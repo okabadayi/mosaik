@@ -18,9 +18,13 @@ This meta-repo is the unified-view agent's "home" — strategic context, project
 
 ## Project Conventions
 
+> Universal collaboration rules (Three Golden Rules + Code Discipline) cascade from the parent tier `../AGENTS.md`. Items below are meta-repo-specific additions.
+
 - Per-solution repos live as siblings (`~/repos/<business>-<solution-name>/`)
 - This meta-repo doesn't contain executable code — it's the strategic + organizational substrate
 - Cross-solution patterns accumulate in `solutions/` as they emerge
+- Per-solution summaries in `projects/` are POINTERS to the per-solution repo's CHANGELOG Decision Log — do not duplicate the rationale here
+- Cross-cutting patterns promoted to `solutions/` should be at higher abstraction than the per-solution repo's `docs/solutions/` — re-frame for cross-business applicability when promoting
 
 ## Operational Dispatcher
 

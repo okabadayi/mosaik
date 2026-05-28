@@ -13,9 +13,12 @@ Generic per-solution repo demonstrating the Mosaik framework's per-solution stru
 
 ## Project Conventions
 
-- Use `bun` for the JavaScript stack
-- Embeddings model pinned per CHANGELOG Decision Log
+> Universal collaboration rules (Three Golden Rules + Code Discipline) cascade from the parent tier `../AGENTS.md`. Items below are project-specific additions.
+
+- Use `bun` (not `npm`) for the JavaScript stack
+- Embeddings model is pinned per the CHANGELOG Decision Log — do not change without an explicit decision entry
 - Document retrievals over a confidence threshold get logged for offline review
+- Retrieval confidence threshold tuning requires logging output of the offline evaluation script before merge
 
 ## Components & Architecture
 

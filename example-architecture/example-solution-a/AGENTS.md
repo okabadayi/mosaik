@@ -13,9 +13,14 @@ Generic per-solution repo demonstrating the Mosaik framework's per-solution stru
 
 ## Project Conventions
 
+> Universal collaboration rules (Three Golden Rules + Code Discipline) cascade from the parent tier `../AGENTS.md`. Items below are project-specific additions.
+
 - Use `bun` for any frontend tooling (if added later)
 - Follow `<business>`-wide naming conventions per the meta-repo's STRATEGY.md
 - All public-facing changes require an entry in CHANGELOG Decision Log
+- Always use `uv` (not `pip`) for Python dependency management
+- Schema changes require a migration script + dry-run output before merge
+- The CRM webhook ingestion path is load-bearing — invoke `/ce-code-review` even at Solo tier for changes touching it
 
 ## Components & Architecture
 

@@ -36,6 +36,10 @@ Mosaik's knowledge fabric depends on QMD — a markdown index daemon providing B
 
 SD-CE (the ship-docs agent), doc-structure (the conventions skill), AGENTS.md + CLAUDE.md `@AGENTS.md` shim (the cross-agent instruction surface), `/recall` with STRATEGY-priority (the context loader). Named, narrow, intentional. This is where Mosaik's fabric and CE's engine compose without stepping on each other.
 
+### Agent collaboration discipline
+
+Substantive AGENTS.md content lives at [`methodology/agent-collaboration-principles.md`](methodology/agent-collaboration-principles.md) — the Three Golden Rules (universal: no autonomous implementation, strict task focus, preserve existing work) + Code Discipline (software-specific: simplicity check, verifiable success criteria). Mosaik prescribes the structural where (AGENTS.md + shim + Per-doc Lifecycle Matrix); the principles doc prescribes the substantive what. Without the discipline, the structural pattern doesn't actually keep the agent on-task.
+
 ## The meta-repo pattern (for heterogeneous-tooling cases)
 
 For medium-sized businesses where tooling is heterogeneous and a monorepo would create dep conflicts / deployment confusion / security blast radius, Mosaik specifies a meta-repo + per-solution repos architecture:
@@ -44,14 +48,14 @@ For medium-sized businesses where tooling is heterogeneous and a monorepo would 
 - **Per-solution repos** (`<business>-<solution>/`): each runs its own CE loop fully. Independent everything.
 - **Cross-repo learning flow**: manual promote (initially) → eventually a thin `<business>-promote-solution` skill when friction justifies.
 
-See [`methodology/compound-engineering/11-meta-repo-pattern-for-heterogeneous-businesses.md`](methodology/compound-engineering/11-meta-repo-pattern-for-heterogeneous-businesses.md) for the full specification and [`examples/`](examples/) for abstract sample structure.
+See [`methodology/compound-engineering/11-meta-repo-pattern-for-heterogeneous-businesses.md`](methodology/compound-engineering/11-meta-repo-pattern-for-heterogeneous-businesses.md) for the full specification and [`example-architecture/`](example-architecture/) for abstract sample structure.
 
 ## What's in this repo
 
 - `methodology/compound-engineering/` — Compound Engineering adoption corpus (overview, migration plan, inventory, walkthrough, doc lifecycle, fresh-repo + migrate-existing repo operator scripts, meta-repo pattern). Built on direct reads of CE plugin source at v3.8.4.
 - `skills/` — live skill source (3 skills: `doc-structure`, `recall` (software-repo mode), `codex-review`)
 - `agents/` — live agent source (`software-documenter-ce`)
-- `examples/` — abstract sample structure (meta-repo + per-solution repos with placeholder content)
+- `example-architecture/` — one abstract sample cluster (parent tier + meta-repo + 2 per-solution repos) demonstrating the meta-repo + per-solution-repos architecture and the AGENTS.md+shim tier pattern
 - `roadmap.md` — what's in development, what's deferred
 - `README.md` — the marketing landing page
 - `TECHNICAL.md` — this file

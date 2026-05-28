@@ -143,6 +143,7 @@ If you're new to this entire space:
 - **QMD** by Tobias Lütke — the local markdown search substrate that makes cross-context recall actually fast.
 - **Anthropic** for Claude Code + the AGENTS.md+shim cross-agent compatibility pattern.
 - **Artem Zhutov** ([@artemxtech](https://artemxtech.substack.com/)) — for ["Grep is Dead: How I Made Claude Code Remember"](https://artemxtech.substack.com/p/grep-is-dead-how-i-made-claude-code), which articulated the QMD + hierarchical-collections + multi-mode `/recall` pattern that directly informed Mosaik's recall skill design.
+- **Andrej Karpathy** — the [distilled CLAUDE.md guidelines](https://github.com/multica-ai/andrej-karpathy-skills) whose LLM coding principles informed parts of Mosaik's [agent collaboration principles](methodology/agent-collaboration-principles.md).
 - The community of operator-architect-builders who've shared their AI transformation experiences — Mosaik captures and extends patterns many people are independently arriving at.
 
 ## About this work

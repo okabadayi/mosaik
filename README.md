@@ -64,7 +64,7 @@ Mosaik runs in **[Claude Code](https://claude.ai/code)** — Anthropic's officia
 The framework depends on a few things being installed:
 - **Compound Engineering plugin** (v3.8.4 or later) — the engineering engine
 - **QMD** — the markdown search daemon Mosaik uses for fast context recall
-- **A markdown vault** (Obsidian works well; not strictly required)
+- **A markdown vault** — recommended: a shared Obsidian vault that both the agent (writes/reads via filesystem) and the operator (reads/edits in the Obsidian UI) work in. Not strictly required, but the shared human-readable surface is what makes the knowledge fabric actually adoptable — every doc the agent writes is immediately visible to the operator without context-switching, and operator edits land back where the agent will read them next session.
 
 You don't need any specific cloud, database, or multiple machines. Mosaik works on a single machine; how you sync work between environments is your operational choice, not part of the framework.
 
@@ -132,7 +132,7 @@ If you're new to this entire space:
 
 1. **Install Compound Engineering** from [the plugin repo](https://github.com/EveryInc/compound-engineering-plugin) — the per-feature engineering engine Mosaik builds on.
 2. **Install QMD** from [the QMD repo](https://github.com/tobi/qmd) — the search substrate `/recall` uses for cross-context recall across your knowledge fabric.
-3. **Set up a markdown vault** for your knowledge fabric (Obsidian works well; any directory of markdown files is fine).
+3. **Set up a shared markdown vault** for your knowledge fabric. Recommended: open the relevant directories (your repos parent, your knowledge vaults) as an Obsidian vault so both you and the agent are working in the same files — you read/edit in the Obsidian UI, the agent reads/writes via filesystem. Any markdown directory works at minimum, but the shared-vault workflow is what makes the framework most useful.
 4. **Read [TECHNICAL.md](TECHNICAL.md)** for the operational detail — runtime requirements, doc-structure conventions, how the pieces compose.
 5. **Try it on one small solution.** Don't try to retrofit Mosaik onto everything at once.
 6. **Adapt to your context.** The framework is opinionated but not exclusive.

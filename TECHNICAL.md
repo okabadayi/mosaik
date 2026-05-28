@@ -169,12 +169,6 @@ We share Mosaik as inspiration. It's opinionated but not exclusive.
 5. **Try it on a real solution.** Pick something small. Run through the operator scripts.
 6. **Adapt to your context.** The framework is opinionated but not exclusive.
 
-## Acknowledgements
-
-- **Compound Engineering** by Kieran Klaassen / Every — the open-source engineering engine Mosaik builds on
-- **Anthropic** for Claude Code + the AGENTS.md+shim cross-agent compatibility pattern
-- The community of operator-architect-builders who've shared their AI transformation experiences
-
 ## Contact / Feedback
 
 GitHub Issues on this repo for content questions and broader framework discussion.

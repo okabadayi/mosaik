@@ -20,7 +20,6 @@
 - [When to use Mosaik vs other tools](#when-to-use-mosaik-vs-other-tools)
 - [Honest current state](#honest-current-state)
 - [Getting started](#getting-started)
-- [Acknowledgements](#acknowledgements)
 - [About this work](#about-this-work)
 - [License](#license)
 - [Roadmap](#roadmap)
@@ -165,18 +164,19 @@ If you're new to this entire space:
 
 *For the minimum viable first-feature path + setup detail, see [TECHNICAL.md § How to use this](TECHNICAL.md#how-to-use-this).*
 
-## Acknowledgements
+## About this work
+
+This repository contains no proprietary content from any company. The framework synthesizes patterns from about a year of building AI solutions in two contexts — a medium-sized company's production AI work and a solo-operator's small business agent infrastructure — plus exposure to the broader agentic AI practitioner community's work on Claude Code + multi-project + knowledge-fabric patterns.
+
+Specific inspirations:
 
 - **[Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin)** by Kieran Klaassen / [Every](https://every.to) — the open-source engineering engine Mosaik builds on. CE's mature methodology + community made Mosaik possible.
 - **[QMD](https://github.com/tobi/qmd)** by Tobias Lütke — the local markdown search substrate that makes cross-context recall actually fast.
 - **[Anthropic](https://www.anthropic.com)** for [Claude Code](https://claude.ai/code) + the AGENTS.md+shim cross-agent compatibility pattern.
 - **Artem Zhutov** ([@artemxtech](https://artemxtech.substack.com/)) — for ["Grep is Dead: How I Made Claude Code Remember"](https://artemxtech.substack.com/p/grep-is-dead-how-i-made-claude-code), which articulated the QMD + hierarchical-collections + multi-mode `/recall` pattern that directly informed Mosaik's recall skill design.
 - **Andrej Karpathy** — the [distilled CLAUDE.md guidelines](https://github.com/multica-ai/andrej-karpathy-skills) whose LLM coding principles informed parts of Mosaik's [agent collaboration principles](methodology/agent-collaboration-principles.md).
-- The community of operator-architect-builders who've shared their AI transformation experiences — Mosaik captures and extends patterns many people are independently arriving at.
 
-## About this work
-
-This repository contains no proprietary content from any company. The framework synthesizes patterns from about a year of building AI solutions in two contexts — a medium-sized company's production AI work and a solo-operator's small business agent infrastructure — plus exposure to the broader agentic AI practitioner community's work on Claude Code + multi-project + knowledge-fabric patterns. Shared as inspiration, not as a definitive answer.
+Shared as inspiration, not as a definitive answer.
 
 ## License
 

@@ -64,8 +64,8 @@ Mosaik runs in **[Claude Code](https://claude.ai/code)** — Anthropic's officia
 The framework depends on a few things being installed:
 - **Compound Engineering plugin** (v3.8.4 or later) — the engineering engine
 - **QMD** — the markdown search daemon Mosaik uses for fast context recall
-- **A markdown vault** — recommended: a shared Obsidian vault that both the agent (writes/reads via filesystem) and the operator (reads/edits in the Obsidian UI) work in. 
-	- Not strictly required, but the shared human-readable surface is what makes the knowledge fabric actually adoptable — every doc the agent writes is immediately visible to the operator without context-switching, and operator edits land back where the agent will read them next session.
+- **A markdown vault** — recommended: a synced [Obsidian](https://obsidian.md) vault that both the agent (writes/reads via filesystem) and the operator (reads/edits in the Obsidian UI) work in. 
+	- Not strictly required, but the synced human-readable surface is what makes the knowledge fabric actually adoptable — every doc the agent writes is immediately visible to the operator without context-switching, and operator edits land back where the agent will read them next session.
 
 You don't need any specific cloud, database, or multiple machines. Mosaik works on a single machine; how you sync work between environments is your operational choice, not part of the framework.
 

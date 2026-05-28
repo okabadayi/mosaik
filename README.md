@@ -133,7 +133,7 @@ If you're new to this entire space:
 
 1. **Install Compound Engineering** from [the plugin repo](https://github.com/EveryInc/compound-engineering-plugin) — the per-feature engineering engine Mosaik builds on.
 2. **Install QMD** from [the QMD repo](https://github.com/tobi/qmd) — the search substrate `/recall` uses for cross-context recall across your knowledge fabric.
-3. **Set up a shared markdown vault** for your knowledge fabric. Recommended: open the relevant directories (your repos parent, your knowledge vaults) as an Obsidian vault so both you and the agent are working in the same files — you read/edit in the Obsidian UI, the agent reads/writes via filesystem. Any markdown directory works at minimum, but the shared-vault workflow is what makes the framework most useful.
+3. **Set up a synced markdown vault** for your knowledge fabric. Recommended: open the relevant directories (your repos parent, your knowledge vaults) as an Obsidian vault so both you and the agent are working in the same files — you read/edit in the Obsidian UI, the agent reads/writes via filesystem. Any markdown directory works at minimum, but the synced-vault workflow is what makes the framework most useful.
 4. **Read [TECHNICAL.md](TECHNICAL.md)** for the operational detail — runtime requirements, doc-structure conventions, how the pieces compose.
 5. **Try it on one small solution.** Don't try to retrofit Mosaik onto everything at once.
 6. **Adapt to your context.** The framework is opinionated but not exclusive.

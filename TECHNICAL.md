@@ -82,7 +82,7 @@ Note on `codex-review`: this skill (included in `skills/`) is used FROM Claude C
 |---|---|---|
 | **Compound Engineering plugin** | The engineering engine Mosaik builds on | v3.8.4 or later |
 | **QMD daemon** | The markdown search substrate `/recall` uses for context loading | Current release |
-| **A markdown vault directory** | Where the knowledge fabric lives | Any structure works; recommended: a shared Obsidian vault that both the agent (filesystem) and operator (Obsidian UI) read/write — every doc the agent ships becomes immediately visible to the human without context-switching |
+| **A markdown vault directory** | Where the knowledge fabric lives | Any structure works; recommended: a synced [Obsidian](https://obsidian.md) vault that both the agent (filesystem) and operator (Obsidian UI) read/write — every doc the agent ships becomes immediately visible to the human without context-switching |
 
 ### What you do NOT need
 
@@ -93,7 +93,7 @@ Note on `codex-review`: this skill (included in `skills/`) is used FROM Claude C
 
 ### Optional but recommended
 
-- **Obsidian as a shared vault between the agent and operator** — open the directories that contain your knowledge fabric (your repos parent, your knowledge vaults) as Obsidian vaults. The agent writes/reads markdown files via filesystem; the operator reads/edits the same files in Obsidian's UI. This is the workflow that informed Mosaik's design — every doc SD-CE ships at feature-complete time is immediately visible to the human, and operator edits land back where the agent will pick them up next session. Not strictly required (any editor works), but the shared-vault workflow is what makes the framework's knowledge fabric load-bearing in practice.
+- **Obsidian as a synced vault between the agent and operator** — open the directories that contain your knowledge fabric (your repos parent, your knowledge vaults) as Obsidian vaults. The agent writes/reads markdown files via filesystem; the operator reads/edits the same files in Obsidian's UI. This is the workflow that informed Mosaik's design — every doc SD-CE ships at feature-complete time is immediately visible to the human, and operator edits land back where the agent will pick them up next session. Not strictly required (any editor works), but the synced-vault workflow is what makes the framework's knowledge fabric load-bearing in practice.
 - **GitHub CLI (`gh`)** for the per-feature ship-time PR operations CE performs
 
 ## Doc-structure conventions

@@ -36,9 +36,6 @@ If asked **"how do I migrate an existing repo into CE?"** OR **"what's the proce
 If asked **"how do I structure AI transformation work across multiple solutions for one business?"** OR **"what's the meta-repo pattern for medium-sized businesses with heterogeneous infrastructure?"**
 → Read `11-meta-repo-pattern-for-heterogeneous-businesses.md`. When tooling is heterogeneous and a monorepo creates dep conflicts / deployment confusion / security blast radius, the meta-repo + per-solution repos pattern provides cross-business unified-view + per-solution engineering discipline + cross-repo learning at the right abstraction layer. This is the Mosaik meta-repo pattern in operator-script form.
 
-If asked **"is this adoption a good idea? what's the honest opinion?"** OR **"how do we catch CE drifts / Claude Code ecosystem drifts?"**
-→ Read the devil's advocate review (in the personal vault, excluded from share). Snapshot devil's-advocate assessment of the methodology marriage + CE update procedure + drift detection routine for catching CE upstream changes and Claude Code ecosystem changes. Revisit at each 3-month re-evaluation and after the 3-feature scorecard checkpoint.
-
 If asked **"how do I ship a feature in a CE-piloted repo?"** OR running through the per-feature walkthrough as a CE-piloted-feature agent
 → Read `05-walkthrough.md`. Per-feature operator script with ☆ prompts at each checkpoint (brainstorm → plan → work → code-review → commit-push-pr → compound → ship docs → scorecard → debrief). **Repeated for every feature** — 09 and 10 hand off here after their one-time repo-onboarding work completes.
 

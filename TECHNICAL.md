@@ -110,14 +110,20 @@ The Mosaik framework prescribes specific documentation conventions for software 
 
 In CE-piloted repos, the Plan type is replaced by CE's structured plan; the other three types preserve their SD locations.
 
-### The 6 project-level files
+### Project-level files
+
+Core files in every repo:
 
 - **`AGENTS.md`** (substantive instruction file — CE-preferred + Anthropic-recommended)
 - **`CLAUDE.md`** (shim — `@AGENTS.md` plus optional Claude-Code-specific additions)
 - **`README.md`** (for humans — description, quick start, components index)
 - **`CHANGELOG.md`** (timeline — Current Focus, Recent Updates, Version History, Decision Log)
 - **`ISSUES.md`** (known bugs by component, Open / Resolved sections)
-- **`STRATEGY.md`** (CE-produced product anchor — Rumelt-shaped)
+- **`docs/architecture.md`** (conditional — only when load-bearing target design isn't captured elsewhere)
+
+CE-piloted repos add:
+
+- **`STRATEGY.md`** (CE-produced product anchor — Rumelt-shaped, written by `/ce-strategy`)
 
 See `skills/doc-structure/SKILL.md` for the full Per-doc Lifecycle Matrix, scaffolding-time discipline rule, and per-surface update triggers.
 

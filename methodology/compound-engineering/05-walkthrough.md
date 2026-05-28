@@ -36,7 +36,7 @@ grep -q "Compound Engineering" ~/repos/CLAUDE.md && echo "OK" || echo "MISSING"
 ls -la ~/.claude/agents/software-documenter-ce.md && echo "OK" || echo "MISSING"
 
 # codex-review skill has the 2026-05-24 fixes?
-grep -q "2026-05-24" ~/.claude/skills/codex-review/SKILL.md && echo "OK" || echo "OUTDATED"
+ls -la ~/.claude/skills/codex-review/SKILL.md && echo "OK (verify it matches your latest copy)" || echo "MISSING"
 
 # STRATEGY.md exists in this repo? (CE's per-product anchor — read by /ce-ideate, /ce-brainstorm, /ce-plan as upstream grounding when present)
 ls -la STRATEGY.md && echo "OK (will ground brainstorm + plan)" || echo "MISSING — see prompt below"

@@ -120,7 +120,7 @@ Six project-level files in scope. Per row: creator at scaffolding, scaffolding-t
 
 At repo creation, project-level docs have **section headers + intent only**. Components / features / Recent Updates / Key Files sections start **EMPTY**. SD-CE populates as features ship.
 
-This rule exists because pre-CE Claude scaffolding agents tend to project from requirements briefs into fictional Components tables — verified empirically in <pilot-repo> Phase A pilot (cleanup stripped CLAUDE.md from 105 → 47 lines after a fictional table claimed `src/bot.py`, 7 skills, `data/<pilot-repo>.sqlite` all existed when none did). Resist the temptation; empty section headers are correct.
+This rule exists because pre-CE Claude scaffolding agents tend to project from requirements briefs into fictional Components tables — verified empirically in an early CE pilot (cleanup stripped CLAUDE.md from ~105 lines to ~47 lines after a fictional table claimed source files, skills, and a sqlite database all existed when none did). Resist the temptation; empty section headers are correct.
 
 ## Two scenarios
 
@@ -189,9 +189,8 @@ When in doubt about authoritative behavior, read the live runtime files (not the
 |---|---|---|
 | Doc-structure conventions | [`skills/doc-structure/SKILL.md`](../../skills/doc-structure/SKILL.md) | The doc-structure skill is the canonical source of truth. |
 | SD-CE agent body (`ship docs`, `capture status`, `reference doc`) | [`agents/software-documenter-ce.md`](../../agents/software-documenter-ce.md) | The live agent definition is the canonical source. |
-| CE skills (brainstorm, plan, work, compound, strategy, refresh) | `~/.claude/plugins/cache/compound-engineering-plugin/compound-engineering/3.8.4/skills/<name>/SKILL.md` | [`01-overview.md`](01-overview.md), [`04-inventory.md`](04-inventory.md) |
+| CE skills (brainstorm, plan, work, compound, strategy, refresh) | CE plugin source at [github.com/EveryInc/compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin) | [`01-overview.md`](01-overview.md), [`04-inventory.md`](04-inventory.md) |
 | Anthropic shim pattern | Claude Code `memory.md § AGENTS.md` (official docs) | — |
-| Empirical evidence driving the methodology | — | [`the devil's-advocate review § 5 (2026-05-26 (late))`](../the devil's-advocate review) |
 
 CE plugin version pinned at adoption: **v3.8.4** (commit `08bb5899036e9ca33585b38ce840e2b2bfaacac8`, released 2026-05-21). When CE upgrades, re-verify the SKILL.md paths above against the new version.
 
@@ -199,15 +198,12 @@ CE plugin version pinned at adoption: **v3.8.4** (commit `08bb5899036e9ca33585b3
 
 | Repo | Status | Notes |
 |---|---|---|
-| `~/repos/<pilot-repo>/` | ✓ **Migrated to AGENTS.md + CLAUDE.md `@AGENTS.md` shim** (2026-05-27, commit `822e7dc`). Phase 1 of [`10-migrate-existing-repo.md`](10-migrate-existing-repo.md) executed cleanly; first real-use validation of the walkthrough. Phase 2 (CE bootstrap) was N/A — `/ce-setup` + `/ce-strategy` already ran in Block B. | First CE pilot, now also first AGENTS.md-substantive pilot. Concrete example of the marriage pattern in `~/repos/<pilot-repo>/AGENTS.md` + `~/repos/<pilot-repo>/CLAUDE.md`. |
-
-Future CE-piloted repos: follow [`09-fresh-repo-scaffolding.md`](09-fresh-repo-scaffolding.md) (fresh) or [`10-migrate-existing-repo.md`](10-migrate-existing-repo.md) (imported). Both produce the AGENTS.md+shim pattern from the start.
+Pilot validation (one pilot, 2026-05-27): the migrate-existing-repo walkthrough was executed end-to-end on a real pre-CE repo — Phase 1 cleanup ran cleanly with the AGENTS.md+shim restructure. Future CE-piloted repos follow [`09-fresh-repo-scaffolding.md`](09-fresh-repo-scaffolding.md) (fresh) or [`10-migrate-existing-repo.md`](10-migrate-existing-repo.md) (imported); both produce the AGENTS.md+shim pattern from the start.
 
 ## Cross-references
 
 - [[00-readme]] — folder index
 - [[03-migration-plan]] § 3.0 — Prereq 4 audit for imported repos
-- [[12-vault-of-repos-pattern]] — AGENTS.md files visible in Obsidian via repos vault
 
 ---
 

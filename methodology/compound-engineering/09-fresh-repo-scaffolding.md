@@ -70,7 +70,7 @@ Add language-specific files: `pyproject.toml`, `package.json`, `Cargo.toml`, `.g
 mkdir -p .claude/rules
 ```
 
-Populate `collaboration.md`, `code-quality.md`, `pre-commit.md` adapted to the project. Use `~/repos/CLAUDE.md` defaults or copy from <pilot-repo> as a reference. Keep rules narrow to the project; universal rules already load from `~/.claude/rules/`.
+Populate `collaboration.md`, `code-quality.md`, `pre-commit.md` adapted to the project. Use your parent-tier rules as defaults or copy from an existing repo as a reference. Keep rules narrow to the project; universal rules already load from your parent-tier configuration.
 
 ### Step 5 — Initial commit + revert anchor
 
@@ -127,7 +127,7 @@ For the full per-feature operator walkthrough (10 steps with prompts), see [`05-
 
 At scaffolding, AGENTS.md / README / CHANGELOG / ISSUES have **section headers + intent only**. Components / Features / Recent Updates / Key Files start EMPTY. SD-CE populates them as features ship.
 
-This is the rule the methodology exists to enforce. Pre-CE Claude scaffolding agents tend to project from a requirements brief into fictional Components tables — verified empirically in <pilot-repo> (cleanup stripped CLAUDE.md from 105 → 47 lines after a fictional table claimed `src/bot.py`, 7 skills, `data/<pilot-repo>.sqlite` existed when none did). Resist the temptation; empty is correct.
+This is the rule the methodology exists to enforce. Pre-CE Claude scaffolding agents tend to project from a requirements brief into fictional Components tables — verified empirically in an early CE pilot (cleanup stripped CLAUDE.md from ~105 lines to ~47 lines after a fictional table claimed source files, skills, and a sqlite database all existed when none did). Resist the temptation; empty is correct.
 
 ### Operational Dispatcher tone
 

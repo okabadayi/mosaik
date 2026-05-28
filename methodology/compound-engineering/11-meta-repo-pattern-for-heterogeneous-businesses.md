@@ -82,7 +82,9 @@ The meta-repo is **just another `~/repos/<name>/`**. The methodology applies to 
 
 The **unified-view agent's "home"**. Holds the strategic and organizational substrate that lets one agent operate across all per-solution repos with cross-context awareness.
 
-### The four meta-repo surfaces
+### The four meta-repo-distinctive surfaces
+
+These are the surfaces unique to a meta-repo (in addition to the standard repo files — README, CHANGELOG, ISSUES — which every repo has):
 
 - **`AGENTS.md`** (substantive) — describes the meta-repo's role + business context + cross-cutting conventions. NOT a per-solution AGENTS.md; it's the business-level instruction file. Includes the Operational Dispatcher with the canonical new-issue-capture bullet.
 
@@ -159,7 +161,7 @@ When you have **3+ per-solution repos** AND finds themselves doing manual cross-
 
 ### Inspiration for the skill: CE's compound
 
-When you eventually build it, read `~/.claude/plugins/cache/compound-engineering-plugin/compound-engineering/3.8.4/skills/ce-compound/SKILL.md` for:
+When you eventually build it, read [CE's `ce-compound` skill source](https://github.com/EveryInc/compound-engineering-plugin/blob/main/compound-engineering/skills/ce-compound/SKILL.md) for:
 - Frontmatter conventions (`module`, `problem_type`, `tags`)
 - The Discoverability Check pattern (auto-updates AGENTS.md when `solutions/` grows)
 - The five outcomes (Keep / Update / Consolidate / Replace / Delete) from `ce-compound-refresh`

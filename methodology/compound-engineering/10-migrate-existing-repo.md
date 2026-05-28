@@ -1,5 +1,5 @@
 ---
-description: Operator walkthrough for migrating a pre-CE repo into CE adoption. Agent-guided three-phase flow — Phase 1 agent automates pre-CE cleanup with ☆ confirmation gates (audit + CLAUDE.md → AGENTS.md restructure + rules split + deprecated file handling + revert tag); Phase 2 you invoke /ce-setup + /ce-strategy with agent waiting + verifying; Phase 3 hands off to 05-walkthrough.md for the first feature. Anti-bypass guardrails baked in (per the <pilot-repo> mechanical-mv failure pattern). For fresh repos, see 09-fresh-repo-scaffolding.md instead.
+description: Operator walkthrough for migrating a pre-CE repo into CE adoption. Agent-guided three-phase flow — Phase 1 agent automates pre-CE cleanup with ☆ confirmation gates (audit + CLAUDE.md → AGENTS.md restructure + rules split + deprecated file handling + revert tag); Phase 2 you invoke /ce-setup + /ce-strategy with agent waiting + verifying; Phase 3 hands off to 05-walkthrough.md for the first feature. Anti-bypass guardrails baked in (per the empirical mechanical-mv failure pattern). For fresh repos, see 09-fresh-repo-scaffolding.md instead.
 type: reference
 status: active
 date_created: 2026-05-26
@@ -66,9 +66,9 @@ The operator approves / modifies / rejects each item before agent proceeds.
 git mv CLAUDE.md AGENTS.md # preserve git history
 ```
 
-> **Note on rename detection (empirical, <pilot-repo> 2026-05-27).** Git's rename detection has a similarity threshold; if the content delta exceeds it (e.g., when restructuring also adds new sections at the same commit), `git status` may classify the result as "create AGENTS.md" + "delete CLAUDE.md" rather than "rename." History is still preserved — use `git log --follow AGENTS.md` to trace it. The pre-Phase-A tag is the clean revert anchor either way.
+> **Note on rename detection (empirical, early-pilot finding 2026-05-27).** Git's rename detection has a similarity threshold; if the content delta exceeds it (e.g., when restructuring also adds new sections at the same commit), `git status` may classify the result as "create AGENTS.md" + "delete CLAUDE.md" rather than "rename." History is still preserved — use `git log --follow AGENTS.md` to trace it. The pre-Phase-A tag is the clean revert anchor either way.
 
-Agent rewrites AGENTS.md per `02A § 5 Step 2` rules:
+Agent rewrites AGENTS.md per the AGENTS.md+shim methodology (see `skills/doc-structure/SKILL.md` and `methodology/agent-collaboration-principles.md`):
 
 - **REMOVE**: Three Golden Rules (now in root `~/CLAUDE.md`)
 - **REMOVE**: current-work-status (loaded via `/recall` from CHANGELOG)
@@ -143,7 +143,7 @@ The agent must NOT:
 - `git mv docs/vision.md STRATEGY.md` or any analogous mechanical shortcut
 - Invoke `/ce-setup` or `/ce-strategy` itself
 
-These are CE-skill territory. Mechanical bypasses are the documented failure pattern from <pilot-repo> — see § "Anti-patterns" below.
+These are CE-skill territory. Mechanical bypasses are the documented failure pattern from early-pilot empirical evidence — see § "Anti-patterns" below.
 
 ---
 
@@ -153,7 +153,7 @@ These are CE-skill territory. Mechanical bypasses are the documented failure pat
 
 **If `.compound-engineering/` and `STRATEGY.md` already exist + valid, Phase 2 is N/A** — skip to Phase 3 with a verification checklist.
 
-This applies to repos that ran `/ce-setup` + `/ce-strategy` in an earlier block but hadn't yet migrated to AGENTS.md + shim. **Empirical case:** <pilot-repo> (2026-05-27). Block B (2026-05-25) did `/ce-setup` + `/ce-strategy`; AGENTS.md+shim migration didn't happen until 2026-05-27 — Phase 2 of this walkthrough was entirely N/A at migration time.
+This applies to repos that ran `/ce-setup` + `/ce-strategy` in an earlier block but hadn't yet migrated to AGENTS.md + shim. **Empirical case (early pilot, 2026-05-27):** `/ce-setup` + `/ce-strategy` were run in an earlier block; AGENTS.md+shim migration didn't happen until later — Phase 2 of this walkthrough was entirely N/A at migration time.
 
 **Verification checklist (when fast-pathing):**
 
@@ -249,7 +249,7 @@ Subsequent features iterate through 05.
 
 ## Anti-patterns (what the agent must NEVER do)
 
-From the <pilot-repo> 2026-05-25 bypass-failure narrative (archived at `archive/next-steps-2026-05-24.md`):
+From the early-pilot bypass-failure narrative:
 
 - ❌ **Do NOT** `git mv docs/vision.md STRATEGY.md`. STRATEGY.md is produced by the `/ce-strategy` interview, not file renaming.
 - ❌ **Do NOT** manually create or edit STRATEGY.md. Only `/ce-strategy` writes it.
@@ -268,7 +268,7 @@ An early pilot did `git mv vision.md → STRATEGY.md` + manual edits instead of 
 
 ## Edge cases — captured inline until pattern density warrants a separate handbook
 
-The original plan (per `03-migration-plan.md § 3.0 Prereq 4`) was to draft a separate JIT handbook (`importing-existing-repos-into-ce.md`) on first real import. **Revised 2026-05-27:** the first real import (<pilot-repo>) produced only two empirical findings, both of which fit better inline in this walkthrough than in a separate doc:
+The original plan (per `03-migration-plan.md § 3.0 Prereq 4`) was to draft a separate JIT handbook (`importing-existing-repos-into-ce.md`) on first real import. **Revised 2026-05-27:** the first real import (an early CE pilot) produced only two empirical findings, both of which fit better inline in this walkthrough than in a separate doc:
 
 1. **Git rename detection threshold** — captured inline at Step 1.4 above.
 2. **Phase 2 fast-path for already-CE-bootstrapped repos** — captured inline at Phase 2 pre-check above.
@@ -286,9 +286,8 @@ If you're running a migration and hit a weird situation not covered above, propo
 - [[03-migration-plan]] § 3.0 Prereq 4 — the 5-check audit definition + deprecated file handling
 - [[03-migration-plan]] § 3.2-3.3.5 — `/ce-setup` config decisions + version pin + `/ce-strategy` invocation rationale
 - [[08-doc-lifecycle-reference]] — methodology grounding (Per-doc Lifecycle Matrix, AGENTS.md primary)
-- `archive/next-steps-2026-05-24.md` § "First Block B bypass failure" — bypass-pattern source narrative
 - `compound engineering/importing-existing-repos-into-ce.md` (TO BE DRAFTED on first real import) — JIT edge-case handbook
 
 ---
 
-*Created 2026-05-26. Operator walkthrough for migrating pre-CE repos into CE. Agent-guided three-phase flow with explicit 🛑 halt + ☆ handoff markers. Anti-bypass guardrails baked in (from <pilot-repo> 2026-05-25 incident). Edge cases captured in JIT handbook as they surface during real migrations.*
+*Created 2026-05-26. Operator walkthrough for migrating pre-CE repos into CE. Agent-guided three-phase flow with explicit 🛑 halt + ☆ handoff markers. Anti-bypass guardrails baked in (from early-pilot 2026-05-25 incident). Edge cases captured in JIT handbook as they surface during real migrations.*

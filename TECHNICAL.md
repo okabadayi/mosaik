@@ -12,7 +12,7 @@ A framework for AI transformation work in medium-sized businesses with heterogen
 
 Also: solo operators/founders running businesses with multiple operational domains; AI transformation consultants; engineers tracking the agent-OS landscape.
 
-## The dual-loop methodology
+## The dual-loop framework
 
 A development engine wrapped in a knowledge fabric.
 
@@ -68,7 +68,7 @@ See [`methodology/compound-engineering/11-meta-repo-pattern-for-heterogeneous-bu
 bunx @every-env/compound-plugin install compound-engineering --to codex
 ```
 
-The skills + agents in `skills/` and `agents/` follow Claude Code conventions; some adaptation would be needed for full Codex parity. The methodology patterns themselves (dual-loop, meta-repo, doc conventions) are agent-agnostic.
+The skills + agents in `skills/` and `agents/` follow Claude Code conventions; some adaptation would be needed for full Codex parity. The framework patterns themselves (dual-loop, meta-repo, doc conventions) are agent-agnostic.
 
 Note on `codex-review`: this skill (included in `skills/`) is used FROM Claude Code to invoke Codex CLI as a second-opinion reviewer at plan-review + impl-review checkpoints. It's a review tool, not an alternate runtime — distinct from the "run Mosaik in Codex" scenario above.
 

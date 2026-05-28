@@ -140,12 +140,14 @@ If you're new to this entire space:
 ## Acknowledgements
 
 - **Compound Engineering** by Kieran Klaassen / Every — the open-source engineering engine Mosaik builds on. CE's mature methodology + community made Mosaik possible.
+- **QMD** by Tobias Lütke — the local markdown search substrate that makes cross-context recall actually fast.
 - **Anthropic** for Claude Code + the AGENTS.md+shim cross-agent compatibility pattern.
+- **Artem Zhutov** ([@artemxtech](https://artemxtech.substack.com/)) — for ["Grep is Dead: How I Made Claude Code Remember"](https://artemxtech.substack.com/p/grep-is-dead-how-i-made-claude-code), which articulated the QMD + hierarchical-collections + multi-mode `/recall` pattern that directly informed Mosaik's recall skill design.
 - The community of operator-architect-builders who've shared their AI transformation experiences — Mosaik captures and extends patterns many people are independently arriving at.
 
 ## About this work
 
-This repository contains no proprietary content from any company.
+This repository contains no proprietary content from any company. The framework synthesizes patterns from about a year of building AI solutions in two contexts — a medium-sized company's production AI work and a solo-operator's small business agent infrastructure — plus exposure to the broader agentic AI practitioner community's work on Claude Code + multi-project + knowledge-fabric patterns. Shared as inspiration, not as a definitive answer.
 
 ## License
 

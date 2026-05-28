@@ -16,6 +16,8 @@ Load project context from the current repo, your knowledge vaults, and session h
 
 This is the Mosaik framework's **software-repo context loader**. It depends on [QMD](https://github.com/tobi/qmd) — a local markdown search daemon — for vault and session indexing. Set up QMD first (see Mosaik's TECHNICAL.md § Runtime requirements + dependencies).
 
+> *Prior art: the hierarchical-collection indexing + BM25 / semantic / temporal-mode pattern this skill implements was articulated by Artem Zhutov in ["Grep is Dead: How I Made Claude Code Remember"](https://artemxtech.substack.com/p/grep-is-dead-how-i-made-claude-code).*
+
 ## Mode Detection Cascade
 
 Examine `$ARGUMENTS` and apply the FIRST matching rule:

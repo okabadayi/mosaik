@@ -26,7 +26,7 @@
 
 ## What problem does Mosaik solve?
 
-You run AI transformation work for a 10-50 employee business. You have:
+You run AI transformation work for a business with several operational problems across heterogeneous tooling. You have:
 - Multiple departments, each with their own pain points
 - A patchwork of SaaS tools and bespoke systems (no single tech stack)
 - One or two people responsible for driving AI adoption across all of it

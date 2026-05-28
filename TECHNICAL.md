@@ -24,7 +24,7 @@ A framework for AI transformation work in medium-sized businesses with heterogen
 
 ## Who is this for
 
-**The operator-architect-builder at a medium-sized business doing AI transformation.** Concrete shape: 10-50 employees, multiple departments with different operational tools and workflows, heterogeneous infrastructure (no single stack), identified pain points across departments that AI could automate, one person (or small team) responsible for the work.
+**The operator-architect-builder at a medium-sized business doing AI transformation.** Concrete shape: multiple departments with different operational tools and workflows, heterogeneous infrastructure (no single stack), identified pain points across departments that AI could automate, one person (or small team) responsible for the work. Headcount typically falls in the 10-50 employee range, but the shape matters more than headcount — a smaller team with this operational pattern fits; a larger one without it doesn't.
 
 Also: solo operators/founders running businesses with multiple operational domains; AI transformation consultants; engineers tracking the agent-OS landscape.
 

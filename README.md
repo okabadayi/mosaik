@@ -140,7 +140,7 @@ The meta-repo holds shared strategic context. Each solution-repo runs its own en
 
 **Vendor AI products** (specific AI features bundled into SaaS) handle problems that match what the vendor sells. One product solves it; the vendor owns integration.
 
-**Mosaik handles** custom AI solutions across multiple operational domains where no single tool or vendor fits — and where cross-solution learning needs to compound rather than scatter. They compose, not compete: a Mosaik per-solution repo can wrap a workflow tool or integrate a vendor product.
+**Mosaik handles** custom AI solutions across multiple operational domains where no single tool or vendor fits — especially when cross-solution learning needs to compound rather than scatter. They compose, not compete: a Mosaik per-solution repo can wrap a workflow tool or integrate a vendor product.
 
 If a single off-the-shelf tool fits your need, use it. Mosaik's value shows when you have several operational problems that need to talk to each other.
 
@@ -163,7 +163,7 @@ If you're new to this entire space:
 5. **Try it on one small solution.** Don't try to retrofit Mosaik onto everything at once.
 6. **Adapt to your context.** The framework is opinionated but not exclusive.
 
-*For a 15-minute minimal evaluation pattern + setup detail, see [TECHNICAL.md § How to use this](TECHNICAL.md#how-to-use-this).*
+*For the minimum viable first-feature path + setup detail, see [TECHNICAL.md § How to use this](TECHNICAL.md#how-to-use-this).*
 
 ## Acknowledgements
 

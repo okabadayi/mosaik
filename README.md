@@ -147,6 +147,8 @@ If a single off-the-shelf tool fits your need, use it. Mosaik's value shows when
 
 Mosaik is **in development**. CE is the mature foundation Mosaik builds on (17,000+ GitHub stars, well-tested in production). The Mosaik-specific contributions — the fabric integration, the meta-repo pattern, the dual-loop framing — are new (May 2026), validated through real operator use across two contexts, reviewed twice by external AI for sharpness, but **not yet validated at broad community scale**.
 
+*If you want your own quick sanity check, the repo pastes well into any modern AI assistant — a prompt like "does this look grounded, coherent, and built on solid foundations?" tends to return a substantive read.*
+
 We share Mosaik as inspiration. The framework is opinionated but not exclusive. Your context will have unique constraints; adapt accordingly.
 
 ## Getting started

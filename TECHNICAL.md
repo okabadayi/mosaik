@@ -4,7 +4,7 @@
 
 ## What is Mosaik
 
-A methodology for AI transformation work in medium-sized businesses with heterogeneous infrastructure. Mosaik **extends** [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin) — Kieran Klaassen / Every's open-source plugin with **over 17,000 GitHub stars**, in active use by many mid-sized businesses for software development. Mosaik adds a complementary knowledge fabric for multi-repo unified-business-view operations: cross-feature compounding, ship-time documentation discipline, software-repo context recall, and the meta-repo pattern for heterogeneous-tooling cases.
+A methodology for AI transformation work in medium-sized businesses with heterogeneous infrastructure. Mosaik **extends** [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin) — Kieran Klaassen / Every's open-source plugin with **over 17,000 GitHub stars**, in active use by many mid-sized businesses for software development. Mosaik adds a complementary knowledge fabric for multi-repo unified-business-view operations: cross-repo compounding, ship-time documentation discipline, software-repo context recall, and the meta-repo pattern for heterogeneous-tooling cases.
 
 ## Who is this for
 
@@ -20,11 +20,17 @@ A development engine wrapped in a knowledge fabric.
 
 CE drives the per-feature cycle: strategy → brainstorm → plan → work → review → ship → compound learning. Structured artifacts with stable IDs (R/A/F/AE/U). Sub-agents that push back on weak answers. Per-repo `docs/solutions/` for engineering compounding. Mosaik uses CE as-is; CE remains the engineering engine.
 
+**Why CE's discipline matters.** Structured artifacts mean nothing gets lost between sessions; requirements trace through to shipped code; cross-feature learning compounds in `docs/solutions/`. This is the difference between shipping one feature and maintaining a portfolio — scalable agentic engineering rather than one-off vibe coding that ships fast but can't be maintained.
+
 See `methodology/compound-engineering/01-overview.md` for the deep CE reference.
 
 ### The fabric: Mosaik's contribution
 
-Software-side knowledge management. Multi-repo awareness, cross-feature compounding at the right abstraction, ship-time per-surface documentation discipline, software-repo context recall via QMD-indexed markdown, doc-structure conventions, codex-review for second opinion.
+Software-side knowledge management. Multi-repo awareness, cross-repo compounding at the right abstraction, ship-time per-surface documentation discipline, software-repo context recall via QMD-indexed markdown, doc-structure conventions, codex-review for second opinion.
+
+### The search substrate: [QMD](https://github.com/tobi/qmd)
+
+Mosaik's knowledge fabric depends on QMD — a markdown index daemon providing BM25 + semantic search across all knowledge collections (strategy, decisions, prior solutions, in-flight work). `/recall` uses QMD to load relevant cross-repo context at every session start. Without QMD, the substrate is just files; with it, the agent recalls relevant context across the entire portfolio instantaneously. QMD is one of the load-bearing foundations Mosaik composes with — alongside CE for the engineering engine.
 
 ### Bridge points
 
@@ -168,4 +174,4 @@ We share Mosaik as inspiration. It's opinionated but not exclusive.
 
 ## Contact / Feedback
 
-GitHub Issues on this repo for content questions. For broader methodology discussion, the repository's discussions tab (when enabled) is the preferred surface.
+GitHub Issues on this repo for content questions and broader methodology discussion.

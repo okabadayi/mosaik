@@ -2,6 +2,11 @@
 
 **A methodology for AI transformation work in medium-sized businesses — built on Compound Engineering, designed for the messy reality of heterogeneous infrastructure.**
 
+[![Built on Compound Engineering](https://img.shields.io/badge/built%20on-Compound%20Engineering-blue)](https://github.com/EveryInc/compound-engineering-plugin)
+[![Powered by QMD](https://img.shields.io/badge/powered%20by-QMD-green)](https://github.com/tobi/qmd)
+[![Runs in Claude Code](https://img.shields.io/badge/runs%20in-Claude%20Code-orange)](https://claude.ai/code)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 > *Two years ago, addressing the operational complexity of a medium-sized business meant hiring separate developers for each problem, each lacking the whole-business view. Today, one agent with whole-business context can emit per-problem solutions while preserving the unified picture. Mosaik is the methodology for running that pattern in practice.*
 
 ## What problem does Mosaik solve?
@@ -14,18 +19,43 @@ You run AI transformation work for a 10-50 employee business. You have:
 
 Mosaik gives you a methodology — and a small set of tools — for shipping **multiple AI solutions that compose into one coherent picture** of your business, rather than five disconnected tools that don't know about each other.
 
-## Why not just use Compound Engineering?
+**A "solution" here is whatever serves the operational need** — custom code, a SaaS integration, an API bridge between existing platforms, or an agent automating events. Mosaik prescribes the structural discipline, not the implementation shape; adopting Mosaik doesn't mean hand-coding everything.
 
-[**Compound Engineering**](https://github.com/EveryInc/compound-engineering-plugin) (CE) is an open-source engineering methodology by Every — 17,000+ GitHub stars, in active use by many mid-sized businesses for software development. CE is excellent at structuring how a single feature gets shipped end-to-end: requirements → plan → autonomous execution → review → ship → captured learning.
+*Mosaik becomes load-bearing the moment you start gathering requirements for your first solution.*
 
-**Mosaik is built on top of CE.** CE remains the engine. Mosaik adds what CE doesn't address out of the box:
+## Foundations + what Mosaik adds
 
-- **Multi-solution coordination** — when one agent serves many operational solutions across one business, you need cross-solution context and learning
-- **The meta-repo pattern** — a coordination layer for businesses where each solution lives in its own repo (different stack, different deployment, different security boundary)
-- **Always-on context loading** — a search-and-recall layer (called QMD) lets the agent answer "what's our current state on X?" without reading every file
-- **Ship-time documentation discipline** — auto-updated user-facing docs as solutions ship, not as a separate documentation task
+Mosaik runs in **[Claude Code](https://claude.ai/code)** — Anthropic's official agentic CLI (also Codex-compatible via CE's converter). It integrates two established open-source tools with its own cross-solution layer.
 
-You can use CE without Mosaik for a single-product team. Use Mosaik when you have multiple operational problems across one business and need them to talk to each other.
+### [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin) (CE) — the per-feature engine
+
+17,000+ GitHub stars; in active use by many mid-sized businesses for software development. CE provides the structured cycle from stakeholder pain point to shipped solution:
+
+- [`/ce-ideate`](https://github.com/EveryInc/compound-engineering-plugin/blob/main/docs/skills/ce-ideate.md) — frame the problem from stakeholder context
+- [`/ce-strategy`](https://github.com/EveryInc/compound-engineering-plugin/blob/main/docs/skills/ce-strategy.md) — define the per-solution product anchor (vision, persona, metrics)
+- [`/ce-brainstorm`](https://github.com/EveryInc/compound-engineering-plugin/blob/main/docs/skills/ce-brainstorm.md) — work through requirements with adversarial sub-agents that push back on weak framings
+- [`/ce-plan`](https://github.com/EveryInc/compound-engineering-plugin/blob/main/docs/skills/ce-plan.md) — translate brainstorm into traceable implementation units
+- [`/ce-work`](https://github.com/EveryInc/compound-engineering-plugin/blob/main/docs/skills/ce-work.md) — execute the plan with operator checkpoints
+- [`/ce-compound`](https://github.com/EveryInc/compound-engineering-plugin/blob/main/docs/skills/ce-compound.md) — capture per-repo learnings as reusable patterns
+
+Each step produces structured artifacts with stable IDs. **CE's discipline is the difference between shipping one feature and maintaining a portfolio** — scalable agentic engineering, not one-off vibe coding.
+
+### [QMD](https://github.com/tobi/qmd) — the search substrate
+
+Created by Tobias Lütke (Shopify founder/CEO); 25,000+ GitHub stars; in active development. A mini CLI search engine that indexes markdown for BM25 + semantic search across knowledge bases.
+
+**Why it matters for agents**: context windows are finite, but the knowledge fabric isn't. QMD sifts through massive volumes of markdown — strategy, decisions, prior solutions, in-flight work — and returns *ranked* results combining keyword precision and semantic meaning. The agent doesn't get raw matches; it gets the right context, pre-filtered.
+
+Mosaik uses QMD as the search substrate for `/recall`, so the agent recalls relevant context across the entire portfolio at every session start.
+
+### Mosaik — the cross-solution layer
+
+- **Meta-repo** (`<business>-ai/`) — the unified-view agent's [strategic home](TECHNICAL.md#the-meta-repo-pattern-for-heterogeneous-tooling-cases): business STRATEGY, per-solution summaries, cross-solution patterns. Holds the comprehensive business view — departments, stakeholders, pain points, prior decisions — that informs every per-solution decision downstream.
+- **Per-solution repos** — each runs its own full CE loop with its own STRATEGY (referencing the meta-repo's). Brainstorms, plans, implementation, ship-time docs all live in the per-solution repo. **What lives inside is up to the solution shape**: custom-coded applications, integration layers wrapping a SaaS tool, API bridges between existing platforms, or agent runtimes invoked via agent-SDK or `claude -p` for automating business events. Patterns promote up to the meta-repo when they generalize.
+- **[`/recall`](TECHNICAL.md#how-recall-integrates)** — the cross-repo context mechanism. When working in a per-solution repo, `/recall` loads the meta-repo's STRATEGY + relevant per-solution summaries + cross-solution patterns. The unified business view follows the agent into every per-solution session.
+- **[Ship-time documentation](TECHNICAL.md#how-sd-ce-composes-with-ce)** — README, CHANGELOG, user docs, project summaries auto-updated as solutions ship. The product-management discipline that turns shipped code into adoptable solutions.
+
+**The result: efficient and consistent solution delivery.** Solution N+1 ships informed by what solutions 1..N learned, and the agent always reasons with full business context when working on any single solution — because `/recall` brings it.
 
 ## How to run this
 
@@ -44,24 +74,19 @@ For full setup details, see [TECHNICAL.md](TECHNICAL.md#runtime-requirements--de
 
 ```mermaid
 graph TB
-    subgraph "Mosaik knowledge fabric"
-        direction TB
-        F1[Cross-repo context recall]
-        F2[Ship-time documentation]
-        F3[Cross-solution learning]
-        F4[Meta-repo coordination]
-        subgraph "CE engineering engine"
-            direction TB
-            E1[Strategy]
-            E2[Brainstorm]
-            E3[Plan]
-            E4[Work]
-            E5[Review]
-            E6[Ship]
-            E7[Compound learning]
-            E1 --> E2 --> E3 --> E4 --> E5 --> E6 --> E7
-        end
+    subgraph CE ["Compound Engineering — per-feature engine"]
+        direction LR
+        E1[ideate] --> E2[strategy] --> E3[brainstorm] --> E4[plan] --> E5[work] --> E6[compound]
     end
+    subgraph Mosaik ["Mosaik — cross-solution fabric"]
+        direction LR
+        M1[Meta-repo<br/>strategic anchor]
+        M2[Cross-repo<br/>context recall]
+        M3[Cross-solution<br/>learning]
+        M4[Ship-time<br/>documentation]
+    end
+    CE -.feeds learnings to.-> Mosaik
+    Mosaik -.provides context to.-> CE
 ```
 
 **CE drives the per-feature cycle.** Mosaik wraps it with the cross-context awareness that makes multiple solutions add up to one business.
@@ -98,16 +123,18 @@ Mosaik is **in development**. CE is the mature foundation Mosaik builds on (17,0
 
 We share Mosaik as inspiration. It's opinionated but not exclusive. Your context will have unique constraints; adapt accordingly.
 
-## How to use this
+## Getting started
 
 If you're already comfortable with CE and just want the technical detail, jump to **[TECHNICAL.md](TECHNICAL.md)**.
 
 If you're new to this entire space:
 
-1. **Install Compound Engineering** from [the plugin repo](https://github.com/EveryInc/compound-engineering-plugin) — Mosaik depends on it.
-2. **Read [TECHNICAL.md](TECHNICAL.md)** for the operational detail.
-3. **Try it on one small solution.** Don't try to retrofit Mosaik onto everything at once.
-4. **Adapt to your context.** The methodology is opinionated but not exclusive.
+1. **Install Compound Engineering** from [the plugin repo](https://github.com/EveryInc/compound-engineering-plugin) — the per-feature engineering engine Mosaik builds on.
+2. **Install QMD** from [the QMD repo](https://github.com/tobi/qmd) — the search substrate `/recall` uses for cross-context recall across your knowledge fabric.
+3. **Set up a markdown vault** for your knowledge fabric (Obsidian works well; any directory of markdown files is fine).
+4. **Read [TECHNICAL.md](TECHNICAL.md)** for the operational detail — runtime requirements, doc-structure conventions, how the pieces compose.
+5. **Try it on one small solution.** Don't try to retrofit Mosaik onto everything at once.
+6. **Adapt to your context.** The methodology is opinionated but not exclusive.
 
 ## Acknowledgements
 

@@ -184,13 +184,15 @@ We share Mosaik as inspiration. It's opinionated but not exclusive.
 
 ## How to use this
 
-Mosaik is structurally additive — start small, let the rest emerge. The 15-minute minimal evaluation:
+Mosaik is structurally additive — start small, let the rest emerge. The minimum viable first-feature path:
 
-1. Install [CE + QMD](README.md#getting-started), then copy this repo's `skills/` and `agents/` to your local `~/.claude/skills/` and `~/.claude/agents/`.
-2. Scaffold a meta-repo `~/repos/<business>-ai/` with a minimal `AGENTS.md` (Three Golden Rules + project description), `STRATEGY.md` (one paragraph naming the business + unified AI vision), and an empty `projects/` folder.
-3. Scaffold a per-solution repo per [`09-fresh-repo-scaffolding.md`](methodology/compound-engineering/09-fresh-repo-scaffolding.md). In session: `/recall <business>-ai` → `/ce-strategy` → `/ce-brainstorm` → `/ce-plan` → `/ce-work` → `/ce-commit-push-pr`. Add a thin summary at `<business>-ai/projects/<solution>-summary.md` so the meta-repo knows the solution exists.
+1. Install [CE + QMD](README.md#getting-started), then copy this repo's `skills/` and `agents/` to your local `~/.claude/skills/` and `~/.claude/agents/`. Set up a parent-tier `~/repos/AGENTS.md` (or wherever you keep your code) carrying the [Three Golden Rules + Code Discipline](methodology/agent-collaboration-principles.md) — these cascade to every per-repo session.
+2. Scaffold a meta-repo `~/repos/<business>-ai/` with a minimal `AGENTS.md` (project description + Tech Stack only — universal rules cascade from the parent tier above), `STRATEGY.md` (one paragraph naming the business + unified AI vision), and an empty `projects/` folder.
+3. Scaffold a per-solution repo per [`09-fresh-repo-scaffolding.md`](methodology/compound-engineering/09-fresh-repo-scaffolding.md). In session: `/recall <business>-ai` → `/ce-strategy` → `/ce-brainstorm` → `/ce-plan` → `/ce-work` → `/ce-commit-push-pr` → `/ce-compound` (capture per-repo learnings — establishes the `docs/solutions/` surface even with one entry; the compounding mechanism starts firing from feature 2 onward). Add a thin summary at `<business>-ai/projects/<solution>-summary.md` so the meta-repo knows the solution exists.
 
-**Defer until empirical friction surfaces the need:** cross-solution `solutions/` patterns, `business/` knowledge surfaces, SD-CE multi-surface automation, the `<business>-promote-solution` skill, parent-tier `AGENTS.md` promotion. Each appears when 2-3 per-solution repos accumulate or manual cross-pollination becomes 2+/week.
+Honest time expectation: full first-feature cycle is hours-to-a-day for experienced operators, longer for newcomers — `/ce-strategy` alone is a ~15-20 min interactive interview. Don't try to compress this into an afternoon; the discipline IS the value.
+
+**Defer until empirical friction surfaces the need:** cross-solution `solutions/` patterns, `business/` knowledge surfaces, SD-CE multi-surface automation, the `<business>-promote-solution` skill. Each appears when 2-3 per-solution repos accumulate or manual cross-pollination becomes 2+/week.
 
 For deeper study before adopting: start at [`methodology/compound-engineering/00-readme.md`](methodology/compound-engineering/00-readme.md) — the doc index with recommended reading order.
 

@@ -26,6 +26,7 @@ What v0.1.0 includes:
 - **Methodology: explicit framing of per-solution repos as agent runtimes** alongside conventional applications and SaaS-integration wrappers (in `methodology/compound-engineering/11-meta-repo-pattern-for-heterogeneous-businesses.md` § "What the per-solution repos ARE"). Three valid shapes: conventional applications / integration wrappers around SaaS or APIs / agent runtimes invoked via agent-SDK or `claude -p`.
 - **Methodology: `business/` folder conventions for meta-repo knowledge surfaces** — departments, stakeholder profiles, tools inventory, compliance constraints, decision log (in `methodology/compound-engineering/11-meta-repo-pattern-for-heterogeneous-businesses.md`). Requires a scoping pass first against existing surfaces (STRATEGY.md Persona section, `projects/<solution>-summary.md` decisions list) to determine what business knowledge is currently homeless vs already covered.
 - **Examples: add `business/` placeholders and an agent-runtime per-solution example** (in `example-architecture/business-ai/`).
+- **Public dependency matrix** — realistic install time + common failure modes for CE, QMD, the skill/agent wiring + parent-tier `AGENTS.md` setup. Codex's final review flagged this as a load-bearing aid for skeptical adopters who'd otherwise be reading marketing copy without a concrete friction picture.
 
 ## Medium-term (v0.3.0)
 

@@ -88,7 +88,6 @@ Note on `codex-review`: this skill (included in `skills/`) is used FROM Claude C
 
 - A specific cloud or hosting provider
 - A specific database
-- **Multiple machines** — Mosaik works on a single machine. Multi-machine sync (e.g., laptop + remote server with shared knowledge fabric) is an operator-specific operational concern, not part of the framework. Adopters who care about cross-machine sync should solve it independently of Mosaik.
 - A specific OS (Mosaik works on macOS, Linux, or wherever Claude Code runs)
 
 ### Optional but recommended

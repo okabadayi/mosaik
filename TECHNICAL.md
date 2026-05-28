@@ -2,6 +2,22 @@
 
 > The detailed framework articulation. If you want the marketing overview, see [README.md](README.md). If you want to understand the dual-loop architecture, the bridge points, the meta-repo pattern, the doc-structure conventions, and how it all composes — this is your doc.
 
+## Table of contents
+
+- [What is Mosaik](#what-is-mosaik)
+- [Who is this for](#who-is-this-for)
+- [The dual-loop framework](#the-dual-loop-framework)
+- [The meta-repo pattern](#the-meta-repo-pattern-for-heterogeneous-tooling-cases)
+- [What's in this repo](#whats-in-this-repo)
+- [Runtime requirements + dependencies](#runtime-requirements--dependencies)
+- [Doc-structure conventions](#doc-structure-conventions)
+- [How `/recall` integrates](#how-recall-integrates)
+- [How SD-CE composes with CE](#how-sd-ce-composes-with-ce)
+- [How codex-review composes](#how-codex-review-composes)
+- [Honest current state](#honest-current-state)
+- [How to use this](#how-to-use-this)
+- [Contact / Feedback](#contact--feedback)
+
 ## What is Mosaik
 
 A framework for AI transformation work in medium-sized businesses with heterogeneous infrastructure. Mosaik **extends** [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin) — Kieran Klaassen / Every's open-source plugin with **over 17,000 GitHub stars**, in active use by many mid-sized businesses for software development. Mosaik adds a complementary knowledge fabric for multi-repo unified-business-view operations: cross-repo compounding, ship-time documentation discipline, software-repo context recall, and the meta-repo pattern for heterogeneous-tooling cases.
@@ -168,12 +184,15 @@ We share Mosaik as inspiration. It's opinionated but not exclusive.
 
 ## How to use this
 
-1. **Read the methodology docs** in order: `methodology/compound-engineering/00-readme.md` (start), then `08-doc-lifecycle-reference.md` (overview), then `09-fresh-repo-scaffolding.md` (new repo) or `10-migrate-existing-repo.md` (existing repo), then `11-meta-repo-pattern-for-heterogeneous-businesses.md` (multi-repo case for medium-sized businesses), then `05-walkthrough.md` (per-feature operator script).
-2. **Install Compound Engineering** (v3.8.4 minimum) from the [CE plugin repo](https://github.com/EveryInc/compound-engineering-plugin). CE is the foundation Mosaik builds on.
-3. **Set up the skills + agents** by copying from this repo to your local Claude Code setup (`~/.claude/skills/` and `~/.claude/agents/`).
-4. **Set up QMD** for the `/recall` skill to work. See [QMD on GitHub](https://github.com/tobi/qmd).
-5. **Try it on a real solution.** Pick something small. Run through the operator scripts.
-6. **Adapt to your context.** The framework is opinionated but not exclusive.
+Mosaik is structurally additive — start small, let the rest emerge. The 15-minute minimal evaluation:
+
+1. Install [CE + QMD](README.md#getting-started), then copy this repo's `skills/` and `agents/` to your local `~/.claude/skills/` and `~/.claude/agents/`.
+2. Scaffold a meta-repo `~/repos/<business>-ai/` with a minimal `AGENTS.md` (Three Golden Rules + project description), `STRATEGY.md` (one paragraph naming the business + unified AI vision), and an empty `projects/` folder.
+3. Scaffold a per-solution repo per [`09-fresh-repo-scaffolding.md`](methodology/compound-engineering/09-fresh-repo-scaffolding.md). In session: `/recall <business>-ai` → `/ce-strategy` → `/ce-brainstorm` → `/ce-plan` → `/ce-work` → `/ce-commit-push-pr`. Add a thin summary at `<business>-ai/projects/<solution>-summary.md` so the meta-repo knows the solution exists.
+
+**Defer until empirical friction surfaces the need:** cross-solution `solutions/` patterns, `business/` knowledge surfaces, SD-CE multi-surface automation, the `<business>-promote-solution` skill, parent-tier `AGENTS.md` promotion. Each appears when 2-3 per-solution repos accumulate or manual cross-pollination becomes 2+/week.
+
+For deeper study before adopting: start at [`methodology/compound-engineering/00-readme.md`](methodology/compound-engineering/00-readme.md) — the doc index with recommended reading order.
 
 ## Contact / Feedback
 

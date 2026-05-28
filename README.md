@@ -9,6 +9,22 @@
 
 > *Two years ago, addressing the operational complexity of a medium-sized business meant hiring separate developers for each problem, each lacking the whole-business view. Today, one agent with whole-business context can emit per-problem solutions while preserving the unified picture. Mosaik is the framework for running that pattern in practice.*
 
+## Table of contents
+
+- [What problem does Mosaik solve?](#what-problem-does-mosaik-solve)
+- [Foundations + what Mosaik adds](#foundations--what-mosaik-adds)
+- [How to run this](#how-to-run-this)
+- [The shape of the framework](#the-shape-of-the-framework)
+- [The architecture at a glance](#the-architecture-at-a-glance)
+- [Who is this for?](#who-is-this-for)
+- [When to use Mosaik vs other tools](#when-to-use-mosaik-vs-other-tools)
+- [Honest current state](#honest-current-state)
+- [Getting started](#getting-started)
+- [Acknowledgements](#acknowledgements)
+- [About this work](#about-this-work)
+- [License](#license)
+- [Roadmap](#roadmap)
+
 ## What problem does Mosaik solve?
 
 You run AI transformation work for a 10-50 employee business. You have:
@@ -118,6 +134,15 @@ The meta-repo holds shared strategic context. Each solution-repo runs its own en
 
 **Also relevant**: solo founders running multi-domain businesses; AI transformation consultants working with mid-sized clients; technical leads tracking how methodology evolves around agent-driven operations.
 
+## When to use Mosaik vs other tools
+
+**Lightweight workflow-automation tools** (the no-code workflow category) handle *"when X happens in tool A, do Y in tool B."* No custom AI logic, no multi-domain coordination — those tools cover that.
+
+**Vendor AI products** (specific AI features bundled into SaaS) handle problems that match what the vendor sells. One product solves it; the vendor owns integration.
+
+**Mosaik handles** custom AI solutions across multiple operational domains where no single tool or vendor fits — and where cross-solution learning needs to compound rather than scatter. They compose, not compete: a Mosaik per-solution repo can wrap a workflow tool or integrate a vendor product.
+
+If a single off-the-shelf tool fits your need, use it. Mosaik's value shows when you have several operational problems that need to talk to each other.
 
 ## Honest current state
 
@@ -137,6 +162,8 @@ If you're new to this entire space:
 4. **Read [TECHNICAL.md](TECHNICAL.md)** for the operational detail — runtime requirements, doc-structure conventions, how the pieces compose.
 5. **Try it on one small solution.** Don't try to retrofit Mosaik onto everything at once.
 6. **Adapt to your context.** The framework is opinionated but not exclusive.
+
+*For a 15-minute minimal evaluation pattern + setup detail, see [TECHNICAL.md § How to use this](TECHNICAL.md#how-to-use-this).*
 
 ## Acknowledgements
 

@@ -69,7 +69,7 @@ CE ships 38 skills. For Mosaik's setup, **9 of them form the CE Core Set** — t
 
 **Extended Set** = everything else (e.g., `/ce-simplify-code`, `/ce-worktree`, `/ce-doc-review` as a standalone invocation, `/ce-compound-refresh`, `/ce-product-pulse`, `/ce-resolve-pr-feedback`, plus all the stack-specific / beta / deferred skills). Extended skills compose with the Core when warranted but aren't load-bearing for the basic compounding loop.
 
-**Why this distinction matters:** the Core Set is the minimum coherent adoption. Invoking only `/ce-brainstorm` + `/ce-plan` without `/ce-compound` (or `/ce-compound` without the chain that produces what it consumes) is the **mechanism cherry-pick** anti-pattern called out in the methodology comparison in the share repo README § 9 — it breaks compounding. The Core is the integrated whole; Extended skills are situational additions around it. **Adopt the Core as a set or not at all**; pick from Extended as the work warrants.
+**Why this distinction matters:** the Core Set is the minimum coherent adoption. Invoking only `/ce-brainstorm` + `/ce-plan` without `/ce-compound` (or `/ce-compound` without the chain that produces what it consumes) is the **mechanism cherry-pick** anti-pattern (invoking artifacts-chain skills without the surrounding chain) — it breaks compounding. The Core is the integrated whole; Extended skills are situational additions around it. **Adopt the Core as a set or not at all**; pick from Extended as the work warrants.
 
 `/ce-ideate` is "optional core" — situational by nature (not invoked per feature; invoked between projects). It's part of the Core conceptually because when you ARE discovering directions, ideate is what you use; CE doesn't have a deeper alternative. Solo can skip it entirely if scope is always known.
 
@@ -303,7 +303,7 @@ Bug fix:
 
 ## 4. Full skill inventory by category
 
-All 38 skills listed with adoption status, what they do, and notes. The **CE Core Set** (9 skills — `/ce-strategy`, `/ce-ideate`, `/ce-brainstorm`, `/ce-plan`, `/ce-work`, `/ce-debug`, `/ce-code-review`, `/ce-commit-push-pr`, `/ce-compound`) is defined in § 2.0 above. **Adopt the Core as a set or not at all** — invoking any Core skill in isolation breaks the compounding loop (mechanism cherry-pick anti-pattern; see the methodology comparison in the share repo README § 9). `/ce-ideate` is marked "optional core" (situational; invoke between projects, not per feature). Extended-Set skills below are situational additions around the Core.
+All 38 skills listed with adoption status, what they do, and notes. The **CE Core Set** (9 skills — `/ce-strategy`, `/ce-ideate`, `/ce-brainstorm`, `/ce-plan`, `/ce-work`, `/ce-debug`, `/ce-code-review`, `/ce-commit-push-pr`, `/ce-compound`) is defined in § 2.0 above. **Adopt the Core as a set or not at all** — invoking any Core skill in isolation breaks the compounding loop (mechanism cherry-pick anti-pattern (invoking artifacts-chain skills without the surrounding chain)). `/ce-ideate` is marked "optional core" (situational; invoke between projects, not per feature). Extended-Set skills below are situational additions around the Core.
 
 ### 4.1 Core loop (artifact-chain subset)
 

@@ -507,9 +507,9 @@ The plugin is **actively evolving** — 153 releases since v1.0, last release 3 
 ## 14. Related upstream resources
 
 - Plugin: https://github.com/EveryInc/compound-engineering-plugin
-- Canonical guide: https://every.to/guides/compound-engineering (saved locally at `<your-vault> Engineering.md`)
-- Kieran's "Camp" walkthrough: https://every.to/source-code/compound-engineering-camp-every-step-from-scratch (saved at `<your-vault> Engineering Camp Every Step, From Scratch.md`)
-- VelvetShark independent walkthrough (YouTube, 2026-01-23, saved at `<your-vault>`)
+- Canonical guide: https://every.to/guides/compound-engineering
+- Kieran's "Camp" walkthrough: https://every.to/source-code/compound-engineering-camp-every-step-from-scratch
+- VelvetShark independent walkthrough (YouTube, 2026-01-23)
 - The "Camp" article notes that Kieran uses different models for different steps: Haiku for brainstorming, Opus for planning, Codex for implementation, sometimes Gemini for code review. (Our adoption keeps Claude for all stages; see `03-migration-plan.md` § 7.)
 
 ---
@@ -518,7 +518,6 @@ The plugin is **actively evolving** — 153 releases since v1.0, last release 3 
 
 - **`03-migration-plan.md`** — action plan: install + first-feature workflow + Phase B integrations
 - **`04-inventory.md`** — per-skill adoption status + per-tier (solo/internal/public) invocation cheat sheets
-- **the methodology comparison in the share repo README** — how CE relates to the broader OS-level methodology: overlaps, complementarities, novel ideas on each side, where the bridges sit
 - **`00-readme.md`** — folder index
 
 ---

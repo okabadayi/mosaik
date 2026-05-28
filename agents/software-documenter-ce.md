@@ -247,7 +247,7 @@ After documenting (capture status OR ship docs), update the per-repo project sum
 2. **Standalone vault fallback.** If no parent meta-repo detected, fall back to your configured cross-project knowledge vault: search via QMD:
 
    ```
-   mcp__qmd__query(searches: [{type: "lex", query: "<project> project summary"}], collections: ["<your-vault>"], rerank: false)
+   mcp__qmd__query(searches: [{type: "lex", query: "<project> project summary"}], collections: ["<your-cross-project-collection>"], rerank: false)
    ```
 
    If found, read and update. If not found, create a new entry following the same thin-summary convention.

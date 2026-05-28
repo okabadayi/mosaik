@@ -12,7 +12,7 @@ related: ["[[00-readme]]", "[[01-overview]]", "[[04-inventory]]"]
 
 # Compound Engineering — Migration Plan
 
-**Start here if you're a fresh agent / future-you adopting CE.** This doc is the action plan. See `01-overview.md` for what CE is structurally, the methodology comparison in the share repo README for how it relates to the existing methodology, `04-inventory.md` for per-skill adoption status and per-tier cheat sheets.
+**Start here if you're a fresh agent / future-you adopting CE.** This doc is the action plan. See `01-overview.md` for what CE is structurally, the dual-loop framework section in `TECHNICAL.md` for how CE relates to Mosaik's fabric layer, `04-inventory.md` for per-skill adoption status and per-tier cheat sheets.
 
 ---
 
@@ -34,7 +34,7 @@ This plan describes adopting Kieran Klaassen / Every's [Compound Engineering plu
 
 CE has no equivalent to most of these — it operates per-repo. The two systems compose at the `~/repos/<project>/` boundary; they don't compete.
 
-The strategic decision behind this scoping is documented in the methodology comparison in the share repo README. The short version: CE is a more integrated, more battle-tested per-repo development workflow than the existing software-documenter; the existing system is broader (OS-level) than anything CE addresses. Adopt CE's loop inside repos; keep everything else.
+The strategic decision: CE is a more integrated, more battle-tested per-repo development workflow than ad-hoc SD approaches; the broader OS-level system is broader (cross-domain) than anything CE addresses. Adopt CE's loop inside repos; keep cross-domain knowledge tooling outside.
 
 ---
 
@@ -178,9 +178,8 @@ Add to `~/repos/CLAUDE.md` (existing Tier-2 file loaded by any Claude Code sessi
 ## Compound Engineering — Adopted Version
 
 Compound Engineering plugin (Kieran Klaassen / Every Inc) is installed user-level
-in Claude Code. Adoption documentation lives at:
-
- <your-vault> Projects/Agentic Future/Implementation Research/compound engineering/
+in Claude Code. Adoption documentation: Mosaik's `methodology/compound-engineering/`
+(in this repo, or a local copy you keep in your knowledge vault).
 
 Start with `03-migration-plan.md`. Pin: v3.8.4 / commit 08bb5899036e9ca33585b38ce840e2b2bfaacac8.
 
@@ -526,7 +525,7 @@ Update `/recall` skill to include `code-solutions` in its default topic-search c
 After this:
 - CE's per-repo `ce-learnings-researcher` continues to work as designed (greps the current repo's solutions)
 - `/recall` provides the cross-repo retrieval layer for solutions
-- Truly cross-life-domain learnings (e.g., cross-life-domain coordination patterns and reflections) continue to live in `<your-vault>` — that location is for **cross-life-domain knowledge ONLY**, never software-development learnings. Software-stack-wide conventions (e.g., "always use bun not npm" applies across multiple Python repos) live in `~/repos/CLAUDE.md` Tier-2 file, not agent vault. See the methodology comparison in the share repo README § 4.2 + § 6.3 for the full routing rules.
+- Truly cross-life-domain learnings (e.g., cross-life-domain coordination patterns and reflections) continue to live in your cross-life-domain knowledge vault — that location is for cross-life-domain knowledge only, never software-development learnings. Software-stack-wide conventions (e.g., "always use bun not npm") live in `~/repos/AGENTS.md` Tier-2 file, not the cross-domain vault.
 
 **Effort:** ~30 minutes. No CE fork required.
 
@@ -679,7 +678,7 @@ Stated preferences: plan in Claude Opus, implementation in Claude (no Codex), pr
 
 **Every 3 months.** Next review: **2026-08-24**.
 
-Add a recurring entry in `<your-vault> Todo/AI.md`:
+Add a recurring entry to your operator todo system:
 
 ```markdown
 - [ ] Re-evaluate Compound Engineering adoption against upstream 📅 2026-08-24 🔁 every 3 months
@@ -728,8 +727,8 @@ With CE adopted inside repos and SD reduced to WIP + reference-doc + optional CH
 | `docs/features/<feature>_scorecard.md` | the operator via `05-walkthrough.md` Step 8 (operator-captured; agent assists with formatting) | Per-feature pilot scorecard — 7 Y/N questions + tier-expectation artifact count + methodology overhead estimate. Source of truth for Phase A evaluation per § 3.6.1 stop / continue criteria | Permanent | Per-repo `docs/features/` | After every CE-piloted feature ships |
 | `docs/ce-pilot-3feature-review.md` | the operator via `05-walkthrough.md` Step 9a (operator-captured) | 3-feature checkpoint review combining structured continue criteria + feel-based reflection (see § 3.6.1 reconciliation table). Decision artifact: continue / partial-drop / revert | Permanent | Per-repo `docs/` | Once per repo at 3-feature checkpoint |
 | `docs/ce-pilot-1month-review.md` | the operator via `05-walkthrough.md` Step 9b (operator-captured) | 1-month or 5-feature sustainability checkpoint combining all per-feature scorecards + feel-based questions about effective shipping / proper documentation / methodology comparison. Read at 3-month re-evaluation per § 9 | Permanent | Per-repo `docs/` | Once per repo at 1-month / 5-feature checkpoint |
-| `<your-vault>` | `@software-documenter-ce` (`capture status` updates Recent Activity; `ship docs` updates Recent Decisions on ship) for CE repos; original SD for non-CE repos | Thin cross-project status summary readable by `/recall` | Updates over time | Agent vault | At capture-status time + at ship-docs time |
-| `<your-vault>` | life-domain capture agent | Cross-life-domain wisdom only — meetings, decisions, people patterns, life-domain conventions. **Software learnings never land here** — they route to per-repo `docs/solutions/` (CE) or repo `docs/` (non-CE). See the methodology comparison in the share repo README § 4.2 + § 6.3. | Permanent | Agent vault | When a session surfaces a cross-life-domain (non-software) insight |
+| your cross-project knowledge vault | `@software-documenter-ce` (`capture status` updates Recent Activity; `ship docs` updates Recent Decisions on ship) | Thin cross-project status summary readable by `/recall` | Updates over time | Cross-project vault | At capture-status time + at ship-docs time |
+| your cross-life-domain vault | a life-domain capture agent (out of share repo scope) | Cross-life-domain wisdom only — meetings, decisions, people patterns, life-domain conventions. **Software learnings never land here** — they route to per-repo `docs/solutions/` (CE) or repo `docs/` (non-CE). | Permanent | Cross-life-domain vault | When a session surfaces a cross-life-domain (non-software) insight |
 | `code-solutions` QMD collection (Phase B B1, deferred) | QMD config | Indexes all repos' `docs/solutions/` for cross-repo `/recall` retrieval | Index, not artifact | QMD daemon | At `qmd embed` cadence |
 | `docs/pulse-reports/YYYY-MM-DD_HH-MM.md` (deferred — § 8) | CE (`/ce-product-pulse`) | Time-windowed product telemetry report | Permanent timeline | Per-repo `docs/pulse-reports/` | Only when production telemetry exists |
 
@@ -743,7 +742,6 @@ Not every artifact applies to every feature. Per-tier defaults in `04-inventory.
 
 - **`04-inventory.md`** — per-skill adoption status (every CE skill with status: adopt / reference / defer / skip), plus per-tier (solo / internal / public) invocation cheat sheets
 - **`01-overview.md`** — what CE is as a system (architecture, primitives, the compounding mechanism, the artifact chain with stable IDs, mode tokens, the persona-selection logic)
-- **the methodology comparison in the share repo README** — how CE relates to the existing the operator methodology: overlaps, complementarities, novel ideas on each side, where the bridges sit (including the Shape A / Shape B detail)
 - **`00-readme.md`** — folder index
 
 For a fresh agent: typical reading order is `03 (here) → 04 → 01 → 02`.

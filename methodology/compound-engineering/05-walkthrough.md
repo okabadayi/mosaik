@@ -284,7 +284,6 @@ Capture answers verbatim in `docs/ce-pilot-1month-review.md` (file is for future
 - `03-migration-plan.md` — full migration plan (this walkthrough is the runtime script for § 3.5 + § 3.6)
 - `03-migration-plan.md § 6.0` — full Phase A revert procedure
 - `04-inventory.md` — per-skill cheat sheets (Solo / Internal / Public tiers + CE Core Set definition § 2.0)
-- the methodology comparison in the share repo README — how CE relates to the existing the operator methodology (good background)
 - `01-overview.md` — what CE is structurally (deep reference)
 - `~/.claude/agents/software-documenter-ce.md` — the SD-CE variant invoked in Step 3 (`capture status`), Step 6 (`ship docs`), and Step 7 (`reference doc <instruction>`). Three modes total — picker surfaces them when you `@-invoke` the agent without arguments
 - `~/.claude/skills/codex-review/SKILL.md` — Codex second-opinion skill (invoked at Step 2 plan review if requested)

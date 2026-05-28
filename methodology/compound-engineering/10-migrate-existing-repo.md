@@ -286,7 +286,6 @@ If you're running a migration and hit a weird situation not covered above, propo
 - [[03-migration-plan]] § 3.0 Prereq 4 — the 5-check audit definition + deprecated file handling
 - [[03-migration-plan]] § 3.2-3.3.5 — `/ce-setup` config decisions + version pin + `/ce-strategy` invocation rationale
 - [[08-doc-lifecycle-reference]] — methodology grounding (Per-doc Lifecycle Matrix, AGENTS.md primary)
-- `compound engineering/importing-existing-repos-into-ce.md` (TO BE DRAFTED on first real import) — JIT edge-case handbook
 
 ---
 

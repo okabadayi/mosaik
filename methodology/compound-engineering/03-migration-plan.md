@@ -18,7 +18,7 @@ related: ["[[00-readme]]", "[[01-overview]]", "[[04-inventory]]"]
 
 ## 1. Position
 
-This plan describes adopting Kieran Klaassen / Every's [Compound Engineering plugin](https://github.com/EveryInc/compound-engineering-plugin) (open-source, 17,000+ GitHub stars) as the software-development engine for the Mosaik methodology.
+This plan describes adopting Kieran Klaassen / Every's [Compound Engineering plugin](https://github.com/EveryInc/compound-engineering-plugin) (open-source, 17,000+ GitHub stars) as the software-development engine for the Mosaik framework.
 
 **In scope:** code-repo work inside `~/repos/<project>/`. CE replaces / augments the per-repo software-development workflow.
 

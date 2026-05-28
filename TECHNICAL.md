@@ -1,10 +1,10 @@
 # Mosaik — Technical Deep Dive
 
-> The detailed methodology articulation. If you want the marketing overview, see [README.md](README.md). If you want to understand the dual-loop architecture, the bridge points, the meta-repo pattern, the doc-structure conventions, and how it all composes — this is your doc.
+> The detailed framework articulation. If you want the marketing overview, see [README.md](README.md). If you want to understand the dual-loop architecture, the bridge points, the meta-repo pattern, the doc-structure conventions, and how it all composes — this is your doc.
 
 ## What is Mosaik
 
-A methodology for AI transformation work in medium-sized businesses with heterogeneous infrastructure. Mosaik **extends** [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin) — Kieran Klaassen / Every's open-source plugin with **over 17,000 GitHub stars**, in active use by many mid-sized businesses for software development. Mosaik adds a complementary knowledge fabric for multi-repo unified-business-view operations: cross-repo compounding, ship-time documentation discipline, software-repo context recall, and the meta-repo pattern for heterogeneous-tooling cases.
+A framework for AI transformation work in medium-sized businesses with heterogeneous infrastructure. Mosaik **extends** [Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin) — Kieran Klaassen / Every's open-source plugin with **over 17,000 GitHub stars**, in active use by many mid-sized businesses for software development. Mosaik adds a complementary knowledge fabric for multi-repo unified-business-view operations: cross-repo compounding, ship-time documentation discipline, software-repo context recall, and the meta-repo pattern for heterogeneous-tooling cases.
 
 ## Who is this for
 
@@ -84,7 +84,7 @@ Note on `codex-review`: this skill (included in `skills/`) is used FROM Claude C
 
 - A specific cloud or hosting provider
 - A specific database
-- **Multiple machines** — Mosaik works on a single machine. Multi-machine sync (e.g., laptop + remote server with shared knowledge fabric) is an operator-specific operational concern, not part of the methodology. Adopters who care about cross-machine sync should solve it independently of Mosaik.
+- **Multiple machines** — Mosaik works on a single machine. Multi-machine sync (e.g., laptop + remote server with shared knowledge fabric) is an operator-specific operational concern, not part of the framework. Adopters who care about cross-machine sync should solve it independently of Mosaik.
 - A specific OS (Mosaik works on macOS, Linux, or wherever Claude Code runs)
 
 ### Optional but recommended
@@ -94,7 +94,7 @@ Note on `codex-review`: this skill (included in `skills/`) is used FROM Claude C
 
 ## Doc-structure conventions
 
-The Mosaik methodology prescribes specific documentation conventions for software repos:
+The Mosaik framework prescribes specific documentation conventions for software repos:
 
 ### The 4-type per-feature doc system
 
@@ -164,7 +164,7 @@ We share Mosaik as inspiration. It's opinionated but not exclusive.
 3. **Set up the skills + agents** by copying from this repo to your local Claude Code setup (`~/.claude/skills/` and `~/.claude/agents/`).
 4. **Set up QMD** for the `/recall` skill to work. See [QMD on GitHub](https://github.com/tobi/qmd).
 5. **Try it on a real solution.** Pick something small. Run through the operator scripts.
-6. **Adapt to your context.** The methodology is opinionated but not exclusive.
+6. **Adapt to your context.** The framework is opinionated but not exclusive.
 
 ## Acknowledgements
 
@@ -174,4 +174,4 @@ We share Mosaik as inspiration. It's opinionated but not exclusive.
 
 ## Contact / Feedback
 
-GitHub Issues on this repo for content questions and broader methodology discussion.
+GitHub Issues on this repo for content questions and broader framework discussion.

@@ -213,7 +213,7 @@ cat > README.md <<'EOF'
 
 Meta-repo for cross-cutting <business> AI transformation work. Holds the unified strategy, per-solution summaries, and cross-repo learnings as they accumulate. Per-solution repos live as siblings (`~/repos/<business>-<solution-name>/`).
 
-Built on the Mosaik methodology — Compound Engineering as the per-feature engine plus a knowledge fabric for unified-business-view operations.
+Built on the Mosaik framework — Compound Engineering as the per-feature engine plus a knowledge fabric for unified-business-view operations.
 
 ## Current state
 
@@ -299,7 +299,7 @@ In the per-solution repo's `STRATEGY.md`, after the standard sections, add:
 
 This solution is part of the `<business>-ai` AI transformation portfolio. The unified strategy lives at `~/repos/<business>-ai/STRATEGY.md`. This solution's strategy inherits the target problem framing + persona understanding from there; the Approach / Tracks / Metrics here are solution-specific.
 
-Cross-cutting patterns that emerge from this solution may be promoted to `~/repos/<business>-ai/solutions/` (see § cross-repo learning workflow in the Mosaik methodology).
+Cross-cutting patterns that emerge from this solution may be promoted to `~/repos/<business>-ai/solutions/` (see § cross-repo learning workflow in the Mosaik framework).
 ```
 
 ### Per-solution summary in meta-repo

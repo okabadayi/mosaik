@@ -1,6 +1,6 @@
 # example-solution-a (customer-data-pipeline)
 
-Generic per-solution repo demonstrating the Mosaik methodology's per-solution structure. Real per-solution repos replace placeholder content with actual solution details.
+Generic per-solution repo demonstrating the Mosaik framework's per-solution structure. Real per-solution repos replace placeholder content with actual solution details.
 
 ## Tech Stack
 
@@ -19,7 +19,7 @@ Generic per-solution repo demonstrating the Mosaik methodology's per-solution st
 
 ## Components & Architecture
 
-> EMPTY at scaffolding per the Mosaik methodology — populates as features ship via SD-CE `ship docs`.
+> EMPTY at scaffolding per the Mosaik framework — populates as features ship via SD-CE `ship docs`.
 
 ## Operational Dispatcher
 

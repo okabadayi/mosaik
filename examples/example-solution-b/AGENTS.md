@@ -1,6 +1,6 @@
 # example-solution-b (internal-knowledge-base)
 
-Generic per-solution repo demonstrating the Mosaik methodology's per-solution structure. Different shape than `example-solution-a` (TypeScript + Next.js + vector store rather than Python data pipeline).
+Generic per-solution repo demonstrating the Mosaik framework's per-solution structure. Different shape than `example-solution-a` (TypeScript + Next.js + vector store rather than Python data pipeline).
 
 ## Tech Stack
 

@@ -14,7 +14,7 @@ user-invocable: true
 
 Load project context from the current repo, your knowledge vaults, and session history.
 
-This is the Mosaik methodology's **software-repo context loader**. It depends on [QMD](https://github.com/tobi/qmd) — a local markdown search daemon — for vault and session indexing. Set up QMD first (see Mosaik's TECHNICAL.md § Runtime requirements + dependencies).
+This is the Mosaik framework's **software-repo context loader**. It depends on [QMD](https://github.com/tobi/qmd) — a local markdown search daemon — for vault and session indexing. Set up QMD first (see Mosaik's TECHNICAL.md § Runtime requirements + dependencies).
 
 ## Mode Detection Cascade
 

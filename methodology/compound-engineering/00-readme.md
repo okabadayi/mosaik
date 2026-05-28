@@ -24,7 +24,7 @@ If asked **"what is Compound Engineering, structurally?"**
 If asked **"how does CE relate to the broader OS-level methodology?"**
 → Read the methodology comparison in the share repo README. Overlaps, complementarities, novel ideas on each side, where the bridges sit.
 
-If asked **"how does documentation work in a CE-piloted repo?"** OR **"what's the doc lifecycle in this methodology?"**
+If asked **"how does documentation work in a CE-piloted repo?"** OR **"what's the doc lifecycle in this framework?"**
 → Read `08-doc-lifecycle-reference.md`. Per-doc Lifecycle Matrix (6 project-level files), AGENTS.md primary + CLAUDE.md `@AGENTS.md` shim pattern, scaffolding-time discipline, two scenarios (fresh + migrated), CE features leveraged, source-of-truth map.
 
 If asked **"how do I scaffold a new CE-piloted repo from scratch?"** OR **"what's the process right now for starting a new repo?"**

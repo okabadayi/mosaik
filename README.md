@@ -1,13 +1,13 @@
 # Mosaik
 
-**A methodology for AI transformation work in medium-sized businesses — built on Compound Engineering, designed for the messy reality of heterogeneous infrastructure.**
+**A framework for AI transformation work in medium-sized businesses — built on Compound Engineering, designed for the messy reality of heterogeneous infrastructure.**
 
 [![Built on Compound Engineering](https://img.shields.io/badge/built%20on-Compound%20Engineering-blue)](https://github.com/EveryInc/compound-engineering-plugin)
 [![Powered by QMD](https://img.shields.io/badge/powered%20by-QMD-green)](https://github.com/tobi/qmd)
 [![Runs in Claude Code](https://img.shields.io/badge/runs%20in-Claude%20Code-orange)](https://claude.ai/code)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> *Two years ago, addressing the operational complexity of a medium-sized business meant hiring separate developers for each problem, each lacking the whole-business view. Today, one agent with whole-business context can emit per-problem solutions while preserving the unified picture. Mosaik is the methodology for running that pattern in practice.*
+> *Two years ago, addressing the operational complexity of a medium-sized business meant hiring separate developers for each problem, each lacking the whole-business view. Today, one agent with whole-business context can emit per-problem solutions while preserving the unified picture. Mosaik is the framework for running that pattern in practice.*
 
 ## What problem does Mosaik solve?
 
@@ -17,7 +17,7 @@ You run AI transformation work for a 10-50 employee business. You have:
 - One or two people responsible for driving AI adoption across all of it
 - A nagging sense that piecemeal solutions don't add up to anything coherent
 
-Mosaik gives you a methodology — and a small set of tools — for shipping **multiple AI solutions that compose into one coherent picture** of your business, rather than five disconnected tools that don't know about each other.
+Mosaik gives you a framework — and a small set of tools — for shipping **multiple AI solutions that compose into one coherent picture** of your business, rather than five disconnected tools that don't know about each other.
 
 **A "solution" here is whatever serves the operational need** — custom code, a SaaS integration, an API bridge between existing platforms, or an agent automating events. Mosaik prescribes the structural discipline, not the implementation shape; adopting Mosaik doesn't mean hand-coding everything.
 
@@ -61,16 +61,16 @@ Mosaik uses QMD as the search substrate for `/recall`, so the agent recalls rele
 
 Mosaik runs in **[Claude Code](https://claude.ai/code)** — Anthropic's official agentic CLI. That's where it was designed and tested. It's also compatible with **OpenAI Codex CLI** through CE's official converter.
 
-The methodology depends on a few things being installed:
+The framework depends on a few things being installed:
 - **Compound Engineering plugin** (v3.8.4 or later) — the engineering engine
 - **QMD** — the markdown search daemon Mosaik uses for fast context recall
 - **A markdown vault** (Obsidian works well; not strictly required)
 
-You don't need any specific cloud, database, or multiple machines. Mosaik works on a single machine; how you sync work between environments is your operational choice, not part of the methodology.
+You don't need any specific cloud, database, or multiple machines. Mosaik works on a single machine; how you sync work between environments is your operational choice, not part of the framework.
 
 For full setup details, see [TECHNICAL.md](TECHNICAL.md#runtime-requirements--dependencies).
 
-## The shape of the methodology
+## The shape of the framework
 
 ```mermaid
 graph TB
@@ -117,11 +117,12 @@ The meta-repo holds shared strategic context. Each solution-repo runs its own en
 
 **Also relevant**: solo founders running multi-domain businesses; AI transformation consultants working with mid-sized clients; technical leads tracking how methodology evolves around agent-driven operations.
 
+
 ## Honest current state
 
 Mosaik is **in development**. CE is the mature foundation Mosaik builds on (17,000+ GitHub stars, well-tested in production). The Mosaik-specific contributions — the fabric integration, the meta-repo pattern, the dual-loop framing — are new (May 2026), validated through real operator use across two contexts, reviewed twice by external AI for sharpness, but **not yet validated at broad community scale**.
 
-We share Mosaik as inspiration. It's opinionated but not exclusive. Your context will have unique constraints; adapt accordingly.
+We share Mosaik as inspiration. The framework is opinionated but not exclusive. Your context will have unique constraints; adapt accordingly.
 
 ## Getting started
 
@@ -134,7 +135,7 @@ If you're new to this entire space:
 3. **Set up a markdown vault** for your knowledge fabric (Obsidian works well; any directory of markdown files is fine).
 4. **Read [TECHNICAL.md](TECHNICAL.md)** for the operational detail — runtime requirements, doc-structure conventions, how the pieces compose.
 5. **Try it on one small solution.** Don't try to retrofit Mosaik onto everything at once.
-6. **Adapt to your context.** The methodology is opinionated but not exclusive.
+6. **Adapt to your context.** The framework is opinionated but not exclusive.
 
 ## Acknowledgements
 

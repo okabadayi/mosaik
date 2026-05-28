@@ -2,7 +2,7 @@
 
 Cross-business meta-repo for unified AI transformation work. Holds the unified strategy, per-solution summaries, and cross-repo learnings.
 
-This is an **example meta-repo** demonstrating the Mosaik methodology's meta-repo pattern. Real businesses replace `<business>` with their actual name and populate with real solutions.
+This is an **example meta-repo** demonstrating the Mosaik framework's meta-repo pattern. Real businesses replace `<business>` with their actual name and populate with real solutions.
 
 ## Purpose
 

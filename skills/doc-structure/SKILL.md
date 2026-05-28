@@ -13,9 +13,9 @@ user-invocable: true
 
 # Documentation Structure
 
-Single source of truth for documentation conventions across all software projects following the Mosaik methodology. Projects live at `~/repos/<project>/`; each carries its own docs. This skill is the canonical blueprint — used by the software-documenter-ce agent and available on demand.
+Single source of truth for documentation conventions across all software projects following the Mosaik framework. Projects live at `~/repos/<project>/`; each carries its own docs. This skill is the canonical blueprint — used by the software-documenter-ce agent and available on demand.
 
-This skill is for **software repos only** in the Mosaik methodology scope.
+This skill is for **software repos only** in the Mosaik framework scope.
 
 ## 4-Type Documentation System
 

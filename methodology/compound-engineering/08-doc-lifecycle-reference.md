@@ -1,5 +1,5 @@
 ---
-description: Canonical reader-facing reference for how documentation flows through the CE × Mosaik (the per-feature engine + complementary knowledge fabric). Per-doc Lifecycle Matrix + AGENTS.md primary + CLAUDE.md @AGENTS.md shim pattern + two scenarios (fresh + migrated) + CE features leveraged + source-of-truth map. Read this if you want "how does documentation work in this methodology".
+description: Canonical reader-facing reference for how documentation flows through the CE × Mosaik (the per-feature engine + complementary knowledge fabric). Per-doc Lifecycle Matrix + AGENTS.md primary + CLAUDE.md @AGENTS.md shim pattern + two scenarios (fresh + migrated) + CE features leveraged + source-of-truth map. Read this if you want "how does documentation work in this framework".
 type: reference
 status: active
 date_created: 2026-05-26
@@ -14,7 +14,7 @@ related: ["[[00-readme]]", "[[03-migration-plan]]"]
 
 Reader's entry point for documentation lifecycle in CE-piloted repos. Captures the **post-Phase-A steady-state methodology** for project-level documentation: which files exist, who owns each at scaffolding, who updates each at feature ship, and how staleness is prevented.
 
-This is the canonical doc-lifecycle reference for CE-piloted repos in the Mosaik methodology.
+This is the canonical doc-lifecycle reference for CE-piloted repos in the Mosaik framework.
 
 ## The picture — a CE-piloted repo's documentation surface
 
@@ -211,4 +211,4 @@ Future CE-piloted repos: follow [`09-fresh-repo-scaffolding.md`](09-fresh-repo-s
 
 ---
 
-*Reader-shaped reference for "how documentation works in CE-piloted repos" inside the Mosaik methodology.*
+*Reader-shaped reference for "how documentation works in CE-piloted repos" inside the Mosaik framework.*

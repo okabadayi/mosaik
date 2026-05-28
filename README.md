@@ -64,7 +64,8 @@ Mosaik runs in **[Claude Code](https://claude.ai/code)** — Anthropic's officia
 The framework depends on a few things being installed:
 - **Compound Engineering plugin** (v3.8.4 or later) — the engineering engine
 - **QMD** — the markdown search daemon Mosaik uses for fast context recall
-- **A markdown vault** — recommended: a shared Obsidian vault that both the agent (writes/reads via filesystem) and the operator (reads/edits in the Obsidian UI) work in. Not strictly required, but the shared human-readable surface is what makes the knowledge fabric actually adoptable — every doc the agent writes is immediately visible to the operator without context-switching, and operator edits land back where the agent will read them next session.
+- **A markdown vault** — recommended: a shared Obsidian vault that both the agent (writes/reads via filesystem) and the operator (reads/edits in the Obsidian UI) work in. 
+	- Not strictly required, but the shared human-readable surface is what makes the knowledge fabric actually adoptable — every doc the agent writes is immediately visible to the operator without context-switching, and operator edits land back where the agent will read them next session.
 
 You don't need any specific cloud, database, or multiple machines. Mosaik works on a single machine; how you sync work between environments is your operational choice, not part of the framework.
 
@@ -139,9 +140,9 @@ If you're new to this entire space:
 
 ## Acknowledgements
 
-- **Compound Engineering** by Kieran Klaassen / Every — the open-source engineering engine Mosaik builds on. CE's mature methodology + community made Mosaik possible.
-- **QMD** by Tobias Lütke — the local markdown search substrate that makes cross-context recall actually fast.
-- **Anthropic** for Claude Code + the AGENTS.md+shim cross-agent compatibility pattern.
+- **[Compound Engineering](https://github.com/EveryInc/compound-engineering-plugin)** by Kieran Klaassen / [Every](https://every.to) — the open-source engineering engine Mosaik builds on. CE's mature methodology + community made Mosaik possible.
+- **[QMD](https://github.com/tobi/qmd)** by Tobias Lütke — the local markdown search substrate that makes cross-context recall actually fast.
+- **[Anthropic](https://www.anthropic.com)** for [Claude Code](https://claude.ai/code) + the AGENTS.md+shim cross-agent compatibility pattern.
 - **Artem Zhutov** ([@artemxtech](https://artemxtech.substack.com/)) — for ["Grep is Dead: How I Made Claude Code Remember"](https://artemxtech.substack.com/p/grep-is-dead-how-i-made-claude-code), which articulated the QMD + hierarchical-collections + multi-mode `/recall` pattern that directly informed Mosaik's recall skill design.
 - **Andrej Karpathy** — the [distilled CLAUDE.md guidelines](https://github.com/multica-ai/andrej-karpathy-skills) whose LLM coding principles informed parts of Mosaik's [agent collaboration principles](methodology/agent-collaboration-principles.md).
 - The community of operator-architect-builders who've shared their AI transformation experiences — Mosaik captures and extends patterns many people are independently arriving at.

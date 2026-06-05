@@ -41,6 +41,16 @@ If ANY of these don't hold, reconsider:
 ~/repos/<business>-ai/                ← META-REPO (cross-business unified surface)
   ├── AGENTS.md                       describes purpose: cross-business cataloging + hub
   ├── STRATEGY.md                     unified AI transformation vision (Rumelt-shaped, CE-produced via /ce-strategy when ready)
+  ├── business/                       intake + discovery substrate (see § 6.5)
+  │   ├── meetings/                   meeting-derived content (date-prefixed; type in frontmatter)
+  │   │   └── YYYY-MM-DD-<slug>.md
+  │   ├── discovery/                  problem-area research before solution boundary is decided
+  │   │   └── <topic>/
+  │   │       ├── problem-definition.md
+  │   │       ├── references.md
+  │   │       └── notes.md
+  │   └── decisions/                  cluster-level decisions (incl. solution-boundary calls)
+  │       └── YYYY-MM-DD-<slug>.md
   ├── projects/                       per-solution thin summaries
   │   ├── solution-a-summary.md       ~40 lines: overview, status, recent decisions, links
   │   ├── solution-b-summary.md
@@ -196,6 +206,43 @@ These higher-abstraction patterns live in the **meta-repo's `solutions/`**, writ
 ### The honest framing
 
 Going multi-repo loses CE's automatic compounding across repos. **But CE's compounding wouldn't have produced useful output at cross-stack scope anyway.** You're not losing what you thought you were losing. You're choosing the right substrate for the right abstraction level.
+
+---
+
+## 6.5 Intake + discovery phase before per-solution repos exist
+
+The meta-repo pattern as articulated in § 1–6 assumes per-solution repos drive the meta-repo's substance. Empirical adoption has surfaced the opposite: **the meta-repo's intake + discovery work drives WHETHER a per-solution repo gets scaffolded**.
+
+The missing phase sits before § 7's "Lightweight initial setup" graduates to § 8's "formal CE-piloted repo." Specifically: an operator arrives with fragmented inputs (interview transcripts, requirements docs from external sources, problem-area research notes) and needs a substrate to distill them into a problem definition that drives a scoping decision.
+
+### The phase shape
+
+- **Phase 0 — Intake at meta-repo level.** Fragmented inputs land in `<business>-ai/business/`:
+  - **`business/meetings/YYYY-MM-DD-<slug>.md`** — all meeting-derived content (interviews, executive sessions, brainstorms, working sessions). Type goes in frontmatter (`type: interview | exec-decision | brainstorm | working-session | <other>`), not in the filename. Flat directory keeps things searchable + chronological. Cross-solution potential is the rule: the same meeting may inform multiple future solutions.
+  - **`business/discovery/<topic>/`** — problem-area research, captured before solution boundary is decided. Holds `problem-definition.md` (distilled understanding), `references.md` (pointers to source materials at their canonical location — Google Drive docs, emails, etc.), `notes.md` (exploratory thinking), and optionally `source-materials/` for small + static + correct snapshots worth keeping immutable.
+  - **`business/decisions/YYYY-MM-DD-<slug>.md`** — cluster-level decisions, including solution-boundary calls ("this is ONE solution called X" / "this is MULTIPLE solutions" / "this fits an existing per-solution repo" / "parked").
+- **Phase 1 — Decide solution boundary.** Captured in `business/decisions/`. The decision references the discovery work that motivated it. Until this decision is made, no per-solution repo gets scaffolded.
+- **Phase 2 — Scaffold per-solution repo (if applicable).** Follows the procedure in § 9 below. The new per-solution repo references back to the relevant meta-repo discovery work; a thin pointer at `<business>-ai/projects/<solution-slug>-summary.md` is added.
+- **Phase 3 — Per-solution work.** Inside the per-solution repo, the CE cycle runs as documented in `05-walkthrough.md`. At session start in a per-solution repo, run `/recall <business>-ai` to load the meta-repo's strategic context — the unified business view follows the agent into every per-solution session.
+
+### Why this phasing matters
+
+The typical failure mode is skipping Phase 0 + Phase 1 and committing prematurely to a per-solution repo. This locks in a scoping decision that hasn't been thought through, and dumps cross-solution-potential inputs (like interview transcripts and source documents) inside a single per-solution repo where they become hard to surface for sibling solutions later.
+
+The `business/` folder set concretizes the meta-repo as more than strategy + project pointers + cross-solution patterns. It also serves as the **substrate for intake + discovery that drives scoping decisions before per-solution repos exist**.
+
+### Optional later additions if friction surfaces
+
+`business/people/` (stakeholder profiles), `business/tools/` (SaaS inventory), `business/constraints/` (compliance / regulatory). Stop at meetings + discovery + decisions unless empirical signal justifies expansion — same JIT philosophy as the rest of the framework.
+
+### Asset routing rule for sensitive data
+
+Source materials from external systems (Google Drive docs, emails, internal databases) come in two flavors: dynamic-or-large (Google Doc that's actively being edited, large dataset, etc.) and small-static-correct (a finalized meeting transcript, a one-page spec). The routing rule:
+
+- **Dynamic or large** → reference URL in `business/discovery/<topic>/references.md`. Living docs stay at their source.
+- **Small, static, correct** → copy to `business/discovery/<topic>/source-materials/`. Immutable snapshot worth having.
+
+**Sensitive data (PII, customer records, credentials/secrets, regulated documents)** → does NOT live in any repo under this framework. The meta-repo + per-solution repos are markdown-vault-grade, not security-grade storage. Store sensitive data in its secure source of record; the repo gets a redacted summary + URL/reference only. If a meeting transcript contains PII, redact before committing OR keep only at the secure source and reference the URL from `business/discovery/<topic>/references.md`.
 
 ---
 

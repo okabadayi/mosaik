@@ -59,6 +59,19 @@ If a QMD collection referenced in a search step is not configured, skip it with 
 - Mode 2 (temporal) still works — reads `~/.claude/projects/*/*.jsonl` directly.
 - Modes 3/4/5/6 (topic/SESSIONS/HYBRID/DEEP) require QMD. If unavailable, tell the user: *"QMD daemon is down; topic/hybrid/deep search unavailable. Use `/recall` (direct load) or `/recall YESTERDAY` (temporal) instead."*
 
+## Cluster-scoped collections (CWD routing)
+
+If you use the Mosaik [meta-repo + per-solution repos pattern](../methodology/compound-engineering/11-meta-repo-pattern-for-heterogeneous-businesses.md), each cluster's meta-repo is typically configured as a separate QMD collection with `includeByDefault: false` — invisible across other contexts unless explicitly opted in. `/recall`'s topic-search modes (3, 5, 6) should auto-extend their default `collections:` set based on CWD:
+
+| CWD pattern | Auto-include collection |
+|---|---|
+| `~/repos/<business>-ai/`, `~/repos/<business>-*/`, `~/<business>/` (if a life-domain folder exists) | `<business>-ai` |
+| Anywhere else | (no extension; defaults stand) |
+
+Detection: `git rev-parse --show-toplevel` or direct CWD-prefix match. When the CWD matches a cluster pattern, the cluster's collection is added to the topic-search call's `collections:` array (in addition to your other default collections).
+
+This makes cluster-scoped substrate searchable from inside the cluster while keeping it dark in unrelated contexts. The corresponding per-cluster routing skill (an instance of the per-cluster routing skill pattern described in `11-meta-repo-pattern-for-heterogeneous-businesses.md`) carries the on-demand grounding procedure that fires when the operator asks placement / prior-work questions. See § "Discoverability bridge" in that doc for the full requirement.
+
 ## Mode 1: Direct Load (no args, or known name)
 
 When invoked with no arguments, detect the project from CWD:
@@ -95,7 +108,7 @@ Load context (mirrors the per-feature checkpoint loading pattern):
 5. **Read project entry** if it exists — search your configured vaults (`mcp__qmd__query` with searches `[{type: "lex", query: "<project> project summary"}]`).
 6. **Synthesize "One Thing"** (see below).
 
-**Meta-repo extension** (if using the Mosaik meta-repo + per-solution repos pattern from `methodology/compound-engineering/11-meta-repo-pattern-for-heterogeneous-businesses.md`): when in a per-solution repo, also load the parent meta-repo's STRATEGY + relevant per-solution summary + relevant cross-solution patterns. Manual invocation pattern: `/recall <business>-ai` after `/recall` in the per-solution repo. Provides whole-business grounding.
+**Meta-repo extension** (if using the Mosaik meta-repo + per-solution repos pattern from `methodology/compound-engineering/11-meta-repo-pattern-for-heterogeneous-businesses.md`): when in a per-solution repo, also load the parent meta-repo's STRATEGY + relevant per-solution summary + relevant cross-solution patterns. Two paths: (a) automatic — Modes 3/5/6 auto-include the cluster's QMD collection per the "Cluster-scoped collections (CWD routing)" section above, surfacing relevant meta-repo content on topic search; (b) explicit — `/recall <business>-ai` after `/recall` in the per-solution repo loads the meta-repo's structural docs directly (STRATEGY, README, projects/, decisions/) for whole-business grounding.
 
 ## Mode 2: Temporal (date-based)
 

@@ -108,7 +108,7 @@ These are the surfaces unique to a meta-repo (in addition to the standard repo f
 
 - **Executable code** — meta-repo is strategic + organizational substrate, not a runtime. Each per-solution repo has its own runtime.
 - **Per-solution implementation details** — those live in per-solution repos' `src/` + `docs/`.
-- **Customer-specific data** — sensitive data lives in per-solution repos with appropriate security.
+- **Customer-specific or otherwise sensitive data** — does NOT live in any repo under this framework (meta-repo or per-solution). Sensitive data (PII, customer records, credentials/secrets, regulated documents) lives in its secure source of record; repos contain only redacted summaries + URL references. See § 6.5 "Asset routing rule for sensitive data" for the routing rule.
 
 ---
 
@@ -218,12 +218,12 @@ The missing phase sits before § 7's "Lightweight initial setup" graduates to §
 ### The phase shape
 
 - **Phase 0 — Intake at meta-repo level.** Fragmented inputs land in `<business>-ai/business/`:
-  - **`business/meetings/YYYY-MM-DD-<slug>.md`** — all meeting-derived content (interviews, executive sessions, brainstorms, working sessions). Type goes in frontmatter (`type: interview | exec-decision | brainstorm | working-session | <other>`), not in the filename. Flat directory keeps things searchable + chronological. Cross-solution potential is the rule: the same meeting may inform multiple future solutions.
-  - **`business/discovery/<topic>/`** — problem-area research, captured before solution boundary is decided. Holds `problem-definition.md` (distilled understanding), `references.md` (pointers to source materials at their canonical location — Google Drive docs, emails, etc.), `notes.md` (exploratory thinking), and optionally `source-materials/` for small + static + correct snapshots worth keeping immutable.
+  - **`business/interactions/YYYY-MM-DD-<slug>.md`** — all **stakeholder interaction records**. Covers BOTH synchronous interactions (interviews, executive sessions, brainstorms, working sessions) AND substantive asynchronous written communications (Slack DM bursts, channel posts, strategic emails from stakeholders). Type goes in frontmatter (`type: interview | exec-decision | brainstorm | working-session | management-input | other`), not in the filename. Flat directory keeps things searchable + chronological. Cross-solution potential is the rule: the same interaction may inform multiple future solutions.
+  - **`business/discovery/<topic>/`** — problem-area research, captured before solution boundary is decided. See "Tiered discovery convention" below for the topic's internal shape.
   - **`business/decisions/YYYY-MM-DD-<slug>.md`** — cluster-level decisions, including solution-boundary calls ("this is ONE solution called X" / "this is MULTIPLE solutions" / "this fits an existing per-solution repo" / "parked").
 - **Phase 1 — Decide solution boundary.** Captured in `business/decisions/`. The decision references the discovery work that motivated it. Until this decision is made, no per-solution repo gets scaffolded.
 - **Phase 2 — Scaffold per-solution repo (if applicable).** Follows the procedure in § 9 below. The new per-solution repo references back to the relevant meta-repo discovery work; a thin pointer at `<business>-ai/projects/<solution-slug>-summary.md` is added.
-- **Phase 3 — Per-solution work.** Inside the per-solution repo, the CE cycle runs as documented in `05-walkthrough.md`. At session start in a per-solution repo, run `/recall <business>-ai` to load the meta-repo's strategic context — the unified business view follows the agent into every per-solution session.
+- **Phase 3 — Per-solution work.** Inside the per-solution repo, the CE cycle runs as documented in `05-walkthrough.md`. The meta-repo's substrate is auto-included by `/recall` when CWD is in the cluster (see "Discoverability bridge" below).
 
 ### Why this phasing matters
 
@@ -231,9 +231,30 @@ The typical failure mode is skipping Phase 0 + Phase 1 and committing prematurel
 
 The `business/` folder set concretizes the meta-repo as more than strategy + project pointers + cross-solution patterns. It also serves as the **substrate for intake + discovery that drives scoping decisions before per-solution repos exist**.
 
+### Tiered discovery convention
+
+A discovery topic's internal shape grows JIT, not declared upfront:
+
+- **Light tier** (default, small topic, ≤ ~5 substantive docs): `problem-definition.md` + `references.md` + `notes.md` (+ optional `source-materials/` for small + static + correct snapshots worth keeping immutable).
+- **Rich tier** (topic accumulates past ~5 substantive docs OR multiple analytical surfaces emerge): `00-index.md` + numbered files (`01-problem-statement.md`, `02-current-state.md`, … `NN-synthesis.md`).
+
+Graduation from light to rich is an operator call — when `notes.md` becomes unwieldy or distinct analytical surfaces want their own files, restructure. Both shapes are valid; pick the one that matches the topic's current weight.
+
+### Discoverability bridge
+
+The intake substrate above is only valuable if fresh sessions can FIND it. Without a deliberate retrieval bridge, captured interactions, discovery work, and decisions are invisible to topic search — the methodology silently regresses to operator-driven recall only.
+
+Every meta-repo adopter MUST:
+
+1. **Add the meta-repo as a scoped collection on each machine they use.** For QMD adopters: a new collection entry with `includeByDefault: false` (so it stays invisible across non-cluster contexts and only surfaces on explicit opt-in). Pattern: `**/*.md`. Ignore root metadata (`README.md`, `AGENTS.md`, `CHANGELOG.md`, `ISSUES.md`, `.git/**`) — those are structural pointer files, not searchable knowledge.
+2. **Extend `/recall` so the collection auto-includes when CWD is in the cluster.** When CWD is `~/repos/<business>-ai`, `~/repos/<business>-*`, or `~/<business>/` (if a life-domain folder exists), `/recall`'s topic-search modes add the collection to their default set. Outside the cluster, the collection stays dark.
+3. **Teach on-demand grounding in the per-cluster routing skill.** When the operator asks placement / prior-work / discoverability questions ("where does this go?", "have we documented X?", "is there prior work on Y?"), the skill instructs the agent to read the meta-repo `README.md` "Current state" + relevant `business/discovery/<topic>/` entries first, AND scope queries to include the meta-repo collection. Grounding is on-demand, NOT a session-start boot sequence (which burns context for sessions doing other work).
+
+Cross-machine note: indexing infrastructure is typically per-machine. The discoverability bridge has to land on every machine the operator uses. A post-setup verification step (collection appears in `qmd collection list`; `qmd collection show <name>` confirms `Include: no`; one known query returns a known file from the cluster) catches silent drift.
+
 ### Optional later additions if friction surfaces
 
-`business/people/` (stakeholder profiles), `business/tools/` (SaaS inventory), `business/constraints/` (compliance / regulatory). Stop at meetings + discovery + decisions unless empirical signal justifies expansion — same JIT philosophy as the rest of the framework.
+`business/people/` (stakeholder profiles), `business/tools/` (SaaS inventory), `business/constraints/` (compliance / regulatory). Stop at interactions + discovery + decisions unless empirical signal justifies expansion — same JIT philosophy as the rest of the framework.
 
 ### Asset routing rule for sensitive data
 
@@ -242,7 +263,7 @@ Source materials from external systems (Google Drive docs, emails, internal data
 - **Dynamic or large** → reference URL in `business/discovery/<topic>/references.md`. Living docs stay at their source.
 - **Small, static, correct** → copy to `business/discovery/<topic>/source-materials/`. Immutable snapshot worth having.
 
-**Sensitive data (PII, customer records, credentials/secrets, regulated documents)** → does NOT live in any repo under this framework. The meta-repo + per-solution repos are markdown-vault-grade, not security-grade storage. Store sensitive data in its secure source of record; the repo gets a redacted summary + URL/reference only. If a meeting transcript contains PII, redact before committing OR keep only at the secure source and reference the URL from `business/discovery/<topic>/references.md`.
+**Sensitive data (PII, customer records, credentials/secrets, regulated documents)** → does NOT live in any repo under this framework. The meta-repo + per-solution repos are markdown-vault-grade, not security-grade storage. Store sensitive data in its secure source of record; the repo gets a redacted summary + URL/reference only. If an interaction record contains PII, redact before committing OR keep only at the secure source and reference the URL from `business/discovery/<topic>/references.md`.
 
 ---
 
@@ -279,6 +300,12 @@ git commit -m "Initial: empty meta-repo shell"
 ```
 
 This is ~5 minutes. Gives you the structural home from day 1.
+
+### Cross-machine note
+
+If you operate cross-machine (multi-host setup — e.g., primary workstation + a fallback machine, or several operator machines), **set up the remote NOW, not later**. The discoverability bridge in § 6.5 mandates the meta-repo on every machine, which requires a remote + clone. Treat the `# 4. Remote setup` block above as **required at scaffolding time** for cross-machine adopters, not deferred.
+
+After the remote exists: on each additional machine, `git clone git@github.com:<org>/<business>-ai.git ~/repos/<business>-ai`, then apply the QMD collection config per § 6.5 (`pattern: "**/*.md"` + ignore root metadata + `includeByDefault: false`). The post-setup verification checklist (collection appears in `qmd collection list`; `qmd collection show <name>` confirms `Include: no`; one known query returns a known file) runs on each machine independently.
 
 ### Deliberate NOT done yet
 

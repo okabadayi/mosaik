@@ -83,7 +83,7 @@ Six project-level files are in scope (plus AGENTS.md as the primary, per the CE-
 | `CLAUDE.md` (shim) | Operator manual | `@AGENTS.md` on line 1. Optional Claude-Code-specific sections below (rare). | Rarely touched; only if Claude-Code-specific overrides emerge | Trivial — usually just the shim line; verify `@AGENTS.md` resolves |
 | `README.md` | Operator manual or scaffolding skill | Title + 1-line description + project status line ("v0 — no features shipped yet") + section headers for Components / Features (EMPTY) | SD-CE `ship docs` at feature ship | `audit-docs`: features in README should appear in git log; components should exist in filesystem |
 | `CHANGELOG.md` | Operator manual or scaffolding skill | Section headers (Current Focus / Roadmap / Recent Updates / Version History / Decision Log) all empty. Current Focus = "no features shipped yet." | SD-CE `ship docs` covers ALL 4 sections at feature ship (Current Focus, Recent Updates, Version History detailed entry, Decision Log for architectural decisions — judgment call) | `audit-docs`: Recent Updates entries should map to git tags / merges |
-| `ISSUES.md` | Operator manual or scaffolding skill | Section headers (Open Issues / Resolved Issues) empty | SD-CE `ship docs` moves resolved entries Open → Resolved with date + feature reference | `audit-docs`: Resolved entries should have feature/commit refs |
+| `ISSUES.md` | Operator manual or scaffolding skill | **Index at top** + per-component sections + `## Resolved Issues`. Use cross-platform anchor syntax `[text](#heading-slug)`. See § ISSUES.md for the full canonical structure. | SD-CE `ship docs` moves resolved entries Open → Resolved with date + feature reference; flags heavy entries for promotion to `docs/reference/<topic>.md` | `audit-docs`: Resolved entries should have feature/commit refs; Index entries resolve |
 | `docs/architecture.md` (conditional) | NOT created by default. Allowed at scaffolding only if load-bearing target design / hypotheses aren't captured by STRATEGY.md + CHANGELOG Decision Log + per-feature plans. Mark as "target design — reconcile at first ship." | If created: target-design + ASCII diagrams + cross-cutting runtime synthesis. DO NOT duplicate Decision Log rationale — point at CHANGELOG Decision Log for the "why." | Manual when runtime model materially shifts; reconcile against Decision Log at each feature ship | Review at scorecard checkpoints — verify no divergence vs Decision Log + STRATEGY.md tracks |
 
 **Scaffolding-time discipline rule.** At repo creation, project-level docs have section headers + intent only; Components / features / Recent Updates / Key Files sections start EMPTY. SD-CE populates as features ship. Pre-CE Claude scaffolding agents tend to project from requirements briefs into fictional Components tables — verified empirically in pilot use. Resist this; empty section headers are correct.
@@ -207,6 +207,7 @@ Each project has its own `CHANGELOG.md` with these sections:
 README is the user-facing project overview. NOT loaded by Claude at startup — Claude reads it on demand.
 
 **README must contain:**
+- **Index at top** — section anchors for the major content blocks (Quick Start / Features / Configuration / Project structure / etc.) using cross-platform anchor syntax: `[text](#heading-slug)` (works in both Obsidian and GitHub).
 - Project description (what it is, who it's for)
 - Quick start (prerequisites, installation, basic usage)
 - **Features/components index** — one paragraph per feature/tool with: what it does, basic usage command, link to full docs
@@ -227,20 +228,61 @@ Tracks known bugs organized by component. Simple format:
 ```markdown
 # Known Issues
 
-## Component: <name>
+## Index
 
-### Issue: <title>
-- **Impact**: How it affects users
-- **Workaround**: Temporary fix, if any
-- **Status**: Open / Investigating / Fixed in <version>
+| Status | Component | Issue |
+|---|---|---|
+| 🔴 Open | [Audio quality](#audio-quality) | brief description |
+| 🟡 Mode-specific | [Pipeline](#pipeline) | brief (mode/version qualifier) |
+| 🟢 Resolved v0.3 | [UX](#ux) | brief description |
+
+## Audio quality
+
+### Issue: brief title
+- **Impact:** how it affects users
+- **Workaround:** any (or — if none)
+- **Status:** Open / Investigating / Fixed in <version>
+- **tracker:** gh#N (when work has started) or — (not yet committed to work)
+- **reference:** docs/reference/<topic>.md (if promoted)
 
 ## Resolved Issues
 
-### Issue: <title> (resolved YYYY-MM-DD)
-- **Reference**: <link to fix / reference doc>
+### Issue: brief title (resolved <version>, YYYY-MM-DD)
+- **Reference:** docs/reference/<topic>.md (or other resolution artifact)
+- **Resolution:** commit/PR reference
 ```
 
-**ISSUES.md maintenance at ship time:** in CE-piloted repos, `@software-documenter-ce ship docs` handles it as part of the per-surface sweep. If the feature resolves any Open issue, move it to the Resolved Issues section with date and reference.
+### Cross-platform anchor syntax (works in BOTH Obsidian and GitHub)
+
+Use `[text](#heading-slug)` for within-document links. Slug rules: lowercase, spaces → hyphens, strip most punctuation. This is GitHub's auto-anchor convention; Obsidian renders it correctly too.
+
+**Examples** (heading → slug):
+- `## Audio quality` → `#audio-quality`
+- `## Pipeline reliability` → `#pipeline-reliability`
+- `## Listener / UX` → `#listener--ux` (the `/` and adjacent space produce a double-hyphen; verify with GitHub preview if unsure)
+
+**Legacy-heading caveat.** If existing files use prefixed headings like `## Component: Audio quality`, the GitHub anchor includes the prefix (→ `#component-audio-quality`). When normalizing: either rename headings to drop the prefix (cleaner anchors), or keep the legacy slug literally in Index links — pick one per file.
+
+### Lightweight vs reference doc — when to promote
+
+ISSUES.md entries stay **lightweight**: title + 3-5 bullets max. When an entry grows past ~5 lines of body OR accumulates external citations / multi-paragraph workarounds / version-behavior matrices, **promote the analysis to `docs/reference/<topic>.md`** and reduce the ISSUES.md entry to a one-liner pointing at it via the `reference:` field.
+
+### GitHub issues vs ISSUES.md
+
+- **ISSUES.md** — lightweight capture; everything starts here. Cheap to file (one-line entry + date).
+- **GitHub issue** — created ONLY when starting work on the item. Filed via `gh issue create`; linked from ISSUES.md as `tracker: gh#N`. PR closes it via `Closes #N` in the commit message.
+
+This matches CE's stance: `ce-issue-intelligence-analyst` reads GitHub issues for theme analysis when invoked, but normal CE feature work doesn't require them for routine bug capture.
+
+### Multi-version / multi-mode status (when applicable)
+
+Projects with multiple versions or modes use per-mode/per-version Status:
+
+`Status: Open in v0.1 mixed; resolved v0.2.1 per-speaker; v0.3 reopened with new symptoms — see [reference doc](docs/reference/<topic>.md)`
+
+The Index table can have separate columns per version/mode if it makes the at-a-glance signal clearer.
+
+**ISSUES.md maintenance at ship time:** in CE-piloted repos, `@software-documenter-ce ship docs` triages at every ship — moves resolved Open entries to `## Resolved Issues` with date + reference; flags heavy entries for promotion to `docs/reference/<topic>.md`.
 
 ## Substantive Instruction File Maintenance (Per-Repo)
 

@@ -48,7 +48,7 @@ Either way, the 5 files at the end of this step:
 | **`CLAUDE.md`** (shim) | `@AGENTS.md` on line 1. Optional CC-specific section below only if there's behavior that doesn't apply to other agents (rare). |
 | **`README.md`** | Title + 1-line description + status line ("v0 — no features shipped yet") + EMPTY Components / Features headers |
 | **`CHANGELOG.md`** | EMPTY Current Focus / Roadmap / Recent Updates / Version History / Decision Log headers. Current Focus = "no features shipped yet." |
-| **`ISSUES.md`** | EMPTY Open Issues / Resolved Issues headers |
+| **`ISSUES.md`** | `# Known Issues` + `## Index` (single placeholder row "no known issues") + `## Resolved Issues` (empty). See `doc-structure` skill § ISSUES.md. Cross-platform anchor syntax (`[text](#heading-slug)`) for future Index entries. |
 
 **`docs/architecture.md` is CONDITIONAL** — create only if there's load-bearing target design not captured by STRATEGY.md + Decision Log + per-feature plans. Mark as "target design — reconcile at first ship."
 

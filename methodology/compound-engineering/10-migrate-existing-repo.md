@@ -112,11 +112,43 @@ If `.claude/rules/` already exists, audit content for alignment with CE methodol
 - **`docs/operations.md`** (if exists): delete now. Move substantial runbook content (if any) to `docs/runbook.md` first; minor Quick Start content moves to README.
 - **`docs/vision.md`** (if exists): **leave it for now.** Vision content will inform the `/ce-strategy` interview in Phase 2. After STRATEGY.md exists, archive vision.md per Step 2.3.
 
-### Step 1.7 — Verify docs/ structure + CHANGELOG sections
+### Step 1.7 — Verify docs/ structure + CHANGELOG sections + ISSUES/README normalization (mandatory)
 
 - Ensure `docs/features/` and `docs/archive/` exist; create if missing
 - Ensure `CHANGELOG.md` has sections: Current Focus / Roadmap / Recent Updates / Version History / Decision Log (add empty headers if missing)
-- Ensure `ISSUES.md` has sections: Open Issues / Resolved Issues (add empty headers if missing)
+- **`ISSUES.md` canonical structure** (per `doc-structure` skill § ISSUES.md):
+  - `# Known Issues` (h1)
+  - `## Index` (anchor table) — even if just one no-known-issues row at scaffolding
+  - Per-component sections (e.g., `## Audio quality`) — empty until first issue lands
+  - `## Resolved Issues` (h2) — empty at scaffolding
+  - **Normalize legacy headings**: if existing ISSUES.md uses `## Component: <name>`, rename to `## <name>` so GitHub anchors don't carry the `component-` prefix (or keep the legacy slug literally in Index links — pick one per file).
+- **`README.md` Index at top** (per `doc-structure` skill § README) — section anchors for major content blocks. If README has substantive content but no Index, add one as part of this step.
+- Use cross-platform anchor syntax `[text](#heading-slug)` for the Indexes — works in both Obsidian and GitHub.
+
+This step is **mandatory normalization** — fast (5-15 min) and shapes docs into the convention. Heavy-entry triage is Step 1.7.5.
+
+### Step 1.7.5 — Heavy-entry triage (operator-approved, deferrable)
+
+Pre-CE repos may have accumulated long-form ISSUES.md entries before the lightweight-capture convention. The heavy-entry triage — promoting multi-paragraph entries to `docs/reference/<topic>.md` and re-sweeping Open vs actually-resolved — is **operator-approved**, not mandatory at migration time.
+
+**Agent's prompt to operator:**
+
+> "ISSUES.md normalization (Index + section structure) is done per Step 1.7. Heavier triage available next:
+> - P entries are past ~5 lines (likely belong in `docs/reference/<topic>.md`)
+> - Q entries marked Open may be actually resolved by recent commits/versions
+>
+> Want to do this triage now (~30-60 min depending on size), or defer to post-migration follow-up?"
+
+**If operator approves now:**
+
+1. Walk per-entry. For each Open entry, verify against current production state + recent commits; move actually-resolved entries to `## Resolved Issues` with the resolution version/commit reference.
+2. Promote heavy entries (multi-paragraph workarounds, external citations, version-behavior matrices) to `docs/reference/<topic>.md`. ISSUES.md gets a one-liner pointing at the reference doc via the `reference:` field.
+
+**If operator defers:**
+
+The deferred triage must surface later — record it as a **visible repo artifact**, not just a commit message. Recommended: a one-line entry in `docs/features/post-migration-cleanup_wip.md` listing the deferred items (file count + line count + concrete next-step). Alternative: an `## Open Issues` entry in ISSUES.md titled "ISSUES.md + README triage per convention" with the same line-count summary.
+
+The deferred triage is **operator-scheduled** — it doesn't block migration from proceeding to Phase 2.
 
 ### Step 1.8 — Tag revert anchor + commit
 

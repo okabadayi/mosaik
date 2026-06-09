@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# pre-push hook for the Mosaik framework repo.
+# Runs scripts/leak-scan.sh; refuses the push if leaks are found.
+#
+# Activated by `git config core.hooksPath hooks` (see README.md § Hook setup).
+# Bypass for an intentional push: `git push --no-verify` (use with care).
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+exec "$REPO_ROOT/scripts/leak-scan.sh"

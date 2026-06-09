@@ -10,7 +10,7 @@ related: ["[[00-readme]]", "[[03-migration-plan]]", "[[05-walkthrough]]", "[[08-
 
 # Migrate an Existing Repo into CE
 
-Agent-guided walkthrough for bringing a pre-CE repo (e.g., meeting-translator) into CE adoption. Three phases — Phase 1 the agent automates with ☆ confirmation gates; Phase 2 you invoke CE bootstrap commands; Phase 3 hands off to [`05-walkthrough.md`](05-walkthrough.md) for the first feature.
+Agent-guided walkthrough for bringing a pre-CE repo (e.g., an existing tool you've been iterating on outside CE) into CE adoption. Three phases — Phase 1 the agent automates with ☆ confirmation gates; Phase 2 you invoke CE bootstrap commands; Phase 3 hands off to [`05-walkthrough.md`](05-walkthrough.md) for the first feature.
 
 For **fresh repos** (brand-new, no pre-CE history), use [`09-fresh-repo-scaffolding.md`](09-fresh-repo-scaffolding.md) instead.
 

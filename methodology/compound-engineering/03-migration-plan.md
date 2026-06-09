@@ -605,7 +605,7 @@ A minimal data-handling rule applies to ANY content sent to a non-Claude model (
 
 - **No secrets in external prompts.** API keys, OAuth tokens, passwords, signing keys never get pasted into Codex / Gemini / external-tool prompts. If a code snippet contains hardcoded secrets, redact before pasting OR point the tool at a sanitized file on disk instead of pasting.
 - **No customer PII.** User emails, names, personal addresses, payment data don't go into external tool prompts. Use synthetic equivalents or redact.
-- **No internal hostnames or private IPs.** `192.168.x.x`, Tailscale `100.x.x.x`, `*.local` / `*.internal` domains stay local.
+- **No internal hostnames or private IPs.** RFC1918 ranges, CGNAT (e.g., Tailscale) ranges, `.local` / `.internal` domains — all stay out of the public repo. Enforced on push by `scripts/leak-scan.sh`.
 - **Prefer pointing at files over pasting content.** Codex with `--sandbox read-only` reads files directly from the filesystem; you don't ship file content over the network from your side. The `codex-review` skill body covers this pattern in detail (see `~/.claude/skills/codex-review/SKILL.md § Data Sanitization Before Pasting`).
 - **When uncertain.** Write the content to a sanitized scratch file on disk, then point the tool at that file.
 

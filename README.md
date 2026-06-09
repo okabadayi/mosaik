@@ -22,6 +22,7 @@
 - [Getting started](#getting-started)
 - [About this work](#about-this-work)
 - [License](#license)
+- [For contributors / agents updating this repo](#for-contributors--agents-updating-this-repo)
 - [Roadmap](#roadmap)
 
 ## What problem does Mosaik solve?
@@ -183,6 +184,28 @@ Shared as inspiration, not as a definitive answer.
 ## License
 
 MIT — see [LICENSE](LICENSE).
+
+## For contributors / agents updating this repo
+
+This is a public repo. Before pushing, the `pre-push` hook runs `scripts/leak-scan.sh` to catch private-information patterns (personal names, business names, internal paths, internal IPs, private repo names, personal emails) that should never reach the public.
+
+**One-time setup after cloning:**
+
+```bash
+git config core.hooksPath hooks
+```
+
+That points git at the committed `hooks/` directory (instead of the default `.git/hooks/`, which isn't part of the repo). The pre-push hook then runs automatically on every `git push`.
+
+**Manual scan** (any time):
+
+```bash
+./scripts/leak-scan.sh
+```
+
+Exit 0 = clean. Exit 1 + report = leaks found; fix before publishing. Patterns are inline in the script — extend as you discover new leak surfaces.
+
+**Bypass** (intentional push): `git push --no-verify`. Use sparingly and only when you've personally verified the match is benign.
 
 ## Roadmap
 

@@ -133,7 +133,7 @@ Core files in every repo:
 - **`AGENTS.md`** (substantive instruction file — CE-preferred + Anthropic-recommended)
 - **`CLAUDE.md`** (shim — `@AGENTS.md` plus optional Claude-Code-specific additions)
 - **`README.md`** (for humans — description, quick start, components index)
-- **`CHANGELOG.md`** (timeline — Current Focus, Recent Updates, Version History, Decision Log)
+- **`CHANGELOG.md`** (timeline — Index, Current Focus, Roadmap, Version History, Decision Log; see `skills/doc-structure/SKILL.md` § CHANGELOG Format)
 - **`ISSUES.md`** (known bugs by component, Open / Resolved sections)
 - **`docs/architecture.md`** (conditional — only when load-bearing target design isn't captured elsewhere)
 

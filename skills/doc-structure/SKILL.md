@@ -82,11 +82,11 @@ Six project-level files are in scope (plus AGENTS.md as the primary, per the CE-
 | `AGENTS.md` (substantive instruction file) | Operator manual (initial) — a dedicated scaffolding skill is a deferred follow-up | Title + project description + Tech Stack + Project Conventions (project-specific only; universal rules cascade from parent-tier `AGENTS.md` — see [`methodology/agent-collaboration-principles.md`](../../methodology/agent-collaboration-principles.md)) + Operational Dispatcher (universal scenarios) + Current State pointer. **EMPTY at scaffolding:** Components & Architecture, Key Files. | Components & Architecture → SD-CE `ship docs` at feature ship. Tech Stack / Conventions / Dispatcher → manual (rare). CE `/ce-compound` Discoverability Check auto-maintains the `docs/solutions/` surface inside AGENTS.md/CLAUDE.md | At scorecard checkpoints + after CE plugin upgrades, invoke an `audit-docs` skill (deferred) to grep claims vs filesystem |
 | `CLAUDE.md` (shim) | Operator manual | `@AGENTS.md` on line 1. Optional Claude-Code-specific sections below (rare). | Rarely touched; only if Claude-Code-specific overrides emerge | Trivial — usually just the shim line; verify `@AGENTS.md` resolves |
 | `README.md` | Operator manual or scaffolding skill | Title + 1-line description + project status line ("v0 — no features shipped yet") + section headers for Components / Features (EMPTY) | SD-CE `ship docs` at feature ship | `audit-docs`: features in README should appear in git log; components should exist in filesystem |
-| `CHANGELOG.md` | Operator manual or scaffolding skill | Section headers (Current Focus / Roadmap / Recent Updates / Version History / Decision Log) all empty. Current Focus = "no features shipped yet." | SD-CE `ship docs` covers ALL 4 sections at feature ship (Current Focus, Recent Updates, Version History detailed entry, Decision Log for architectural decisions — judgment call) | `audit-docs`: Recent Updates entries should map to git tags / merges |
+| `CHANGELOG.md` | Operator manual or scaffolding skill | **Index at top** (anchor links to Current Focus / Roadmap / Version History / Decision Log; cross-platform `[text](#heading-slug)` syntax) + section headers all empty (Current Focus / Roadmap / Version History / Decision Log). Current Focus = "no features shipped yet." See § CHANGELOG Format for the full canonical structure. | SD-CE `ship docs` updates Current Focus, prepends to Version History (latest-version-first, ISO dates, change-type grouped per Keep a Changelog), appends to Decision Log when architectural decisions surface; heavy Decision Log entries promoted to `docs/decisions/<slug>.md` (non-CE) or `docs/solutions/<category>/<slug>.md` (CE-piloted) | `audit-docs`: Version History entries should map to git tags / merges; Decision Log entries past promotion threshold should be promoted |
 | `ISSUES.md` | Operator manual or scaffolding skill | **Index at top** + per-component sections + `## Resolved Issues`. Use cross-platform anchor syntax `[text](#heading-slug)`. See § ISSUES.md for the full canonical structure. | SD-CE `ship docs` moves resolved entries Open → Resolved with date + feature reference; flags heavy entries for promotion to `docs/reference/<topic>.md` | `audit-docs`: Resolved entries should have feature/commit refs; Index entries resolve |
 | `docs/architecture.md` (conditional) | NOT created by default. Allowed at scaffolding only if load-bearing target design / hypotheses aren't captured by STRATEGY.md + CHANGELOG Decision Log + per-feature plans. Mark as "target design — reconcile at first ship." | If created: target-design + ASCII diagrams + cross-cutting runtime synthesis. DO NOT duplicate Decision Log rationale — point at CHANGELOG Decision Log for the "why." | Manual when runtime model materially shifts; reconcile against Decision Log at each feature ship | Review at scorecard checkpoints — verify no divergence vs Decision Log + STRATEGY.md tracks |
 
-**Scaffolding-time discipline rule.** At repo creation, project-level docs have section headers + intent only; Components / features / Recent Updates / Key Files sections start EMPTY. SD-CE populates as features ship. Pre-CE Claude scaffolding agents tend to project from requirements briefs into fictional Components tables — verified empirically in pilot use. Resist this; empty section headers are correct.
+**Scaffolding-time discipline rule.** At repo creation, project-level docs have section headers + intent only; Components / Features / Version History / Key Files sections start EMPTY. SD-CE populates as features ship. Pre-CE Claude scaffolding agents tend to project from requirements briefs into fictional Components tables — verified empirically in pilot use. Resist this; empty section headers are correct.
 
 **AGENTS.md primary + CLAUDE.md shim — why, and at every tier.** CE skills (`ce-brainstorm`, `ce-plan`, `ce-work`) explicitly prefer AGENTS.md with CLAUDE.md as compatibility fallback. Anthropic's `memory.md` docs recommend the same pattern: `CLAUDE.md` starts with `@AGENTS.md`, optionally followed by Claude-Code-specific additions. Forward-compatible with Codex, Cursor, OpenAI agents (all read AGENTS.md). Substantive content lives in AGENTS.md; CLAUDE.md is the auto-load bridge. **Apply the same pattern at every tier with substantive content** — including the parent tier above a repo cluster (`~/repos/AGENTS.md` + `~/repos/CLAUDE.md` shim) where universal collaboration rules live once and cascade to every per-repo session. See [`methodology/agent-collaboration-principles.md`](../../methodology/agent-collaboration-principles.md) § "How to wire these into a repo cluster" for the tier layout.
 
@@ -171,36 +171,130 @@ tags: []
 
 ## CHANGELOG Format
 
-Each project has its own `CHANGELOG.md` with these sections:
+Each project has its own `CHANGELOG.md`. The structure stays useful — current activity scannable from the top, version history captures shipped reality, decision log preserves WHY — without becoming a soup. The convention layers Mosaik-specific anchors (Current Focus, Decision Log) on top of [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) for the version-shipping mechanics.
+
+**Why no `[Unreleased]` section.** Keep a Changelog opens with an `[Unreleased]` block. This convention deliberately replaces it with **Current Focus + Roadmap** — operational anchors `/recall` reads to resume work. Unreleased implementation detail lives in Plan/WIP docs (`docs/features/<slug>_{plan,wip}.md`) until it ships, not in the CHANGELOG; Current Focus points at the active feature's plan/WIP, Roadmap holds concrete near-term direction. This keeps the CHANGELOG a record of shipped reality + decisions, not a staging area for in-flight work.
+
+### Required structure
 
 ```markdown
 # Changelog
 
+## Index
+
+| Section | Purpose |
+|---|---|
+| [Current Focus](#current-focus) | What's being worked on right now (load-bearing for `/recall`) |
+| [Roadmap](#roadmap) | Forward-looking direction (concrete near-term) |
+| [Version History](#version-history) | What shipped, per-version, latest first |
+| [Decision Log](#decision-log) | Why we made architectural calls |
+
 ## Current Focus
-> What's being worked on RIGHT NOW
-- **Feature Name** — brief status
+
+> Single active feature. Load-bearing for `/recall`. Keep tight — ≤3 lines per active item.
+
+- **<feature-slug>** — one-line status. Plan: `docs/features/<slug>_plan.md` (or `docs/plans/YYYY-MM-DD-NNN-<slug>-plan.md` in CE-piloted repos). WIP: `docs/features/<slug>_wip.md`.
 
 ## Roadmap
-> Future work, not yet started
 
-## Recent Updates
-### Month Year
-- **Feature** — description (DD.MM.YYYY)
+> Future work, not yet started. Concrete near-term. STRATEGY.md (CE-piloted repos) holds the longer-term north star.
+
+- ...
 
 ## Version History
-### Feature Name (DD.MM.YYYY)
-**One-line summary**
-- Motivation, key components, documentation links
+
+> Latest version first. ISO `YYYY-MM-DD` dates. Change-type grouping within each version (Keep a Changelog convention).
+
+### vX.Y — One-line summary (YYYY-MM-DD)
+
+**Two-line motivation paragraph if needed.**
+
+- **Added:** new surface / module / feature
+- **Changed:** behavior shifts in existing functionality
+- **Fixed:** bug fixes shipped with this version
+- **Deprecated:** features marked for removal
+- **Removed:** features now removed
+- **Security:** security-relevant changes (CVE-style notes)
+- **Decision refs:** [YYYY-MM-DD: Decision Title](#yyyy-mm-dd-decision-title) — anchor link(s) into the Decision Log; keeps version context coupled to the WHY. (Promoted decisions keep a stub anchor in the Decision Log plus their own `Reference:` field, so the link still resolves.)
+- **Plan / WIP / Reference:** `docs/features/<slug>_plan.md` · `docs/<feature>_reference.md`
+
+Production HEAD: `<sha>` · Rollback target: `vX.Y-1-prod`
 
 ## Decision Log
+
+> Latest first. ISO dates. Lightweight stub inline; promote heavy entries (see threshold below).
+
 ### YYYY-MM-DD: Decision Title
-- **Context**: What prompted this decision
-- **Decision**: What was decided
-- **Why**: Rationale
-- **Alternatives rejected**: What else was considered
+
+- **Context:** what prompted this
+- **Decision:** what was decided
+- **Why:** rationale
+- **Alternatives rejected:** what else was considered
+- **Reference:** `docs/decisions/<slug>.md` (only when promoted)
 ```
 
-**Current Focus is the index.** SD-CE reads this first to find active work. Keep it current.
+### Conventions worth flagging
+
+1. **Index at top.** Same convention as ISSUES.md / README; cross-platform anchor syntax `[text](#heading-slug)` works in both Obsidian and GitHub.
+2. **No `Recent Updates` section.** A separate Recent-Updates section duplicates Version History for fast-shipping projects — the top 2-3 Version History entries serve the "recent updates" view at no maintenance cost.
+3. **ISO dates everywhere.** Both Version History and Decision Log use `YYYY-MM-DD`. Avoid `DD.MM.YYYY` or other regional formats; they're ambiguous and don't sort.
+4. **Latest-version-first in Version History.** Matches Keep a Changelog's canonical rule. Don't let chronological-ascending or jumbled order grow organically.
+5. **Change-type grouping within each version** (`Added` / `Changed` / `Fixed` / `Deprecated` / `Removed` / `Security`) — Keep a Changelog convention. Scannable for readers; matches what most LLMs expect when parsing the file.
+
+### Current Focus is the index
+
+SD-CE reads this first to find active work; `/recall` Mode 1 extracts the feature slug from here. Keep it current — point at the actual active feature, not "various". One bullet, ≤3 lines.
+
+### Decision Log — lightweight inline, promote heavy entries (analogous to ISSUES.md)
+
+ISSUES.md taught us this shape; the Decision Log follows the same discipline.
+
+- **Stub inline (≤10 lines body)** — Context / Decision / Why / Alternatives rejected. Most decisions fit here.
+- **Promote when:** body exceeds ~10 lines, OR the entry has multiple sub-findings (e.g., a multi-fix code review with separately-actionable items), OR the decision captures a reusable convention (which is `/ce-compound`'s natural output).
+- **Promotion target:**
+  - **CE-piloted repos**: `docs/solutions/<category>/<slug>.md` — `/ce-compound` already writes here; the CHANGELOG entry becomes a stub-with-reference pointer.
+  - **Non-CE repos**: `docs/decisions/<slug>.md` — ADR-lite. Don't require formal Nygard/MADR template; same body shape (Context / Decision / Why / Alternatives) plus the date.
+- **Stub format after promotion:** one-paragraph summary in CHANGELOG + `Reference:` field pointing at the promoted doc.
+
+### Per-version file split (when CHANGELOG.md itself becomes the soup)
+
+Don't split prematurely. **Promote the Decision Log soup first** — run the promotion triage (heavy entries → `docs/solutions/` or `docs/decisions/`) before reaching for a file split. Decision Log bloat is the more common cause of a fat CHANGELOG; splitting Version History into per-version files while the Decision Log is still inline just moves the soup. Split per-version files only when Version History *itself* dominates after the Decision Log has been triaged.
+
+Split the per-version Version History entries out of `CHANGELOG.md` when ANY of (and only after Decision Log triage):
+
+- File exceeds ~1000 lines
+- 4+ major versions accumulated AND Version History dominates the file
+- IDE editing becomes painful (concrete signal: merge conflicts on the file every PR)
+
+**Pattern (matches Mojo / Docusaurus / Metabase / Terraform when their changelogs split):** `docs/changelog/v<X>.md` per major version; root `CHANGELOG.md` becomes Index + Current Focus + Roadmap + recent Decision Log entries + a `Version History` section whose entries LINK to the per-version files instead of inlining them. The links use the same cross-platform anchor pattern.
+
+### Multi-version / multi-mode status (when applicable)
+
+For projects with multiple modes shipping per-version (e.g., a tool with multiple operational modes that each evolve at their own version cadence), make the mode-impact explicit in each Version History entry's summary line:
+
+`### v0.4 — Concurrency handling (affects mode-A + mode-B; mode-C unaffected) (2026-06-09)`
+
+The Index can also list a per-mode mini-table when ambiguity would otherwise build up.
+
+### Maintenance at ship time
+
+`@software-documenter-ce ship docs` (CE-piloted) or `@software-documenter feature complete` (non-CE) updates at every ship:
+
+1. **Current Focus** — point at next feature or "no active work"
+2. **Version History** — prepend new entry (latest first); use change-type grouping
+3. **Decision Log** — append architectural decisions that surfaced (apply promotion threshold; heavy entries → promote with stub-and-reference)
+4. **Triage** — any pre-existing Decision Log entry past threshold → flag for promotion (operator decides when)
+5. **Don't touch Roadmap** unless plans materially shifted
+
+### Migration of pre-convention CHANGELOG.md files
+
+Pre-convention CHANGELOG.md files may have:
+- Mixed Version History order (organic growth — not strict latest-first)
+- `DD.MM.YYYY` dates in Version History (or other regional formats)
+- A `Recent Updates` section that duplicates Version History
+- Heavy Decision Log entries that should be promoted
+
+**Two cuts, two policies.** During a *formal repo migration* (the `10-migrate-existing-repo.md` walkthrough), the structural normalization in Step 1.7 — Index + reorder to latest-first + ISO dates + drop Recent Updates — is **mandatory** (it's fast and shapes the doc into the convention). The **heavy-entry triage** (Step 1.7.5: promoting Decision Log essays + reshaping legacy prose) is always **operator-approved, deferrable**. *Outside* a formal migration — i.e., retrofitting the convention onto a repo you're not otherwise migrating — even the Step 1.7 normalization is operator-approved; don't force it mid-feature. See `methodology/compound-engineering/10-migrate-existing-repo.md` Step 1.7 + 1.7.5 for the procedure and operator prompts.
 
 ## README.md (Human-Facing)
 

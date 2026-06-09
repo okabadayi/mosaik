@@ -44,7 +44,7 @@ This is the canonical doc-lifecycle reference for CE-piloted repos in the Mosaik
 | CLAUDE.md (shim) | operator-managed | Rarely touched |
 | STRATEGY.md | CE `/ce-strategy` | CE `/ce-strategy` update mode on scope shift |
 | README.md | operator-managed or scaffolding skill | SD-CE `ship docs` |
-| CHANGELOG.md | operator-managed or scaffolding skill | SD-CE `ship docs` (all 4 sections) |
+| CHANGELOG.md | operator-managed or scaffolding skill | SD-CE `ship docs` (Current Focus, Version History, Decision Log — per the doc-structure CHANGELOG convention) |
 | ISSUES.md | operator-managed or scaffolding skill | SD-CE `ship docs` (Open → Resolved); new-issue capture = manual rule in AGENTS.md (interim default) |
 | `docs/architecture.md` | operator-created (only if load-bearing target design not covered elsewhere) | Manual when runtime model shifts |
 | `docs/brainstorms/*` | CE `/ce-brainstorm` | CE; archive to `docs/archive/` at scorecard time |
@@ -112,13 +112,13 @@ Six project-level files in scope. Per row: creator at scaffolding, scaffolding-t
 | **`AGENTS.md`** | operator-written (scaffolding skill is deferred follow-up) | Title + project description + Tech Stack + Project Conventions + Operational Dispatcher (universal scenarios) + Current State pointer. **EMPTY:** Components & Architecture, Key Files. | Components & Architecture → SD-CE `ship docs` at feature ship. Tech Stack / Conventions / Dispatcher → manual (rare). CE `/ce-compound` Discoverability Check auto-maintains the `docs/solutions/` slot. | `audit-docs` skill (Phase B) at scorecard checkpoints + after CE plugin upgrades — greps claims vs filesystem |
 | **`CLAUDE.md` (shim)** | operator-managed | `@AGENTS.md` on line 1. Optional Claude-Code-specific sections below if needed (rare). | Rarely touched | Trivial — verify `@AGENTS.md` resolves |
 | **`README.md`** | operator-managed or scaffolding skill | Title + 1-line description + project status line ("v0 — no features shipped yet") + section headers for Components / Features (EMPTY) | SD-CE `ship docs` at feature ship | `audit-docs`: features in README should appear in git log; components should exist in filesystem |
-| **`CHANGELOG.md`** | operator-managed or scaffolding skill | Section headers (Current Focus / Roadmap / Recent Updates / Version History / Decision Log) all empty. Current Focus = "no features shipped yet." | SD-CE `ship docs` covers ALL sections (Current Focus, Recent Updates, Version History, Decision Log — judgment call for architectural decisions) | `audit-docs`: Recent Updates entries map to git tags / merges |
+| **`CHANGELOG.md`** | operator-managed or scaffolding skill | **Index at top** (anchor links to Current Focus / Roadmap / Version History / Decision Log; cross-platform `[text](#heading-slug)` syntax) + section headers all empty. Current Focus = "no features shipped yet." Per the convention codified in `skills/doc-structure/SKILL.md § CHANGELOG Format` (Index + drop Recent Updates + ISO dates + latest-version-first + Keep a Changelog change-type grouping + Decision Log promotion threshold). | SD-CE `ship docs` updates Current Focus, prepends to Version History (latest-version-first, ISO dates, change-type grouped), appends to Decision Log when architectural decisions surface; heavy Decision Log entries promoted to `docs/decisions/<slug>.md` (non-CE) or `docs/solutions/<category>/<slug>.md` (CE-piloted). | `audit-docs`: Version History entries map to git tags / merges; Decision Log entries past promotion threshold should be promoted |
 | **`ISSUES.md`** | operator-managed or scaffolding skill | **Index at top** (anchor links per-component, `[text](#heading-slug)` cross-platform syntax) + per-component sections + `## Resolved Issues`. Per the convention codified in `doc-structure` skill § ISSUES.md (lightweight capture + reference-doc promotion + GH-issues for committed work). | SD-CE `ship docs` moves resolved entries to `## Resolved Issues` with date + feature reference; flags heavy entries for promotion to `docs/reference/<topic>.md`. New-issue capture: manual rule in AGENTS.md Operational Dispatcher (interim default; revisit if frictional after 3+ features). | `audit-docs`: Resolved entries should have feature/commit refs; Index entries resolve |
 | **`docs/architecture.md`** (conditional) | NOT created by default. Allowed at scaffolding only if load-bearing target design isn't covered by STRATEGY.md + CHANGELOG Decision Log + per-feature plans. Mark as "target design — reconcile at first ship." | If created: target-design + ASCII diagrams + cross-cutting runtime synthesis. DO NOT duplicate Decision Log rationale. | Manual when runtime model shifts; reconcile against Decision Log at each feature ship | Review at scorecard checkpoints — verify no divergence vs Decision Log + STRATEGY.md tracks |
 
 ### Scaffolding-time discipline rule
 
-At repo creation, project-level docs have **section headers + intent only**. Components / features / Recent Updates / Key Files sections start **EMPTY**. SD-CE populates as features ship.
+At repo creation, project-level docs have **section headers + intent only**. Components / Features / Version History / Key Files sections start **EMPTY**. SD-CE populates as features ship.
 
 This rule exists because pre-CE Claude scaffolding agents tend to project from requirements briefs into fictional Components tables — verified empirically in an early CE pilot (cleanup stripped CLAUDE.md from ~105 lines to ~47 lines after a fictional table claimed source files, skills, and a sqlite database all existed when none did). Resist the temptation; empty section headers are correct.
 
@@ -147,7 +147,7 @@ Net: AGENTS.md / README / CHANGELOG / ISSUES grow organically with shipped reali
 Order of operations when bringing an existing repo into CE adoption:
 
 1. `cd ~/repos/<imported-name>`
-2. **Pre-`/ce-setup` audit** — see [`03-migration-plan.md § 3.0 Prereq 4`](03-migration-plan.md). Five checks: grep claims vs filesystem; command-validity (`How to Run` commands run?); git-proof Recent Updates; planned-vs-existing labeling; AGENTS.md/CLAUDE.md restructure (substantive CLAUDE.md → AGENTS.md + shim).
+2. **Pre-`/ce-setup` audit** — see [`03-migration-plan.md § 3.0 Prereq 4`](03-migration-plan.md). Five checks: grep claims vs filesystem; command-validity (`How to Run` commands run?); git-proof Version History (or pre-convention `Recent Updates`); planned-vs-existing labeling; AGENTS.md/CLAUDE.md restructure (substantive CLAUDE.md → AGENTS.md + shim).
 3. Audit `.claude/rules/` for content; verify alignment with CE methodology
 4. `git tag pre-ce-phase-a` (revert point)
 5. `/ce-setup` — bootstraps CE infrastructure

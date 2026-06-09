@@ -43,7 +43,7 @@ For each project-level doc (per `03-migration-plan.md § 3.0 Prereq 4`):
 
 1. **Grep claims vs filesystem reality.** Components tables, Key Files tables, `How to Run` blocks — does each path exist on disk? Are listed skills/agents real?
 2. **Command-validity check.** Do `How to Run` commands actually execute? Spot-check at least one per block.
-3. **Git-proof Recent Updates.** Do CHANGELOG Recent Updates entries map to commits/tags? `git log --grep=<feature-slug>` should find them.
+3. **Git-proof Version History.** Do CHANGELOG Version History entries map to commits/tags? `git log --grep=<feature-slug>` should find them. (Pre-convention CHANGELOGs may have a separate `Recent Updates` section duplicating Version History — flag it for removal at Step 1.7.)
 4. **Planned-vs-existing labeling.** Is aspirational content labeled "Future / Planned / Aspirational," or presented as current state? Mislabeled aspirations are the primary pollution vector.
 5. **AGENTS.md / CLAUDE.md restructure assessment.** If pre-existing CLAUDE.md has substantive cross-agent content (Tech Stack, Project Conventions, Components, dispatcher rules) — flag for restructure to AGENTS.md.
 
@@ -53,7 +53,7 @@ Output: drift report with categorized findings.
 
 Agent presents to the operator:
 
-- **Confirmed fictional content** (path doesn't exist / command doesn't run / Recent Updates entry not in git log) → proposed for strip
+- **Confirmed fictional content** (path doesn't exist / command doesn't run / Version History or legacy Recent Updates entry not in git log) → proposed for strip
 - **Ambiguous content** (aspirational but not clearly labeled; preserved intent unclear) → proposed for your judgment
 - **Restructure plan** — does CLAUDE.md need to become AGENTS.md + shim? Y/N + which content moves where
 - **Deprecated file plan** — archive `docs/vision.md` (yes/no — only after STRATEGY.md is established in Phase 2); delete `docs/operations.md` (yes/no — substantive runbook content moves to `docs/<feature>_reference.md` or `docs/runbook.md` first)
@@ -112,41 +112,53 @@ If `.claude/rules/` already exists, audit content for alignment with CE methodol
 - **`docs/operations.md`** (if exists): delete now. Move substantial runbook content (if any) to `docs/runbook.md` first; minor Quick Start content moves to README.
 - **`docs/vision.md`** (if exists): **leave it for now.** Vision content will inform the `/ce-strategy` interview in Phase 2. After STRATEGY.md exists, archive vision.md per Step 2.3.
 
-### Step 1.7 — Verify docs/ structure + CHANGELOG sections + ISSUES/README normalization (mandatory)
+### Step 1.7 — Verify docs/ structure + CHANGELOG / ISSUES / README normalization (mandatory)
 
-- Ensure `docs/features/` and `docs/archive/` exist; create if missing
-- Ensure `CHANGELOG.md` has sections: Current Focus / Roadmap / Recent Updates / Version History / Decision Log (add empty headers if missing)
-- **`ISSUES.md` canonical structure** (per `doc-structure` skill § ISSUES.md):
+- Ensure `docs/features/` and `docs/archive/` exist; create if missing.
+- **`CHANGELOG.md` canonical structure** (per `skills/doc-structure/SKILL.md § CHANGELOG Format`):
+  - `# Changelog` (h1)
+  - `## Index` (anchor table linking the 4 sections) — cross-platform anchor syntax `[text](#heading-slug)`
+  - `## Current Focus` / `## Roadmap` / `## Version History` / `## Decision Log` (add empty headers if missing)
+  - **Drop `## Recent Updates`** if it exists — collapse content into Version History (it duplicates the same shipped-reality)
+  - **Reorder Version History to latest-first** — pre-convention CHANGELOGs may have organic-growth or jumbled order; the convention is reverse-chronological (matches Keep a Changelog)
+  - **Normalize dates to ISO `YYYY-MM-DD`** — drop `DD.MM.YYYY` or other regional formats in Version History headings
+  - **Change-type sub-bullets** (`Added` / `Changed` / `Fixed` / `Deprecated` / `Removed` / `Security` — Keep a Changelog convention): apply to the **current/latest version entry and any trivially-short legacy entries** as part of this mandatory pass. **Deep reshaping of long legacy prose entries into change-type groups is NOT mandatory here** — that's content-reshaping work, not structural normalization. Leave a heavy legacy entry as-is (date + order normalized only) and defer its regrouping to Step 1.7.5. Step 1.7's job is fast structure, not rewriting history.
+- **`ISSUES.md` canonical structure** (per `skills/doc-structure/SKILL.md § ISSUES.md`):
   - `# Known Issues` (h1)
   - `## Index` (anchor table) — even if just one no-known-issues row at scaffolding
   - Per-component sections (e.g., `## Audio quality`) — empty until first issue lands
   - `## Resolved Issues` (h2) — empty at scaffolding
   - **Normalize legacy headings**: if existing ISSUES.md uses `## Component: <name>`, rename to `## <name>` so GitHub anchors don't carry the `component-` prefix (or keep the legacy slug literally in Index links — pick one per file).
-- **`README.md` Index at top** (per `doc-structure` skill § README) — section anchors for major content blocks. If README has substantive content but no Index, add one as part of this step.
-- Use cross-platform anchor syntax `[text](#heading-slug)` for the Indexes — works in both Obsidian and GitHub.
+- **`README.md` Index at top** (per `skills/doc-structure/SKILL.md § README`) — section anchors for major content blocks. If README has substantive content but no Index, add one as part of this step.
+- Use cross-platform anchor syntax `[text](#heading-slug)` for all Indexes — works in both Obsidian and GitHub.
 
-This step is **mandatory normalization** — fast (5-15 min) and shapes docs into the convention. Heavy-entry triage is Step 1.7.5.
+This step is **mandatory structural normalization** — fast (5-20 min depending on CHANGELOG size) because it touches *structure* (headers, Index, order, dates), not *content*. It does NOT include reshaping long legacy prose into change-type groups, promotion to reference / decisions / solutions docs, or the Open/Resolved sweep — those are Step 1.7.5. If a legacy CHANGELOG is large enough that even the structural pass threatens the 20-min budget, normalize the latest 2-3 versions + the Index now and defer the rest to Step 1.7.5 with a visible cleanup artifact.
 
 ### Step 1.7.5 — Heavy-entry triage (operator-approved, deferrable)
 
-Pre-CE repos may have accumulated long-form ISSUES.md entries before the lightweight-capture convention. The heavy-entry triage — promoting multi-paragraph entries to `docs/reference/<topic>.md` and re-sweeping Open vs actually-resolved — is **operator-approved**, not mandatory at migration time.
+Pre-CE repos may have accumulated long-form entries before the lightweight-capture convention — both in **ISSUES.md** (multi-paragraph debugging walkthroughs that belong in `docs/reference/`) and in **CHANGELOG.md Decision Log** (decision-essays with sub-findings or reusable conventions that belong in `docs/decisions/` or `docs/solutions/`). The heavy-entry triage is **operator-approved**, not mandatory at migration time.
 
 **Agent's prompt to operator:**
 
-> "ISSUES.md normalization (Index + section structure) is done per Step 1.7. Heavier triage available next:
+> "Mandatory normalization (CHANGELOG Index + Version History reorder + ISO dates + drop Recent Updates; ISSUES Index + section structure; README Index) is done per Step 1.7. Heavier triage available next:
+>
+> **ISSUES.md:**
 > - P entries are past ~5 lines (likely belong in `docs/reference/<topic>.md`)
 > - Q entries marked Open may be actually resolved by recent commits/versions
 >
-> Want to do this triage now (~30-60 min depending on size), or defer to post-migration follow-up?"
+> **CHANGELOG.md Decision Log:**
+> - R entries past ~10 lines body, or with multiple sub-findings, or capturing reusable conventions (likely belong in `docs/decisions/<slug>.md` for non-CE repos, or `docs/solutions/<category>/<slug>.md` for CE-piloted repos)
+>
+> Want to do this triage now (~30-90 min depending on combined size), or defer to post-migration follow-up?"
 
 **If operator approves now:**
 
-1. Walk per-entry. For each Open entry, verify against current production state + recent commits; move actually-resolved entries to `## Resolved Issues` with the resolution version/commit reference.
-2. Promote heavy entries (multi-paragraph workarounds, external citations, version-behavior matrices) to `docs/reference/<topic>.md`. ISSUES.md gets a one-liner pointing at the reference doc via the `reference:` field.
+1. **ISSUES.md** — walk per-entry. For each Open entry, verify against current production state + recent commits; move actually-resolved entries to `## Resolved Issues` with the resolution version/commit reference. Promote heavy entries (multi-paragraph workarounds, external citations, version-behavior matrices) to `docs/reference/<topic>.md`. ISSUES.md gets a one-liner pointing at the reference doc via the `reference:` field.
+2. **CHANGELOG Decision Log** — walk per-entry. For each entry past the promotion threshold (>~10 lines body / multiple sub-findings / captures a reusable convention), promote to `docs/decisions/<slug>.md` (non-CE) or `docs/solutions/<category>/<slug>.md` (CE-piloted; check if `/ce-compound` has already captured a matching solution doc to avoid duplication). CHANGELOG entry becomes a one-paragraph stub + `Reference:` field.
 
 **If operator defers:**
 
-The deferred triage must surface later — record it as a **visible repo artifact**, not just a commit message. Recommended: a one-line entry in `docs/features/post-migration-cleanup_wip.md` listing the deferred items (file count + line count + concrete next-step). Alternative: an `## Open Issues` entry in ISSUES.md titled "ISSUES.md + README triage per convention" with the same line-count summary.
+The deferred triage must surface later — record it as a **visible repo artifact**, not just a commit message. Recommended: a one-line entry in `docs/features/post-migration-cleanup_wip.md` listing the deferred items (file count + line count + concrete next-step). Track CHANGELOG Decision Log heavy entries + ISSUES.md heavy entries as separate items so the operator can tackle them independently. Alternative: an `## Open Issues` entry in ISSUES.md titled "ISSUES.md / CHANGELOG triage per convention" with the same line-count summary.
 
 The deferred triage is **operator-scheduled** — it doesn't block migration from proceeding to Phase 2.
 

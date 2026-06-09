@@ -47,7 +47,7 @@ Either way, the 5 files at the end of this step:
 | **`AGENTS.md`** (substantive) | Title + 1-line description + Tech Stack + Project Conventions + Operational Dispatcher (universal scenarios only — **must include the canonical new-issue-capture bullet per the AGENTS.md+shim methodology**: "When a bug surfaces mid-work, adding a one-line entry to `ISSUES.md` Open Issues with date + brief is the lightweight capture path; SD-CE moves it to Resolved at ship time.") + Current State pointer. **EMPTY:** Components & Architecture, Key Files. |
 | **`CLAUDE.md`** (shim) | `@AGENTS.md` on line 1. Optional CC-specific section below only if there's behavior that doesn't apply to other agents (rare). |
 | **`README.md`** | Title + 1-line description + status line ("v0 — no features shipped yet") + EMPTY Components / Features headers |
-| **`CHANGELOG.md`** | EMPTY Current Focus / Roadmap / Recent Updates / Version History / Decision Log headers. Current Focus = "no features shipped yet." |
+| **`CHANGELOG.md`** | `# Changelog` + `## Index` (anchor table linking the 4 sections) + EMPTY `## Current Focus` / `## Roadmap` / `## Version History` / `## Decision Log` headers. Current Focus = "no features shipped yet." Per `skills/doc-structure/SKILL.md § CHANGELOG Format`. Cross-platform anchor syntax (`[text](#heading-slug)`) for Index links. |
 | **`ISSUES.md`** | `# Known Issues` + `## Index` (single placeholder row "no known issues") + `## Resolved Issues` (empty). See `doc-structure` skill § ISSUES.md. Cross-platform anchor syntax (`[text](#heading-slug)`) for future Index entries. |
 
 **`docs/architecture.md` is CONDITIONAL** — create only if there's load-bearing target design not captured by STRATEGY.md + Decision Log + per-feature plans. Mark as "target design — reconcile at first ship."
@@ -125,7 +125,7 @@ For the full per-feature operator walkthrough (10 steps with prompts), see [`05-
 
 ### Empty section headers are correct
 
-At scaffolding, AGENTS.md / README / CHANGELOG / ISSUES have **section headers + intent only**. Components / Features / Recent Updates / Key Files start EMPTY. SD-CE populates them as features ship.
+At scaffolding, AGENTS.md / README / CHANGELOG / ISSUES have **section headers + intent only**. Components / Features / Version History / Key Files start EMPTY. SD-CE populates them as features ship.
 
 This is the rule the methodology exists to enforce. Pre-CE Claude scaffolding agents tend to project from a requirements brief into fictional Components tables — verified empirically in an early CE pilot (cleanup stripped CLAUDE.md from ~105 lines to ~47 lines after a fictional table claimed source files, skills, and a sqlite database all existed when none did). Resist the temptation; empty is correct.
 
@@ -150,7 +150,7 @@ After feature 1 ships and you invoke `@software-documenter-ce ship docs`, SD-CE:
 1. Detects `AGENTS.md` exists at repo root → targets AGENTS.md (not CLAUDE.md) for the Components table.
 2. Adds a row to AGENTS.md `Components & Architecture`.
 3. Updates README components paragraph + features index.
-4. Updates CHANGELOG Current Focus (mark complete) + Recent Updates entry + Version History detailed entry + Decision Log (if architectural decisions surfaced — judgment call).
+4. Updates CHANGELOG Current Focus (mark complete or point to next feature) + prepends Version History entry (latest-version-first, ISO dates, Keep-a-Changelog change-type grouping) + appends Decision Log entries (if architectural decisions surfaced — judgment call; heavy entries promoted to `docs/solutions/<category>/<slug>.md` per the promotion threshold in `skills/doc-structure/SKILL.md § CHANGELOG Format`).
 5. Moves any newly resolved ISSUES.md entries Open → Resolved with date + feature reference.
 6. If `/ce-compound` fired earlier and the Discoverability Check ran, AGENTS.md now contains a one-line `docs/solutions/` awareness pointer.
 

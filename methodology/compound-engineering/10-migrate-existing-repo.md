@@ -119,6 +119,8 @@ If `.claude/rules/` already exists, audit content for alignment with CE methodol
   - `# Changelog` (h1)
   - `## Index` (anchor table linking the 4 sections) — cross-platform anchor syntax `[text](#heading-slug)`
   - `## Current Focus` / `## Roadmap` / `## Version History` / `## Decision Log` (add empty headers if missing)
+  - **Trim a bloated `## Current Focus` to ≤3 lines** — pre-convention CHANGELOGs often have a full ship-report dumped into Current Focus. Reduce to the active feature + one-line status + plan/WIP pointers; the detail belongs in that version's Version History entry. (This is the section `/recall` reads to resume work — keep it scannable.)
+  - **`## Roadmap` is future-only** — move any `Complete` / `✓ Shipped` rows out (they duplicate Version History); Roadmap holds only not-yet-started work.
   - **Drop `## Recent Updates`** if it exists — collapse content into Version History (it duplicates the same shipped-reality)
   - **Reorder Version History to latest-first** — pre-convention CHANGELOGs may have organic-growth or jumbled order; the convention is reverse-chronological (matches Keep a Changelog)
   - **Normalize dates to ISO `YYYY-MM-DD`** — drop `DD.MM.YYYY` or other regional formats in Version History headings
@@ -154,7 +156,10 @@ Pre-CE repos may have accumulated long-form entries before the lightweight-captu
 **If operator approves now:**
 
 1. **ISSUES.md** — walk per-entry. For each Open entry, verify against current production state + recent commits; move actually-resolved entries to `## Resolved Issues` with the resolution version/commit reference. Promote heavy entries (multi-paragraph workarounds, external citations, version-behavior matrices) to `docs/reference/<topic>.md`. ISSUES.md gets a one-liner pointing at the reference doc via the `reference:` field.
-2. **CHANGELOG Decision Log** — walk per-entry. For each entry past the promotion threshold (>~10 lines body / multiple sub-findings / captures a reusable convention), promote to `docs/decisions/<slug>.md` (non-CE) or `docs/solutions/<category>/<slug>.md` (CE-piloted; check if `/ce-compound` has already captured a matching solution doc to avoid duplication). CHANGELOG entry becomes a one-paragraph stub + `Reference:` field.
+2. **CHANGELOG Decision Log** — walk per-entry. For each entry past the threshold (>~10 lines body / multiple sub-findings / implementation-detail dump), apply the **two-move triage** from `skills/doc-structure/SKILL.md § CHANGELOG Format`:
+   - **Compress in place** is the *default* — keep Decision + Why + the one load-bearing trade-off; drop the rot-prone mechanics (file lists, field renames, constants, setup steps — those live in code/git/reference docs). Most fat historical entries shrink this way **with no new file**.
+   - **Promote to a doc** only when the bulk is durable reusable analysis (a convention, a non-obvious causal chain, a decision future work re-litigates) → `docs/solutions/<category>/<slug>.md` (CE-piloted; check `/ce-compound` hasn't already captured it, to avoid duplication) or `docs/decisions/<slug>.md` (non-CE). Stub + `Reference:`.
+   - **Don't manufacture a doc for "here's what we did" essays** — compress them. The test: would a future contributor re-read this to make a decision?
 
 **If operator defers:**
 

@@ -250,11 +250,10 @@ SD-CE reads this first to find active work; `/recall` Mode 1 extracts the featur
 ISSUES.md taught us this shape; the Decision Log follows the same discipline.
 
 - **Stub inline (≤10 lines body)** — Context / Decision / Why / Alternatives rejected. Most decisions fit here.
-- **Promote when:** body exceeds ~10 lines, OR the entry has multiple sub-findings (e.g., a multi-fix code review with separately-actionable items), OR the decision captures a reusable convention (which is `/ce-compound`'s natural output).
-- **Promotion target:**
-  - **CE-piloted repos**: `docs/solutions/<category>/<slug>.md` — `/ce-compound` already writes here; the CHANGELOG entry becomes a stub-with-reference pointer.
-  - **Non-CE repos**: `docs/decisions/<slug>.md` — ADR-lite. Don't require formal Nygard/MADR template; same body shape (Context / Decision / Why / Alternatives) plus the date.
-- **Stub format after promotion:** one-paragraph summary in CHANGELOG + `Reference:` field pointing at the promoted doc.
+- **Over threshold? (body >~10 lines, multiple sub-findings, or an implementation-detail dump)** — don't leave it fat inline. Pick one of **two** shrink moves:
+  - **Compress in place** (the default, especially for old entries) — keep Decision + Why + the one load-bearing trade-off as a single paragraph; **drop the rot-prone mechanics** (which files changed, field renames, specific constants, step-by-step setup). Those already live in the code, git history, or a reference doc — the CHANGELOG doesn't re-host them. Most fat historical entries shrink this way with **no new file**.
+  - **Promote to a doc** — only when the bulk is *durable, reusable analysis* (a convention, a non-obvious causal chain, a decision future work will re-litigate). Move it to `docs/solutions/<category>/<slug>.md` (CE-piloted; `/ce-compound`'s natural home) or `docs/decisions/<slug>.md` (non-CE; ADR-lite — same Context / Decision / Why / Alternatives body + date, no formal Nygard/MADR template). Leave a one-paragraph stub + `Reference:` field.
+- **Don't manufacture a doc for implementation detail.** A 20-line essay listing which files changed is not reusable analysis — compress it, don't promote it. `docs/solutions/` is poisoned by noise more than by silence. The test: would a *future contributor* re-read this to make a decision? If yes → promote. If it's just "here's what we did" → compress.
 
 ### Per-version file split (when CHANGELOG.md itself becomes the soup)
 
@@ -289,12 +288,13 @@ The Index can also list a per-mode mini-table when ambiguity would otherwise bui
 ### Migration of pre-convention CHANGELOG.md files
 
 Pre-convention CHANGELOG.md files may have:
+- A **bloated Current Focus** (a full ship-report dumped in, instead of ≤3 lines) — trim it to the active feature + one-line status + plan/WIP pointers; the detail belongs in that version's Version History entry
 - Mixed Version History order (organic growth — not strict latest-first)
 - `DD.MM.YYYY` dates in Version History (or other regional formats)
 - A `Recent Updates` section that duplicates Version History
-- Heavy Decision Log entries that should be promoted
+- Heavy Decision Log entries that should be **compressed or promoted** (see the two-move triage above — compress is the default; promote only durable reusable analysis)
 
-**Two cuts, two policies.** During a *formal repo migration* (the `10-migrate-existing-repo.md` walkthrough), the structural normalization in Step 1.7 — Index + reorder to latest-first + ISO dates + drop Recent Updates — is **mandatory** (it's fast and shapes the doc into the convention). The **heavy-entry triage** (Step 1.7.5: promoting Decision Log essays + reshaping legacy prose) is always **operator-approved, deferrable**. *Outside* a formal migration — i.e., retrofitting the convention onto a repo you're not otherwise migrating — even the Step 1.7 normalization is operator-approved; don't force it mid-feature. See `methodology/compound-engineering/10-migrate-existing-repo.md` Step 1.7 + 1.7.5 for the procedure and operator prompts.
+**Two cuts, two policies.** During a *formal repo migration* (the `10-migrate-existing-repo.md` walkthrough), the structural normalization in Step 1.7 — Index + reorder to latest-first + ISO dates + drop Recent Updates + trim a bloated Current Focus to ≤3 lines — is **mandatory** (it's fast and shapes the doc into the convention). The **heavy-entry triage** (Step 1.7.5: promoting Decision Log essays + reshaping legacy prose) is always **operator-approved, deferrable**. *Outside* a formal migration — i.e., retrofitting the convention onto a repo you're not otherwise migrating — even the Step 1.7 normalization is operator-approved; don't force it mid-feature. See `methodology/compound-engineering/10-migrate-existing-repo.md` Step 1.7 + 1.7.5 for the procedure and operator prompts.
 
 ## README.md (Human-Facing)
 

@@ -82,7 +82,7 @@ Six project-level files are in scope (plus AGENTS.md as the primary, per the CE-
 | `AGENTS.md` (substantive instruction file) | Operator manual (initial) — a dedicated scaffolding skill is a deferred follow-up | Title + project description + Tech Stack + Project Conventions (project-specific only; universal rules cascade from parent-tier `AGENTS.md` — see [`methodology/agent-collaboration-principles.md`](../../methodology/agent-collaboration-principles.md)) + Operational Dispatcher (universal scenarios) + Current State pointer. **EMPTY at scaffolding:** Components & Architecture, Key Files. | Components & Architecture → SD-CE `ship docs` at feature ship. Tech Stack / Conventions / Dispatcher → manual (rare). CE `/ce-compound` Discoverability Check auto-maintains the `docs/solutions/` surface inside AGENTS.md/CLAUDE.md | At scorecard checkpoints + after CE plugin upgrades, invoke an `audit-docs` skill (deferred) to grep claims vs filesystem |
 | `CLAUDE.md` (shim) | Operator manual | `@AGENTS.md` on line 1. Optional Claude-Code-specific sections below (rare). | Rarely touched; only if Claude-Code-specific overrides emerge | Trivial — usually just the shim line; verify `@AGENTS.md` resolves |
 | `README.md` | Operator manual or scaffolding skill | Title + 1-line description + project status line ("v0 — no features shipped yet") + section headers for Components / Features (EMPTY) | SD-CE `ship docs` at feature ship | `audit-docs`: features in README should appear in git log; components should exist in filesystem |
-| `CHANGELOG.md` | Operator manual or scaffolding skill | **Index at top** (anchor links to Current Focus / Roadmap / Version History / Decision Log; cross-platform `[text](#heading-slug)` syntax) + section headers all empty (Current Focus / Roadmap / Version History / Decision Log). Current Focus = "no features shipped yet." See § CHANGELOG Format for the full canonical structure. | SD-CE `ship docs` updates Current Focus, prepends to Version History (latest-version-first, ISO dates, change-type grouped per Keep a Changelog), appends to Decision Log when architectural decisions surface; heavy Decision Log entries promoted to `docs/decisions/<slug>.md` (non-CE) or `docs/solutions/<category>/<slug>.md` (CE-piloted) | `audit-docs`: Version History entries should map to git tags / merges; Decision Log entries past promotion threshold should be promoted |
+| `CHANGELOG.md` | Operator manual or scaffolding skill | **Index at top** (anchor links to Current Focus / Roadmap / Version History / Decision Log; cross-platform `[text](#heading-slug)` syntax) + section headers all empty (Current Focus / Roadmap / Version History / Decision Log). Current Focus = "no features shipped yet." See § CHANGELOG Format for the full canonical structure. | SD-CE `ship docs` updates Current Focus, prepends to Version History (latest-version-first, ISO dates, change-type grouped per Keep a Changelog), appends to Decision Log as dated stubs, with any substantial detail relocated to `docs/reference/<topic>.md` (`docs/solutions/` stays CE-owned — `/ce-compound` only; see § CHANGELOG Format) | `audit-docs`: Version History entries should map to git tags / merges; Decision Log stubs carrying un-homed detail should be flagged |
 | `ISSUES.md` | Operator manual or scaffolding skill | **Index at top** + per-component sections + `## Resolved Issues`. Use cross-platform anchor syntax `[text](#heading-slug)`. See § ISSUES.md for the full canonical structure. | SD-CE `ship docs` moves resolved entries Open → Resolved with date + feature reference; flags heavy entries for promotion to `docs/reference/<topic>.md` | `audit-docs`: Resolved entries should have feature/commit refs; Index entries resolve |
 | `docs/architecture.md` (conditional) | NOT created by default. Allowed at scaffolding only if load-bearing target design / hypotheses aren't captured by STRATEGY.md + CHANGELOG Decision Log + per-feature plans. Mark as "target design — reconcile at first ship." | If created: target-design + ASCII diagrams + cross-cutting runtime synthesis. DO NOT duplicate Decision Log rationale — point at CHANGELOG Decision Log for the "why." | Manual when runtime model materially shifts; reconcile against Decision Log at each feature ship | Review at scorecard checkpoints — verify no divergence vs Decision Log + STRATEGY.md tracks |
 
@@ -230,7 +230,7 @@ Production HEAD: `<sha>` · Rollback target: `vX.Y-1-prod`
 - **Decision:** what was decided
 - **Why:** rationale
 - **Alternatives rejected:** what else was considered
-- **Reference:** `docs/decisions/<slug>.md` (only when promoted)
+- **Reference:** `docs/reference/<topic>.md` (when detail is relocated)
 ```
 
 ### Conventions worth flagging
@@ -245,19 +245,25 @@ Production HEAD: `<sha>` · Rollback target: `vX.Y-1-prod`
 
 SD-CE reads this first to find active work; `/recall` Mode 1 extracts the feature slug from here. Keep it current — point at the actual active feature, not "various". One bullet, ≤3 lines.
 
-### Decision Log — lightweight inline, promote heavy entries (analogous to ISSUES.md)
+### Decision Log — dated stubs in the CHANGELOG, durable detail in reference docs
 
-ISSUES.md taught us this shape; the Decision Log follows the same discipline.
+The CHANGELOG Decision Log is a **dated index of decisions**, not the place the supporting detail lives. Each entry: **what was decided + why (the load-bearing rationale) + a pointer**. The substantial detail — implementation specifics, gotchas, empirical findings, alternatives-with-reasoning, the why-behind-specific-values — lives in a **reference doc** (`docs/<topic>_reference.md` or `docs/reference/<topic>.md`). This is the same Reference type from the 4-type system — durable technical knowledge has always belonged there, not in a chronological log.
 
-- **Stub inline (≤10 lines body)** — Context / Decision / Why / Alternatives rejected. Most decisions fit here.
-- **Over threshold? (body >~10 lines, multiple sub-findings, or an implementation-detail dump)** — don't leave it fat inline. Pick one of **two** shrink moves:
-  - **Compress in place** (the default, especially for old entries) — keep Decision + Why + the one load-bearing trade-off as a single paragraph; **drop the rot-prone mechanics** (which files changed, field renames, specific constants, step-by-step setup). Those already live in the code, git history, or a reference doc — the CHANGELOG doesn't re-host them. Most fat historical entries shrink this way with **no new file**.
-  - **Promote to a doc** — only when the bulk is *durable, reusable analysis* (a convention, a non-obvious causal chain, a decision future work will re-litigate). Move it to `docs/solutions/<category>/<slug>.md` (CE-piloted; `/ce-compound`'s natural home) or `docs/decisions/<slug>.md` (non-CE; ADR-lite — same Context / Decision / Why / Alternatives body + date, no formal Nygard/MADR template). Leave a one-paragraph stub + `Reference:` field.
-- **Don't manufacture a doc for implementation detail.** A 20-line essay listing which files changed is not reusable analysis — compress it, don't promote it. `docs/solutions/` is poisoned by noise more than by silence. The test: would a *future contributor* re-read this to make a decision? If yes → promote. If it's just "here's what we did" → compress.
+> **`docs/solutions/` is off-limits to hand-editing — it's Compound Engineering's compound folder.** It is written and maintained by `/ce-compound` + `/ce-compound-refresh`, with its own frontmatter schema and discoverability lifecycle. A CHANGELOG stub may *point at* an existing solution doc, but CHANGELOG cleanup (or any manual edit) **never creates or rewrites a file there.** If a decision is a genuinely reusable convention worth compounding, **run `/ce-compound`** — don't hand-author into `docs/solutions/`. Everything else relocates to `docs/reference/`.
+
+**The discriminator is `is this stored anywhere else?` — never `is it long?`.** For each decision, the detail goes to exactly one home:
+
+- **Inline stub (≤~10 lines)** — short decisions whose rationale fits in a few lines; no external detail to home. Most entries.
+- **Relocate to a reference doc** (`docs/reference/<topic>.md`) — the **default for any decision carrying substantial detail.** Move the detail to the topic doc; the CHANGELOG keeps a dated stub (decision + why + `Reference:`). **Nothing is deleted — it's rehomed where it belongs and organized by topic instead of buried by date, which makes it *more* findable, not less.** Aggregate related decisions into a few topic docs (e.g. `transcription`, `infra`, `audio-pipeline`) — don't spawn one doc per entry.
+- **Drop (delete) only what's verifiably redundant** — file lists already in git, constants already in code with obvious rationale, anything duplicated in an existing doc. **If a line carries a unique gotcha, an empirical finding, or reasoning that exists nowhere else, it is NOT redundant — relocate it, never delete it.**
+
+**The failure mode to avoid:** deleting hard-won knowledge to make the file short. A gotcha that cost real debugging time and lives nowhere else is exactly what durable docs exist to preserve. **A short file with the knowledge deleted is a worse outcome than the soup.** Fidelity is the requirement; shrinking is the means — when they conflict, relocate (which serves both) rather than delete.
+
+**Write it right at creation time.** When a shipped feature carries substantial decision detail, put the detail in its reference doc *as you ship* and let the Decision Log entry be born as a stub + `Reference:`. The CHANGELOG then never accumulates the essays in the first place — migration cleanup is only needed for pre-convention history.
 
 ### Per-version file split (when CHANGELOG.md itself becomes the soup)
 
-Don't split prematurely. **Promote the Decision Log soup first** — run the promotion triage (heavy entries → `docs/solutions/` or `docs/decisions/`) before reaching for a file split. Decision Log bloat is the more common cause of a fat CHANGELOG; splitting Version History into per-version files while the Decision Log is still inline just moves the soup. Split per-version files only when Version History *itself* dominates after the Decision Log has been triaged.
+Don't split prematurely. **Relocate the Decision Log detail first** — move heavy entries' detail to reference docs (leaving dated stubs) before reaching for a file split. Decision Log bloat is the more common cause of a fat CHANGELOG; splitting Version History into per-version files while the Decision Log is still inline just moves the soup. Split per-version files only when Version History *itself* dominates after the Decision Log has been relocated to stubs.
 
 Split the per-version Version History entries out of `CHANGELOG.md` when ANY of (and only after Decision Log triage):
 
@@ -281,8 +287,8 @@ The Index can also list a per-mode mini-table when ambiguity would otherwise bui
 
 1. **Current Focus** — point at next feature or "no active work"
 2. **Version History** — prepend new entry (latest first); use change-type grouping
-3. **Decision Log** — append architectural decisions that surfaced (apply promotion threshold; heavy entries → promote with stub-and-reference)
-4. **Triage** — any pre-existing Decision Log entry past threshold → flag for promotion (operator decides when)
+3. **Decision Log** — append architectural decisions that surfaced **as dated stubs**; put any substantial detail in the feature's reference doc as you ship and point the stub at it (born-as-stub, never essay-in-the-log). `docs/solutions/` is CE's — if a decision is a reusable convention, run `/ce-compound`, don't hand-author there
+4. **Triage** — any pre-existing Decision Log entry carrying un-homed detail → flag to relocate its detail to a reference doc (operator decides when)
 5. **Don't touch Roadmap** unless plans materially shifted
 
 ### Migration of pre-convention CHANGELOG.md files
@@ -292,7 +298,7 @@ Pre-convention CHANGELOG.md files may have:
 - Mixed Version History order (organic growth — not strict latest-first)
 - `DD.MM.YYYY` dates in Version History (or other regional formats)
 - A `Recent Updates` section that duplicates Version History
-- Heavy Decision Log entries that should be **compressed or promoted** (see the two-move triage above — compress is the default; promote only durable reusable analysis)
+- Heavy Decision Log entries whose detail should be **relocated to `docs/reference/<topic>.md`** (see the discriminator above — relocate by default to preserve the knowledge; delete only what's verifiably redundant with code/git; never hand-author into CE's `docs/solutions/`). The CHANGELOG keeps the dated stub + `Reference:`.
 
 **Two cuts, two policies.** During a *formal repo migration* (the `10-migrate-existing-repo.md` walkthrough), the structural normalization in Step 1.7 — Index + reorder to latest-first + ISO dates + drop Recent Updates + trim a bloated Current Focus to ≤3 lines — is **mandatory** (it's fast and shapes the doc into the convention). The **heavy-entry triage** (Step 1.7.5: promoting Decision Log essays + reshaping legacy prose) is always **operator-approved, deferrable**. *Outside* a formal migration — i.e., retrofitting the convention onto a repo you're not otherwise migrating — even the Step 1.7 normalization is operator-approved; don't force it mid-feature. See `methodology/compound-engineering/10-migrate-existing-repo.md` Step 1.7 + 1.7.5 for the procedure and operator prompts.
 

@@ -150,7 +150,7 @@ After feature 1 ships and you invoke `@software-documenter-ce ship docs`, SD-CE:
 1. Detects `AGENTS.md` exists at repo root → targets AGENTS.md (not CLAUDE.md) for the Components table.
 2. Adds a row to AGENTS.md `Components & Architecture`.
 3. Updates README components paragraph + features index.
-4. Updates CHANGELOG Current Focus (mark complete or point to next feature) + prepends Version History entry (latest-version-first, ISO dates, Keep-a-Changelog change-type grouping) + appends Decision Log entries (if architectural decisions surfaced — judgment call; heavy entries promoted to `docs/solutions/<category>/<slug>.md` per the promotion threshold in `skills/doc-structure/SKILL.md § CHANGELOG Format`).
+4. Updates CHANGELOG Current Focus (mark complete or point to next feature) + prepends Version History entry (latest-version-first, ISO dates, Keep-a-Changelog change-type grouping) + appends Decision Log entries **as dated stubs** (if architectural decisions surfaced — judgment call), with any substantial detail relocated to `docs/reference/<topic>.md` per `skills/doc-structure/SKILL.md § CHANGELOG Format`. (`docs/solutions/` is CE's — `/ce-compound` only, never hand-authored at ship time.)
 5. Moves any newly resolved ISSUES.md entries Open → Resolved with date + feature reference.
 6. If `/ce-compound` fired earlier and the Discoverability Check ran, AGENTS.md now contains a one-line `docs/solutions/` awareness pointer.
 

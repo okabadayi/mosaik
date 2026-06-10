@@ -138,7 +138,7 @@ This step is **mandatory structural normalization** — fast (5-20 min depending
 
 ### Step 1.7.5 — Heavy-entry triage (operator-approved, deferrable)
 
-Pre-CE repos may have accumulated long-form entries before the lightweight-capture convention — both in **ISSUES.md** (multi-paragraph debugging walkthroughs that belong in `docs/reference/`) and in **CHANGELOG.md Decision Log** (decision-essays with sub-findings or reusable conventions that belong in `docs/decisions/` or `docs/solutions/`). The heavy-entry triage is **operator-approved**, not mandatory at migration time.
+Pre-CE repos may have accumulated long-form entries before the lightweight-capture convention — both in **ISSUES.md** (multi-paragraph debugging walkthroughs that belong in `docs/reference/`) and in **CHANGELOG.md Decision Log** (decision-essays whose detail belongs relocated to `docs/reference/<topic>.md`). The heavy-entry triage is **operator-approved**, not mandatory at migration time.
 
 **Agent's prompt to operator:**
 
@@ -149,17 +149,17 @@ Pre-CE repos may have accumulated long-form entries before the lightweight-captu
 > - Q entries marked Open may be actually resolved by recent commits/versions
 >
 > **CHANGELOG.md Decision Log:**
-> - R entries past ~10 lines body, or with multiple sub-findings, or capturing reusable conventions (likely belong in `docs/decisions/<slug>.md` for non-CE repos, or `docs/solutions/<category>/<slug>.md` for CE-piloted repos)
+> - R entries past ~10 lines body, or with multiple sub-findings, or carrying gotchas/findings that exist nowhere else (their detail belongs relocated to `docs/reference/<topic>.md`; `docs/solutions/` stays CE-owned — `/ce-compound` only)
 >
 > Want to do this triage now (~30-90 min depending on combined size), or defer to post-migration follow-up?"
 
 **If operator approves now:**
 
 1. **ISSUES.md** — walk per-entry. For each Open entry, verify against current production state + recent commits; move actually-resolved entries to `## Resolved Issues` with the resolution version/commit reference. Promote heavy entries (multi-paragraph workarounds, external citations, version-behavior matrices) to `docs/reference/<topic>.md`. ISSUES.md gets a one-liner pointing at the reference doc via the `reference:` field.
-2. **CHANGELOG Decision Log** — walk per-entry. For each entry past the threshold (>~10 lines body / multiple sub-findings / implementation-detail dump), apply the **two-move triage** from `skills/doc-structure/SKILL.md § CHANGELOG Format`:
-   - **Compress in place** is the *default* — keep Decision + Why + the one load-bearing trade-off; drop the rot-prone mechanics (file lists, field renames, constants, setup steps — those live in code/git/reference docs). Most fat historical entries shrink this way **with no new file**.
-   - **Promote to a doc** only when the bulk is durable reusable analysis (a convention, a non-obvious causal chain, a decision future work re-litigates) → `docs/solutions/<category>/<slug>.md` (CE-piloted; check `/ce-compound` hasn't already captured it, to avoid duplication) or `docs/decisions/<slug>.md` (non-CE). Stub + `Reference:`.
-   - **Don't manufacture a doc for "here's what we did" essays** — compress them. The test: would a future contributor re-read this to make a decision?
+2. **CHANGELOG Decision Log** — walk per-entry. For each entry past the threshold (>~10 lines body / multiple sub-findings / implementation-detail dump), apply the triage from `skills/doc-structure/SKILL.md § CHANGELOG Format`. **The discriminator is "is this stored anywhere else?", never "is it long?":**
+   - **Relocate to `docs/reference/<topic>.md`** is the *default* — move the substantial detail (specifics, gotchas, empirical findings, alternatives-with-reasoning, why-these-values) into a topic reference doc; the CHANGELOG keeps a dated stub (decision + why + `Reference:`). **Nothing is deleted — fidelity is preserved, organized by topic.** Aggregate related decisions into a few topic docs; don't spawn one per entry.
+   - **Delete only verifiably-redundant content** — file lists already in git, constants already in code with obvious rationale. If a line carries a unique gotcha / empirical finding / reasoning that exists nowhere else, it is NOT redundant — relocate it, never delete it.
+   - **`docs/solutions/` is CE-owned — never hand-author there.** It's `/ce-compound`'s folder. A stub may point at an existing solution doc, but cleanup doesn't create one. If a decision is a genuine reusable convention worth compounding, that's a separate `/ce-compound` run, not a manual write during this triage.
 
 **If operator defers:**
 

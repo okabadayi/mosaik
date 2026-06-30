@@ -105,7 +105,7 @@ there's CC-only behavior that doesn't apply to other agents.]
 
 ## Per-doc Lifecycle Matrix
 
-Six project-level files in scope. Per row: creator at scaffolding, scaffolding-time content rules, live update trigger, staleness prevention.
+Six project-level files in scope (plus `CONCEPTS.md`, CE-owned and conditional, added upstream in v3.16.0 — see the conditional row at the bottom). Per row: creator at scaffolding, scaffolding-time content rules, live update trigger, staleness prevention.
 
 | File | Creator at scaffolding | Scaffolding-time content rules | Live update trigger | Staleness prevention |
 |---|---|---|---|---|
@@ -115,6 +115,7 @@ Six project-level files in scope. Per row: creator at scaffolding, scaffolding-t
 | **`CHANGELOG.md`** | operator-managed or scaffolding skill | **Index at top** (anchor links to Current Focus / Roadmap / Version History / Decision Log; cross-platform `[text](#heading-slug)` syntax) + section headers all empty. Current Focus = "no features shipped yet." Per the convention codified in `skills/doc-structure/SKILL.md § CHANGELOG Format` (Index + drop Recent Updates + ISO dates + latest-version-first + Keep a Changelog change-type grouping + Decision Log promotion threshold). | SD-CE `ship docs` updates Current Focus, prepends to Version History (latest-version-first, ISO dates, change-type grouped), appends to Decision Log **as dated stubs** with any substantial detail relocated to `docs/reference/<topic>.md` (`docs/solutions/` stays CE-owned — `/ce-compound` only). | `audit-docs`: Version History entries map to git tags / merges; Decision Log stubs carrying un-homed detail should be flagged |
 | **`ISSUES.md`** | operator-managed or scaffolding skill | **Index at top** (anchor links per-component, `[text](#heading-slug)` cross-platform syntax) + per-component sections + `## Resolved Issues`. Per the convention codified in `doc-structure` skill § ISSUES.md (lightweight capture + reference-doc promotion + GH-issues for committed work). | SD-CE `ship docs` moves resolved entries to `## Resolved Issues` with date + feature reference; flags heavy entries for promotion to `docs/reference/<topic>.md`. New-issue capture: manual rule in AGENTS.md Operational Dispatcher (interim default; revisit if frictional after 3+ features). | `audit-docs`: Resolved entries should have feature/commit refs; Index entries resolve |
 | **`docs/architecture.md`** (conditional) | NOT created by default. Allowed at scaffolding only if load-bearing target design isn't covered by STRATEGY.md + CHANGELOG Decision Log + per-feature plans. Mark as "target design — reconcile at first ship." | If created: target-design + ASCII diagrams + cross-cutting runtime synthesis. DO NOT duplicate Decision Log rationale. | Manual when runtime model shifts; reconcile against Decision Log at each feature ship | Review at scorecard checkpoints — verify no divergence vs Decision Log + STRATEGY.md tracks |
+| **`CONCEPTS.md`** (conditional, **v3.16.0+**) | NOT created at scaffolding — CE-owned. A Full `/ce-compound` run seeds it when shared domain vocabulary emerges. | Do **not** pre-create at scaffolding. Root-level shared domain-vocabulary glossary. | `/ce-compound` adds/refines entries (Full mode seeds; Lightweight refines existing only). `/ce-compound` Discoverability Check ensures AGENTS.md/CLAUDE.md surfaces it. | CE-owned — leave to `/ce-compound`. New upstream artifact as of v3.16.0. |
 
 ### Scaffolding-time discipline rule
 
@@ -176,7 +177,7 @@ Four CE-native features close lifecycle gaps natively; no custom operator-side g
 `audit-docs` skill (Phase B) is **operator-triggered at known checkpoints**, not a recurring cron:
 
 - **Scorecard-checkpoint invocation** — at walkthrough Step 8 after a feature ships, optionally include a doc audit
-- **Post-CE-plugin-upgrade invocation** — after `/ce-update-plugin` or any CE version bump
+- **Post-CE-plugin-upgrade invocation** — after a CE plugin upgrade (`/plugin update compound-engineering`) or any CE version bump
 - **At imported-repo `/ce-setup` time** — runs BEFORE `/ce-setup` to clean pollution before CE adoption begins
 
 No recurring schedule. The operator chooses when based on context.
@@ -192,7 +193,7 @@ When in doubt about authoritative behavior, read the live runtime files (not the
 | CE skills (brainstorm, plan, work, compound, strategy, refresh) | CE plugin source at [github.com/EveryInc/compound-engineering-plugin](https://github.com/EveryInc/compound-engineering-plugin) | [`01-overview.md`](01-overview.md), [`04-inventory.md`](04-inventory.md) |
 | Anthropic shim pattern | Claude Code `memory.md § AGENTS.md` (official docs) | — |
 
-CE plugin version pinned at adoption: **v3.8.4** (commit `08bb5899036e9ca33585b38ce840e2b2bfaacac8`, released 2026-05-21). When CE upgrades, re-verify the SKILL.md paths above against the new version.
+CE plugin pin: **v3.16.0** (commit `3157993648fc5822e120b6beb542ada15ebdc656`, released 2026-06-30; adopted at v3.8.4 / `08bb5899`, released 2026-05-21). When CE upgrades, re-verify the SKILL.md paths above against the new version — at v3.16.0 skills moved to top-level `skills/` and standalone agents became `skills/<skill>/references/{agents,personas}/`.
 
 ## CE-piloted repos status
 

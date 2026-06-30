@@ -1,12 +1,12 @@
 ---
-description: Operational migration plan for adopting Compound Engineering as the software-development methodology for code repos inside the operator's setup. Phase A is install + first-feature dry-run; Phase B is integration enhancements (QMD cross-repo solutions, software-documenter scope reduction, ce-agent-native reference, optional Shape-B bridge). Pin compound-engineering-plugin v3.8.4 commit 08bb5899036e9ca33585b38ce840e2b2bfaacac8.
+description: Operational migration plan for adopting Compound Engineering as the software-development methodology for code repos inside the operator's setup. Phase A is install + first-feature dry-run; Phase B is integration enhancements (QMD cross-repo solutions, software-documenter scope reduction, ce-agent-native reference, optional Shape-B bridge). Pin compound-engineering-plugin v3.16.0 commit 3157993648fc5822e120b6beb542ada15ebdc656 (adopted at v3.8.4 / 08bb5899).
 type: plan
 status: active
 date_created: 2026-05-24
 date_updated: 2026-05-27
 tags: [agentic-future, compound-engineering, migration, software-methodology]
-ce_reference_version: v3.8.4
-ce_reference_commit: 08bb5899036e9ca33585b38ce840e2b2bfaacac8
+ce_reference_version: v3.16.0
+ce_reference_commit: 3157993648fc5822e120b6beb542ada15ebdc656
 related: ["[[00-readme]]", "[[01-overview]]", "[[04-inventory]]"]
 ---
 
@@ -43,6 +43,7 @@ The strategic decision: CE is a more integrated, more battle-tested per-repo dev
 | Field | Value |
 |---|---|
 | Plugin | https://github.com/EveryInc/compound-engineering-plugin |
+| **Current pin (2026-06-30)** | **v3.16.0** / commit `3157993648fc5822e120b6beb542ada15ebdc656` |
 | Version pinned at adoption | **v3.8.4** |
 | Tag commit SHA | `08bb5899036e9ca33585b38ce840e2b2bfaacac8` |
 | Released | 2026-05-21 |
@@ -181,7 +182,7 @@ Compound Engineering plugin (Kieran Klaassen / Every Inc) is installed user-leve
 in Claude Code. Adoption documentation: Mosaik's `methodology/compound-engineering/`
 (in this repo, or a local copy you keep in your knowledge vault).
 
-Start with `03-migration-plan.md`. Pin: v3.8.4 / commit 08bb5899036e9ca33585b38ce840e2b2bfaacac8.
+Start with `03-migration-plan.md`. Pin: v3.16.0 / commit 3157993648fc5822e120b6beb542ada15ebdc656 (adopted at v3.8.4).
 
 Re-evaluate every 3 months — next review due 2026-08-24.
 ```
@@ -556,6 +557,8 @@ After this:
 
 ### 6.3 B3 — ce-agent-native-architecture as skill-builder reference
 
+⚠ Removed upstream at v3.16.0 — `ce-agent-native-architecture` + `ce-agent-native-audit` were removed in the agentless surface reduction; their reference material is now folded into skill-local `references/`. The `/ce-agent-native-*` commands no longer resolve; re-scope before acting.
+
 CE ships `ce-agent-native-architecture` — a tutor/reference skill with 14 reference files covering aspects of building agent-native applications (architecture patterns, MCP tool design, system prompt design, dynamic context injection, action parity discipline, self-modification, mobile patterns, testing, refactoring, checklists). It's structured as an intake: pick one of 14 dimensions and the relevant reference loads.
 
 Relevant for the operator because the operator builds skills (`recall`, a vault-write skill, `todos`, a life-domain capture agent, etc.). The reference patterns apply to Claude Code skills, not just full agent-native apps.
@@ -698,7 +701,7 @@ Add a recurring entry to your operator todo system:
 
 ### 9.2 Upgrade decision
 
-Upgrading the plugin is its own decision. CE auto-updates if you run `/ce-update` (which it announces during `/ce-setup`). Recommended cadence:
+Upgrading the plugin is its own decision. (The `/ce-update` skill was **removed upstream** by v3.16.0 — use `/plugin update compound-engineering`, or uninstall + reinstall when the marketplace restructures, as in the 2026-06-30 v3.8.4 → v3.16.0 jump.) Recommended cadence:
 
 - **Patch upgrades** (e.g., v3.8.4 → v3.8.5): adopt freely, low risk
 - **Minor upgrades** (e.g., v3.8.x → v3.9.0): read the CHANGELOG; usually safe but check for new skills or changed contracts
@@ -748,4 +751,4 @@ For a fresh agent: typical reading order is `03 (here) → 04 → 01 → 02`.
 
 ---
 
-*Last updated: 2026-05-27. Pinned CE version: v3.8.4 / commit `08bb5899036e9ca33585b38ce840e2b2bfaacac8`. Next re-evaluation: 2026-08-24.*
+*Last updated: 2026-05-27 (pin bumped to v3.16.0 on 2026-06-30). Pinned CE version: v3.16.0 / commit `3157993648fc5822e120b6beb542ada15ebdc656`. Next re-evaluation: 2026-08-24.*

@@ -5,8 +5,8 @@ status: active
 date_created: 2026-05-24
 date_updated: 2026-05-24
 tags: [agentic-future, compound-engineering, inventory, cheat-sheet, per-tier]
-ce_reference_version: v3.8.4
-ce_reference_commit: 08bb5899036e9ca33585b38ce840e2b2bfaacac8
+ce_reference_version: v3.16.0
+ce_reference_commit: 3157993648fc5822e120b6beb542ada15ebdc656
 related: ["[[00-readme]]", "[[03-migration-plan]]", "[[01-overview]]"]
 ---
 
@@ -14,7 +14,9 @@ related: ["[[00-readme]]", "[[03-migration-plan]]", "[[01-overview]]"]
 
 This is the operational reference for "which CE skill should I use right now?" — read after `03-migration-plan.md` (which is the action plan) and before `01-overview.md` (which is the deep CE reference).
 
-The pin is **v3.8.4** / commit `08bb5899036e9ca33585b38ce840e2b2bfaacac8`. The plugin ships **38 skills + 51 agents** at this pin. Adoption status here applies to this operator setup specifically.
+The pin is **v3.16.0** / commit `3157993648fc5822e120b6beb542ada15ebdc656`. Adoption status here applies to this operator setup specifically.
+
+> ⚠ **Inventory NOT re-verified against v3.16.0.** The per-skill roster + counts below were taken at **v3.8.4** ("38 skills + 49 agents"). Since then upstream did an **agentless surface reduction**: the 49 standalone agents were removed and folded into `skills/<skill>/references/{agents,personas}/`; skills moved to top-level `skills/`; and the roster churned (removed incl. `/ce-update`, `/ce-release-notes`, `/ce-report-bug`, `/ce-agent-native-architecture`, `/ce-agent-native-audit`, `/ce-clean-gone-branches`, `/ce-sessions`, `/ce-slack-research`, `/ce-frontend-design`, `/ce-demo-reel`, `/ce-dhh-rails-style`, `/ce-work-beta`, `/ce-polish-beta`; added `/ce-dogfood`, `/ce-pov`, `/ce-promote`, `/ce-polish`). **The 9-skill Core Set is unaffected** (all present). **Every row below that names a removed skill is stale regardless of its Adopt/Reference/Skip status** — re-verify the full inventory at the next re-evaluation. Use `/plugin update compound-engineering` instead of `/ce-update`.
 
 ---
 
@@ -502,7 +504,7 @@ Agents are sub-agents dispatched BY skills — you typically don't invoke these 
 | Resolve incoming PR review comments | `/ce-resolve-pr-feedback` |
 | Get a Codex second opinion on a plan or diff | `/codex-review` (existing skill, not CE) |
 | Set up CE in a new repo | `/ce-setup` |
-| Check for CE plugin updates | `/ce-update` |
+| Check for CE plugin updates | `/plugin update compound-engineering` (the `/ce-update` skill was removed at v3.16.0) |
 | Audit an user-level skill for agent-native principles | `/ce-agent-native-audit` |
 | Build a new custom skill | Consult `/ce-agent-native-architecture` for relevant reference patterns |
 
@@ -565,7 +567,7 @@ A Solo script can still nuke a directory. Blast Radius is about *typical* method
 
 ## 8. Pin + re-evaluation
 
-- Plugin pin: **v3.8.4** / commit `08bb5899036e9ca33585b38ce840e2b2bfaacac8`
+- Plugin pin: **v3.16.0** / commit `3157993648fc5822e120b6beb542ada15ebdc656` (adopted at v3.8.4 / `08bb5899`)
 - Next re-evaluation: **2026-08-24** (3-month cadence)
 
 At re-evaluation, check this doc against current CE for:
@@ -581,4 +583,4 @@ See `03-migration-plan.md` § 9 for the re-evaluation protocol.
 
 ---
 
-*Last updated: 2026-05-24. Pinned CE version: v3.8.4 / commit `08bb5899036e9ca33585b38ce840e2b2bfaacac8`.*
+*Last updated: 2026-05-24 (pin bumped to v3.16.0 on 2026-06-30; inventory roster NOT yet re-verified — see caveat at top). Pinned CE version: v3.16.0 / commit `3157993648fc5822e120b6beb542ada15ebdc656`.*

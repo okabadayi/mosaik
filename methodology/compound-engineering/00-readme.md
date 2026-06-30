@@ -50,20 +50,19 @@ A pointed-at-this-folder agent should read in this typical order: `03 → 04 →
 ## Pin
 
 - Plugin: https://github.com/EveryInc/compound-engineering-plugin
-- Version pinned at adoption: **v3.8.4**
-- Commit SHA: `08bb5899036e9ca33585b38ce840e2b2bfaacac8`
-- Released: 2026-05-21
+- **Current pin: v3.16.0** — commit `3157993648fc5822e120b6beb542ada15ebdc656` (released 2026-06-30)
+- Adopted at: **v3.8.4** — commit `08bb5899036e9ca33585b38ce840e2b2bfaacac8` (released 2026-05-21), kept here as adoption history
+- **v3.16.0 restructure note:** skills relocated to top-level `skills/`, and the standalone `agents/ce-*.md` were removed (agentless surface reduction) — their personas now live under `skills/<skill>/references/{agents,personas}/`.
 
 Re-evaluate every 3 months.
 
 ## Sources of truth for these docs
 
-These docs are built on **direct reads of CE plugin source files**, not summaries:
+These docs are built on **direct reads of CE plugin source files**, not summaries (v3.16.0 layout; pre-3.16.0 these were under `plugins/compound-engineering/`):
 
-- `plugins/compound-engineering/skills/<name>/SKILL.md` — runtime skill files (authoritative)
-- `plugins/compound-engineering/skills/<name>/references/*.md` — lazy-loaded skill content
-- `plugins/compound-engineering/agents/ce-<name>.md` — sub-agent role prompts
-- `plugins/compound-engineering/AGENTS.md` — plugin authoring rules
+- `skills/<name>/SKILL.md` — runtime skill files (authoritative)
+- `skills/<name>/references/*.md` — lazy-loaded skill content (incl. `references/agents/` + `references/personas/` — the former standalone sub-agents)
+- `.claude-plugin/` manifests — plugin/marketplace manifests + plugin authoring rules
 - Top-level `README.md`, `AGENTS.md`, `CHANGELOG.md`
 
 User-facing docs at `docs/skills/<name>.md` were used for orientation only — they are summaries of the runtime, not the runtime itself. **When in doubt, the SKILL.md in source is the authority.**
@@ -71,7 +70,7 @@ User-facing docs at `docs/skills/<name>.md` were used for orientation only — t
 A reproducible read can be done by:
 ```bash
 git clone --depth 1 https://github.com/EveryInc/compound-engineering-plugin /tmp/ce-plugin
-# read /tmp/ce-plugin/plugins/compound-engineering/skills/<name>/SKILL.md
+# read /tmp/ce-plugin/skills/<name>/SKILL.md   # v3.16.0 layout (pre-3.16.0: plugins/compound-engineering/skills/<name>/SKILL.md)
 ```
 
 ## Position relative to other methodology docs
@@ -80,4 +79,4 @@ This folder is a working reference for CE adoption inside `~/repos/<project>/` s
 
 ---
 
-*Compound Engineering plugin v3.8.4.*
+*Compound Engineering plugin v3.8.4; pin updated to v3.16.0.*

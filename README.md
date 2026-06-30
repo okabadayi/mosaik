@@ -78,7 +78,7 @@ Mosaik uses QMD as the search substrate for `/recall`, so the agent recalls rele
 Mosaik runs in **[Claude Code](https://claude.ai/code)** — Anthropic's official agentic CLI. That's where it was designed and tested. It's also compatible with **OpenAI Codex CLI** through CE's official converter.
 
 The framework depends on a few things being installed:
-- **Compound Engineering plugin** (v3.8.4 or later) — the engineering engine
+- **Compound Engineering plugin** (v3.16.0 or later) — the engineering engine
 - **QMD** — the markdown search daemon Mosaik uses for fast context recall
 - **A markdown vault** — recommended: a synced [Obsidian](https://obsidian.md) vault that both the agent (writes/reads via filesystem) and the operator (reads/edits in the Obsidian UI) work in. 
 	- Not strictly required, but the synced human-readable surface is what makes the knowledge fabric actually adoptable — every doc the agent writes is immediately visible to the operator without context-switching, and operator edits land back where the agent will read them next session.

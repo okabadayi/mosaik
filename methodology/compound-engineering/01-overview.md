@@ -5,8 +5,8 @@ status: active
 date_created: 2026-05-24
 date_updated: 2026-05-24
 tags: [agentic-future, compound-engineering, overview, architecture, deep-reference]
-ce_reference_version: v3.8.4
-ce_reference_commit: 08bb5899036e9ca33585b38ce840e2b2bfaacac8
+ce_reference_version: v3.16.0
+ce_reference_commit: 3157993648fc5822e120b6beb542ada15ebdc656
 related: ["[[00-readme]]", "[[03-migration-plan]]", "[[04-inventory]]"]
 ---
 
@@ -14,7 +14,9 @@ related: ["[[00-readme]]", "[[03-migration-plan]]", "[[04-inventory]]"]
 
 This is the **structural understanding** of how Compound Engineering works as a system. Read after `03-migration-plan.md` and `04-inventory.md` (which are operational) when you want to understand the design rationale and the mechanical guts.
 
-Pin: **v3.8.4** / commit `08bb5899036e9ca33585b38ce840e2b2bfaacac8`. Read from source files at `plugins/compound-engineering/skills/<name>/SKILL.md` and `plugins/compound-engineering/agents/ce-<name>.md`. Per Kieran (canonical guide): "Ideally we delete the whole thing someday because it's all built in. The point was always the philosophy, not the plugin."
+Pin: **v3.16.0** / commit `3157993648fc5822e120b6beb542ada15ebdc656` (released 2026-06-30; adopted at v3.8.4 / `08bb5899036e9ca33585b38ce840e2b2bfaacac8`). Read from source files at `skills/<name>/SKILL.md` and `skills/<name>/references/{agents,personas}/*.md` (top-level since v3.16.0; pre-3.16.0 these sat under `plugins/compound-engineering/`). Per Kieran (canonical guide): "Ideally we delete the whole thing someday because it's all built in. The point was always the philosophy, not the plugin."
+
+> ⚠ **Calibration caveat:** the per-skill counts and repo layout described in this doc were written at **v3.8.4** and have not been fully re-verified against v3.16.0. Known drift: `plugins/` was removed (skills moved to top-level `skills/`); the standalone `agents/ce-*.md` were removed in the agentless surface reduction (personas folded into `skills/<skill>/references/{agents,personas}/`). The architectural *concepts* below still hold; treat the *inventory specifics* (counts, paths) as v3.8.4-era unless re-checked.
 
 ---
 
@@ -28,24 +30,24 @@ Kieran's allocation rule: 80% in planning + review, 20% in execution. Sometimes 
 
 ## 2. Architecture — skills, agents, slash commands
 
-CE's plugin is built on three primitives, all in a single repository under `plugins/compound-engineering/`:
+CE's plugin is built on three primitives, all in a single repository (under `plugins/compound-engineering/` at the v3.8.4 pin; relocated to top-level `skills/` + `.claude-plugin/` manifests at v3.16.0 — see the calibration caveat above):
 
 ### 2.1 Skills
 
-A **skill** is a directory at `plugins/compound-engineering/skills/<name>/` containing:
+A **skill** is a directory at `skills/<name>/` (`plugins/compound-engineering/skills/<name>/` pre-v3.16.0) containing:
 
 - `SKILL.md` — the runtime skill body. Cached at session start; loaded when the skill is invoked. YAML frontmatter at the top with `name`, `description`, optional `argument-hint`, optional `allowed-tools`, optional `disable-model-invocation`. The body is the actual orchestration logic — phased workflow, decision rules, output format.
 - `references/<topic>.md` (optional) — **lazy-loaded** content. SKILL.md tells the agent "STOP. Read `references/<topic>.md`" at specific phase transitions. Keeps SKILL.md lean while putting deep mechanics where the workflow needs them.
 - `scripts/<name>.{sh,py}` (optional) — executable helpers. Referenced via relative paths from the skill directory.
 - `assets/` (optional) — supporting files (templates, examples).
 
-The slash-command surface is the skill name: invoking `/ce-brainstorm` runs `plugins/compound-engineering/skills/ce-brainstorm/SKILL.md`. **There is no separate `commands/` folder** — commands were migrated to skills in v2.39.0.
+The slash-command surface is the skill name: invoking `/ce-brainstorm` runs `skills/ce-brainstorm/SKILL.md` (pre-3.16.0: `plugins/compound-engineering/skills/ce-brainstorm/SKILL.md`). **There is no separate `commands/` folder** — commands were migrated to skills in v2.39.0.
 
 Skill sizes range from 36 lines (`ce-slack-research`) to 898 lines (`ce-code-review`). Reference files often double or triple the total content (e.g., `ce-brainstorm` is 240 lines of SKILL.md + 5 references totaling ~58KB).
 
 ### 2.2 Agents
 
-An **agent** is a single file at `plugins/compound-engineering/agents/ce-<name>.md`:
+An **agent** is a single file at `plugins/compound-engineering/agents/ce-<name>.md` (pre-3.16.0 layout; at v3.16.0 the standalone `agents/ce-*.md` were removed in the agentless surface reduction and the personas were folded into skill-local `skills/<skill>/references/{agents,personas}/`):
 
 ```yaml
 ---
@@ -62,7 +64,7 @@ Agents are dispatched **by skills**, not invoked directly by users. A skill migh
 
 Most CE agents are 60-300 lines. They're focused single-purpose role prompts with strict output formats. The agent body teaches the LLM the specialized lens (e.g., security review = OWASP top 10, input validation, SQL injection patterns, etc.) and constrains output shape (e.g., P0-P3 severity + structured finding fields).
 
-CE ships 51 agents at v3.8.4. They cluster into: review (21), document review (7), research (9), design (3), workflow (2), docs (1). The bulk are reviewer personas dispatched by `/ce-code-review` and `/ce-doc-review`.
+CE ships **49** agents at v3.8.4. They roughly cluster into review / document-review / research / design / workflow / docs categories — the bulk are reviewer personas dispatched by `/ce-code-review` and `/ce-doc-review`. (At v3.16.0 these standalone agents were removed and folded into `skills/<skill>/references/{agents,personas}/` — see the calibration caveat above.)
 
 ### 2.3 Slash commands
 
@@ -70,7 +72,7 @@ In CE post-v2.39.0, slash commands ARE skills. `/ce-brainstorm` invokes the `ce-
 
 ### 2.4 The plugin manifest
 
-`plugins/compound-engineering/.claude-plugin/plugin.json`:
+`.claude-plugin/plugin.json` (at v3.16.0 the manifests are top-level under `.claude-plugin/`; pre-3.16.0: `plugins/compound-engineering/.claude-plugin/plugin.json`):
 
 ```json
 {
@@ -438,7 +440,7 @@ These aren't documentation; they're institutional memory captured via `/ce-compo
 
 ### 11.2 The AGENTS.md authoring rules
 
-`plugins/compound-engineering/AGENTS.md` is **authoring** context (not runtime). It captures:
+The plugin's top-level `AGENTS.md` (pre-3.16.0: `plugins/compound-engineering/AGENTS.md`) is **authoring** context (not runtime). It captures:
 
 - Skill design principles ("calibrate prescription level to failure mode" — hard rules / strong guidance / trust)
 - Cross-platform conventions (ASCII identifiers, `ce-` prefix required, markdown tables not box-drawing)
@@ -485,7 +487,7 @@ The Mosaik fabric side also has things CE doesn't and doesn't need:
 
 ## 13. Plugin version pin + evolution
 
-**Pin:** v3.8.4 / commit `08bb5899036e9ca33585b38ce840e2b2bfaacac8` (released 2026-05-21).
+**Pin:** v3.16.0 / commit `3157993648fc5822e120b6beb542ada15ebdc656` (released 2026-06-30; adopted at v3.8.4 / `08bb5899036e9ca33585b38ce840e2b2bfaacac8`, released 2026-05-21). The evolution notes below cover the v3.4 → v3.8 window only; the v3.9 → v3.16 window added the agentless surface reduction + top-level `skills/` relocation (see the calibration caveat near the top).
 
 **Recent evolution (v3.4 → v3.8 window):**
 
@@ -522,4 +524,4 @@ The plugin is **actively evolving** — 153 releases since v1.0, last release 3 
 
 ---
 
-*Last updated: 2026-05-24. Pinned CE version: v3.8.4 / commit `08bb5899036e9ca33585b38ce840e2b2bfaacac8`.*
+*Last updated: 2026-05-24 (pin bumped to v3.16.0 on 2026-06-30). Pinned CE version: v3.16.0 / commit `3157993648fc5822e120b6beb542ada15ebdc656`; structural inventory calibrated at v3.8.4 (see caveat near top).*

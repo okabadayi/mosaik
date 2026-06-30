@@ -68,7 +68,7 @@ See [`methodology/compound-engineering/11-meta-repo-pattern-for-heterogeneous-bu
 
 ## What's in this repo
 
-- `methodology/compound-engineering/` — Compound Engineering adoption corpus (overview, migration plan, inventory, walkthrough, doc lifecycle, fresh-repo + migrate-existing repo operator scripts, meta-repo pattern). Built on direct reads of CE plugin source at v3.8.4.
+- `methodology/compound-engineering/` — Compound Engineering adoption corpus (overview, migration plan, inventory, walkthrough, doc lifecycle, fresh-repo + migrate-existing repo operator scripts, meta-repo pattern). Built on direct reads of CE plugin source at v3.16.0.
 - `skills/` — live skill source (3 skills: `doc-structure`, `recall` (software-repo mode), `codex-review`)
 - `agents/` — live agent source (`software-documenter-ce`)
 - `example-architecture/` — one abstract sample cluster (parent tier + meta-repo + 2 per-solution repos) demonstrating the meta-repo + per-solution-repos architecture and the AGENTS.md+shim tier pattern
@@ -96,7 +96,7 @@ Note on `codex-review`: this skill (included in `skills/`) is used FROM Claude C
 
 | Component | Why | Required version |
 |---|---|---|
-| **Compound Engineering plugin** | The engineering engine Mosaik builds on | v3.8.4 or later |
+| **Compound Engineering plugin** | The engineering engine Mosaik builds on | v3.16.0 or later |
 | **QMD daemon** | The markdown search substrate `/recall` uses for context loading | Current release |
 | **A markdown vault directory** | Where the knowledge fabric lives | Any structure works; recommended: a synced [Obsidian](https://obsidian.md) vault that both the agent (filesystem) and operator (Obsidian UI) read/write — every doc the agent ships becomes immediately visible to the human without context-switching |
 

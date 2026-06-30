@@ -3,7 +3,7 @@ description: Operational reference for Compound Engineering adoption. Per-tier (
 type: inventory
 status: active
 date_created: 2026-05-24
-date_updated: 2026-05-24
+date_updated: 2026-06-30
 tags: [agentic-future, compound-engineering, inventory, cheat-sheet, per-tier]
 ce_reference_version: v3.16.0
 ce_reference_commit: 3157993648fc5822e120b6beb542ada15ebdc656
@@ -16,7 +16,7 @@ This is the operational reference for "which CE skill should I use right now?" �
 
 The pin is **v3.16.0** / commit `3157993648fc5822e120b6beb542ada15ebdc656`. Adoption status here applies to this operator setup specifically.
 
-> ⚠ **Inventory NOT re-verified against v3.16.0.** The per-skill roster + counts below were taken at **v3.8.4** ("38 skills + 49 agents"). Since then upstream did an **agentless surface reduction**: the 49 standalone agents were removed and folded into `skills/<skill>/references/{agents,personas}/`; skills moved to top-level `skills/`; and the roster churned (removed incl. `/ce-update`, `/ce-release-notes`, `/ce-report-bug`, `/ce-agent-native-architecture`, `/ce-agent-native-audit`, `/ce-clean-gone-branches`, `/ce-sessions`, `/ce-slack-research`, `/ce-frontend-design`, `/ce-demo-reel`, `/ce-dhh-rails-style`, `/ce-work-beta`, `/ce-polish-beta`; added `/ce-dogfood`, `/ce-pov`, `/ce-promote`, `/ce-polish`). **The 9-skill Core Set is unaffected** (all present). **Every row below that names a removed skill is stale regardless of its Adopt/Reference/Skip status** — re-verify the full inventory at the next re-evaluation. Use `/plugin update compound-engineering` instead of `/ce-update`.
+> ✅ **Inventory re-verified against v3.16.0 on 2026-06-30.** The roster is now **27 skills** (was 38 at v3.8.4) + **0 standalone agents** — upstream did an **agentless surface reduction**: the 49 standalone agents were removed and the personas folded into `skills/<skill>/references/{agents,personas}/` (dispatched by their parent skill, not separately invocable). Removed skills are marked **`✗ Removed v3.16.0`** in the tables below; the 4 new skills (`/ce-dogfood`, `/ce-pov`, `/ce-promote`, `/ce-polish`) have been added. **The 9-skill Core Set is unaffected** (all present). The § 5 agent inventory is retained as **v3.8.4 historical reference** — see the note at its top.
 
 ---
 
@@ -53,7 +53,7 @@ The cheat sheets below tell you which CE skill to typically invoke / consider / 
 
 ### 2.0 CE Core Set vs Extended Set
 
-CE ships 38 skills. For Mosaik's setup, **9 of them form the CE Core Set** — the skills that carry the compounding mechanism end-to-end (upstream grounding through artifact chain through learning capture). The Core Set is invoked across all three tiers (with tier-dependent defaults on the optional ones); the Extended Set is situational.
+CE ships 27 skills (v3.16.0; 38 at adoption). For Mosaik's setup, **9 of them form the CE Core Set** — the skills that carry the compounding mechanism end-to-end (upstream grounding through artifact chain through learning capture). The Core Set is invoked across all three tiers (with tier-dependent defaults on the optional ones); the Extended Set is situational.
 
 **CE Core Set (9 skills):**
 
@@ -128,7 +128,7 @@ The per-tier cheat sheets below show **when** to reach for each Core skill, but 
 | `/ce-commit` (local commit only) | ◐ | ✅ | ✅ |
 | `/ce-commit-push-pr` (full ship) | ◐ | ✅ | ✅ |
 | `/ce-worktree` (isolated checkouts) | ✗ | ◐ | ✅ |
-| `/ce-clean-gone-branches` (cleanup) | ◐ | ✅ | ✅ |
+| `/ce-clean-gone-branches` (cleanup) | ✗ **Removed v3.16.0** | — | — |
 
 **Notes:**
 
@@ -141,8 +141,8 @@ The per-tier cheat sheets below show **when** to reach for each Core skill, but 
 
 | Skill | Solo | Internal | Public |
 |---|:---:|:---:|:---:|
-| `/ce-sessions` (cross-harness session search) | ✗ | ✗ | ✗ |
-| `/ce-slack-research` (Slack search) | ✗ | ◐ | ◐ |
+| `/ce-sessions` (cross-harness session search) | ✗ **Removed v3.16.0** | — | — |
+| `/ce-slack-research` (Slack search) | ✗ **Removed v3.16.0** | — | — |
 | `/ce-riffrec-feedback-analysis` (Every-specific recordings) | ✗ | ✗ | ✗ |
 | `/ce-proof` (Every-specific HITL editor) | ✗ | ✗ | ✗ |
 
@@ -158,8 +158,8 @@ All of these are **✗ Skip** at all current tiers because your repos may be Pyt
 
 | Skill | Status |
 |---|---|
-| `/ce-frontend-design` (greenfield web UI design) | Skip — adopt when first web-UI repo |
-| `ce-dhh-rails-style` (Ruby/Rails 37signals style) | Skip — Rails not in use |
+| `/ce-frontend-design` (greenfield web UI design) | ✗ **Removed v3.16.0** (was Skip) |
+| `ce-dhh-rails-style` (Ruby/Rails 37signals style) | ✗ **Removed v3.16.0** (was Skip) |
 | `ce-julik-frontend-races-reviewer` (JS/Stimulus race conditions) | Skip — not in use |
 | `ce-swift-ios-reviewer` (Swift/iOS) | Skip — iOS not in use |
 | `/ce-test-xcode` (iOS simulator testing) | Skip — iOS not in use |
@@ -172,11 +172,11 @@ These activate when needed; no per-tier decision. Most don't require explicit ad
 | Skill | Status / Note |
 |---|---|
 | `/ce-setup` | Run once per new repo at adoption time. Re-run when something looks broken. |
-| `/ce-update` | Run periodically to check for plugin updates. CE auto-suggests this. |
-| `/ce-release-notes` | Reference — "what changed in recent CE releases?" Useful at re-evaluation time. |
-| `/ce-report-bug` | Use when you hit a CE bug. Files a structured GitHub issue. |
+| `/ce-update` | ✗ **Removed v3.16.0** — use `/plugin update compound-engineering`. |
+| `/ce-release-notes` | ✗ **Removed v3.16.0** (was Reference) — check upstream release notes directly at re-evaluation time. |
+| `/ce-report-bug` | ✗ **Removed v3.16.0** — file CE bugs directly on the upstream GitHub repo. |
 | `/ce-resolve-pr-feedback` | Adopt at Internal / Public tier when collaborators leave PR review comments. Skip at Solo (no PR feedback). |
-| `/ce-demo-reel` | Adopt per-repo if visual evidence in PRs is valuable (UI changes, CLI demos). Skip otherwise. |
+| `/ce-demo-reel` | ✗ **Removed v3.16.0** (was Defer). |
 
 ### 2.7 Skill-builder reference (separate axis from tier)
 
@@ -184,8 +184,8 @@ These are tier-independent — they help when building your own custom skills (`
 
 | Skill | Status |
 |---|---|
-| `/ce-agent-native-architecture` | **◆ Reference**. Tutor/reference with 14 sub-references on building agent-native systems. Consult before building a new custom skill. |
-| `/ce-agent-native-audit` | **◆ Reference**. Scored audit against 5 core principles. Run periodically against existing your custom skills to find improvement opportunities. |
+| `/ce-agent-native-architecture` | ✗ **Removed v3.16.0** (was Reference) — removed as a standalone skill; reference material now skill-local under `references/`. |
+| `/ce-agent-native-audit` | ✗ **Removed v3.16.0** (was Reference) — removed as a standalone skill; reference material now skill-local under `references/`. |
 
 ### 2.8 Beta + experimental (per tier)
 
@@ -194,9 +194,9 @@ All of these are **◌ Defer** at all current tiers until stable / a concrete tr
 | Skill | Status / Trigger to revisit |
 |---|---|
 | `/lfg` (full autonomous chain) | Defer until base CE loop has 3+ features successfully shipped. Then evaluate. |
-| `/ce-polish-beta` (conversational UX polish) | Defer; experimental. Adopt if it becomes stable AND first UI-heavy repo lands. |
-| `/ce-dogfood-beta` (browser QA of active branch) | Defer; experimental. Same triggers as ce-polish-beta. |
-| `/ce-work-beta` (Codex delegation variant of `/ce-work`) | Defer. Mosaik's default runtime is Claude Code; no Codex delegation needed. |
+| `/ce-polish-beta` (conversational UX polish) | ✗ **Removed v3.16.0** (was Defer) — superseded by `/ce-polish` (see § 4.11). |
+| `/ce-dogfood-beta` (browser QA of active branch) | ✗ **Removed v3.16.0** (was Defer) — superseded by `/ce-dogfood` (see § 4.11). |
+| `/ce-work-beta` (Codex delegation variant of `/ce-work`) | ✗ **Removed v3.16.0** (was Defer/Skip). Mosaik's default runtime is Claude Code; no Codex delegation needed. |
 
 ### 2.9 Automation / specialized (per tier)
 
@@ -305,7 +305,7 @@ Bug fix:
 
 ## 4. Full skill inventory by category
 
-All 38 skills listed with adoption status, what they do, and notes. The **CE Core Set** (9 skills — `/ce-strategy`, `/ce-ideate`, `/ce-brainstorm`, `/ce-plan`, `/ce-work`, `/ce-debug`, `/ce-code-review`, `/ce-commit-push-pr`, `/ce-compound`) is defined in § 2.0 above. **Adopt the Core as a set or not at all** — invoking any Core skill in isolation breaks the compounding loop (mechanism cherry-pick anti-pattern (invoking artifacts-chain skills without the surrounding chain)). `/ce-ideate` is marked "optional core" (situational; invoke between projects, not per feature). Extended-Set skills below are situational additions around the Core.
+All 27 skills (v3.16.0; 38 at adoption) listed with adoption status, what they do, and notes. The **CE Core Set** (9 skills — `/ce-strategy`, `/ce-ideate`, `/ce-brainstorm`, `/ce-plan`, `/ce-work`, `/ce-debug`, `/ce-code-review`, `/ce-commit-push-pr`, `/ce-compound`) is defined in § 2.0 above. **Adopt the Core as a set or not at all** — invoking any Core skill in isolation breaks the compounding loop (mechanism cherry-pick anti-pattern (invoking artifacts-chain skills without the surrounding chain)). `/ce-ideate` is marked "optional core" (situational; invoke between projects, not per feature). Extended-Set skills below are situational additions around the Core.
 
 ### 4.1 Core loop (artifact-chain subset)
 
@@ -341,9 +341,10 @@ All 38 skills listed with adoption status, what they do, and notes. The **CE Cor
 
 | Skill | What it does | Status |
 |---|---|---|
-| `/ce-sessions` | Cross-harness session history search (Claude Code, Codex, Cursor) | **✗ Skip** — `/recall` is superior (cross-vault, cross-machine) |
-| `/ce-slack-research` | Slack search for organizational context | **◌ Defer** — useful for company-internal context retrieval; requires Slack MCP setup. Revisit when MCP is in place. |
+| `/ce-sessions` | Cross-harness session history search (Claude Code, Codex, Cursor) | **✗ Removed v3.16.0** (was Skip) — `/recall` is superior (cross-vault, cross-machine) |
+| `/ce-slack-research` | Slack search for organizational context | **✗ Removed v3.16.0** (was Defer) — was useful for company-internal context retrieval; no longer ships. |
 | `/ce-riffrec-feedback-analysis` | Riffrec recording analysis (Every-specific tool) | **✗ Skip** — Every-Inc-specific |
+| `/ce-pov` *(new v3.16.0)* | Decisive, project-grounded verdict on an external technology / library / pattern / architecture; mid-session second opinion judged against the current project | **◆ Reference (Adopt)** — fits the research-driven, stress-test-recommendations workflow; invoke when deciding whether to adopt/switch/revisit a tool against the current project |
 
 ### 4.5 Git workflow
 
@@ -351,7 +352,7 @@ All 38 skills listed with adoption status, what they do, and notes. The **CE Cor
 |---|---|---|
 | `/ce-commit` | Single well-crafted commit, convention-aware, sensitive-file-safe, file-level logical splitting | **✓ Adopt** |
 | `/ce-commit-push-pr` | Full ship flow with adaptive PR descriptions (scales with change complexity), body-file safety, branch-state decision tree | **✓ Adopt** |
-| `/ce-clean-gone-branches` | Delete local branches whose remote is gone | **✓ Adopt** — periodic cleanup |
+| `/ce-clean-gone-branches` | Delete local branches whose remote is gone | **✗ Removed v3.16.0** (was Adopt) — use plain git branch cleanup. |
 | `/ce-worktree` | Create `.worktrees/<branch>` with `.env` copying + branch-aware dev-tool trust + `.gitignore` management | **✓ Adopt** — for parallel work / PR review isolation |
 
 ### 4.6 Frontend, mobile, framework-specific
@@ -360,8 +361,8 @@ All **✗ Skip** for current stack (Python-primary). Adopt when the relevant sta
 
 | Skill | Trigger to revisit |
 |---|---|
-| `/ce-frontend-design` | First web-UI repo |
-| `ce-dhh-rails-style` | First Rails repo |
+| `/ce-frontend-design` | ✗ **Removed v3.16.0** (was Skip — would have been: first web-UI repo) |
+| `ce-dhh-rails-style` | ✗ **Removed v3.16.0** (was Skip — would have been: first Rails repo) |
 | `ce-julik-frontend-races-reviewer` | First JS/Stimulus-heavy repo |
 | `ce-swift-ios-reviewer` | First iOS repo |
 | `/ce-test-xcode` | First iOS repo |
@@ -372,11 +373,12 @@ All **✗ Skip** for current stack (Python-primary). Adopt when the relevant sta
 | Skill | Status / When |
 |---|---|
 | `/ce-setup` | **✓ Adopt** — run at repo adoption + when something looks broken |
-| `/ce-update` | **✓ Adopt** — run periodically; CE may auto-suggest |
-| `/ce-release-notes` | **◆ Reference** — useful at re-evaluation time (every 3 months) |
-| `/ce-report-bug` | **◆ Reference** — use when hitting a CE bug |
+| `/ce-update` | **✗ Removed v3.16.0** (was Adopt) — use `/plugin update compound-engineering` |
+| `/ce-release-notes` | **✗ Removed v3.16.0** (was Reference) — check upstream release notes directly at re-evaluation time |
+| `/ce-report-bug` | **✗ Removed v3.16.0** (was Reference) — file CE bugs directly on the upstream GitHub repo |
 | `/ce-resolve-pr-feedback` | **✓ Adopt** at Internal+ when collaborators leave PR comments; skip at Solo |
-| `/ce-demo-reel` | **◌ Defer** — adopt per-repo when visual evidence in PRs is valuable |
+| `/ce-demo-reel` | **✗ Removed v3.16.0** (was Defer) |
+| `/ce-promote` *(new v3.16.0)* | Drafts launch / promotion copy for a shipped feature, inside the engineering workflow | **◌ Defer** — Public-tier only; adopt when a public-facing launch lands |
 
 ### 4.8 Collaboration
 
@@ -388,8 +390,8 @@ All **✗ Skip** for current stack (Python-primary). Adopt when the relevant sta
 
 | Skill | What it does | Status |
 |---|---|---|
-| `/ce-agent-native-architecture` | Tutor/reference for building agent-native applications. 14 sub-references covering architecture patterns, MCP tool design, system prompt design, dynamic context injection, action parity discipline, self-modification, mobile patterns, testing, refactoring, checklists. | **◆ Reference** — consult when building new custom skills |
-| `/ce-agent-native-audit` | Scored audit against five core principles (Parity / Granularity / Composability / Emergent Capability / Improvement Over Time) | **◆ Reference** — periodic audit of existing your custom skills |
+| `/ce-agent-native-architecture` | Tutor/reference for building agent-native applications. 14 sub-references covering architecture patterns, MCP tool design, system prompt design, dynamic context injection, action parity discipline, self-modification, mobile patterns, testing, refactoring, checklists. | **✗ Removed v3.16.0** (was Reference) — removed as a standalone skill; reference material now skill-local under `references/` |
+| `/ce-agent-native-audit` | Scored audit against five core principles (Parity / Granularity / Composability / Emergent Capability / Improvement Over Time) | **✗ Removed v3.16.0** (was Reference) — removed as a standalone skill; reference material now skill-local under `references/` |
 
 ### 4.10 Automation / specialized
 
@@ -402,13 +404,17 @@ All **✗ Skip** for current stack (Python-primary). Adopt when the relevant sta
 | Skill | What it does | Status |
 |---|---|---|
 | `/lfg` | Full autonomous chain (plan → work → review → resolve → test → commit → push → PR → CI watch → fix) | **◌ Defer** — adopt after base CE loop has 3+ features shipped successfully |
-| `/ce-polish-beta` | Conversational UX polish: dev server + browser + iterate | **◌ Defer** — beta; adopt if stable and UI-heavy repo lands |
-| `/ce-dogfood-beta` | Browser QA of active branch, exhaustive test matrix | **◌ Defer** — beta; same triggers as polish-beta |
-| `/ce-work-beta` | `/ce-work` variant with Codex delegation for implementation | **✗ Skip** — Mosaik's default runtime is Claude Code; no Codex delegation needed |
+| `/ce-polish-beta` | Conversational UX polish: dev server + browser + iterate | **✗ Removed v3.16.0** (was Defer) — superseded by `/ce-polish` (below) |
+| `/ce-dogfood-beta` | Browser QA of active branch, exhaustive test matrix | **✗ Removed v3.16.0** (was Defer) — superseded by `/ce-dogfood` (below) |
+| `/ce-work-beta` | `/ce-work` variant with Codex delegation for implementation | **✗ Removed v3.16.0** (was Skip) — Mosaik's default runtime is Claude Code; no Codex delegation needed |
+| `/ce-dogfood` *(new v3.16.0)* | Hands-off, diff-scoped browser QA of the active branch; drives a real browser, autonomously fixes small breakages with regression tests, judges against personas. Manual-only | **◌ Defer** — web-frontend only; no supported web frontend in current repos (all Python/CLI/backend/Android). Pairs with `/ce-polish`; adopt at first web-frontend repo |
+| `/ce-polish` *(new v3.16.0)* | Start the dev server, open the feature in a browser, iterate on polish live. Supports Rails/Next/Vite/Nuxt/Astro/Remix/SvelteKit/Procfile only. Manual-only | **◌ Defer** — same web-frontend gate as `/ce-dogfood`; none of the current repos qualify (it would auto-detect 'unknown'). Adopt at first supported web frontend |
 
 ---
 
 ## 5. Agent inventory by category
+
+> **⚠ v3.16.0:** the standalone agent layer was removed (agentless surface reduction). The ~49 agents below were the **v3.8.4** structure; in v3.16.0 these personas live inside skills at `skills/<skill>/references/{agents,personas}/` and are dispatched by their parent skill, not separately invocable. Retained below as historical reference.
 
 Agents are sub-agents dispatched BY skills — you typically don't invoke these directly. Listed here so a fresh agent reading the docs knows what's available and what each does.
 
@@ -505,8 +511,12 @@ Agents are sub-agents dispatched BY skills — you typically don't invoke these 
 | Get a Codex second opinion on a plan or diff | `/codex-review` (existing skill, not CE) |
 | Set up CE in a new repo | `/ce-setup` |
 | Check for CE plugin updates | `/plugin update compound-engineering` (the `/ce-update` skill was removed at v3.16.0) |
-| Audit an user-level skill for agent-native principles | `/ce-agent-native-audit` |
-| Build a new custom skill | Consult `/ce-agent-native-architecture` for relevant reference patterns |
+| Audit a custom skill for agent-native principles | `/ce-agent-native-audit` was removed at v3.16.0 — its reference material now lives skill-local under `references/` |
+| Build a new custom skill | `/ce-agent-native-architecture` was removed at v3.16.0 — its reference patterns now live skill-local under `references/` |
+| Decisive verdict on whether to adopt/switch an external tool against the current project | `/ce-pov` (new v3.16.0) |
+| Draft launch / promotion copy for a shipped feature | `/ce-promote` (new v3.16.0) |
+| Live browser polish of a web-frontend feature | `/ce-polish` (new v3.16.0; web frontends only) |
+| Hands-off browser QA of the active branch | `/ce-dogfood` (new v3.16.0; web frontends only) |
 
 ---
 
@@ -583,4 +593,4 @@ See `03-migration-plan.md` § 9 for the re-evaluation protocol.
 
 ---
 
-*Last updated: 2026-05-24 (pin bumped to v3.16.0 on 2026-06-30; inventory roster NOT yet re-verified — see caveat at top). Pinned CE version: v3.16.0 / commit `3157993648fc5822e120b6beb542ada15ebdc656`.*
+*Last updated: 2026-06-30 (inventory re-verified against v3.16.0: 27 skills, 0 standalone agents; removed skills marked, 4 new skills added). Pinned CE version: v3.16.0 / commit `3157993648fc5822e120b6beb542ada15ebdc656`.*
